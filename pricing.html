@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>pricing · codeinl∞p</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000000; font-family: 'Space Grotesk', sans-serif; color: #ffffff; overflow-x: hidden; }
+    .cursor-glow { position: fixed; width: 480px; height: 480px; background: radial-gradient(circle at center, rgba(3, 38, 252, 0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); opacity: 0; }
+    .terminal-panel { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(3, 38, 252, 0.3); }
+    .cmd-prompt::before { content: '$ '; color: #0326fc; font-weight: 600; display: inline-block; }
+    .pricing-card { position: relative; background: rgba(0, 0, 0, 0.8); border: 1px solid rgba(3, 38, 252, 0.2); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow: hidden; }
+    .pricing-card:hover { border-color: #0326fc; transform: translateY(-10px); box-shadow: 0 30px 50px -20px #0326fc; }
+    .pricing-card.popular { border: 2px solid #0326fc; box-shadow: 0 0 30px rgba(3, 38, 252, 0.3); transform: scale(1.02); }
+    .pricing-card.popular::before { content: '// POPULAR'; position: absolute; top: 20px; right: -30px; background: #0326fc; color: black; padding: 0.5rem 3rem; transform: rotate(45deg); font-size: 0.75rem; font-weight: bold; letter-spacing: 2px; }
+    .feature-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(3, 38, 252, 0.1); }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-check { color: #0326fc; font-size: 1.25rem; }
+    .price-amount { font-size: 3rem; sm:font-size: 4rem; font-weight: 700; line-height: 1; }
+    .price-period { color: rgba(255,255,255,0.5); font-size: 1rem; margin-left: 0.5rem; }
+    .shape-3d { position: absolute; width: 300px; height: 300px; background: radial-gradient(circle at 30% 30%, #0326fc, transparent 80%); filter: blur(70px); opacity: 0.2; border-radius: 50%; z-index: 0; pointer-events: none; }
+    .cta-button { background: transparent; border: 2px solid #0326fc; color: white; padding: 0.75rem 1.5rem; sm:padding: 1rem 2rem; width: 100%; font-weight: 600; letter-spacing: 1px; transition: all 0.3s ease; cursor: pointer; }
+    .cta-button:hover { background: #0326fc; color: black; box-shadow: 0 0 30px #0326fc; }
+    .faq-item { border-bottom: 1px solid rgba(3, 38, 252, 0.2); padding: 1.5rem 0; cursor: pointer; }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
+    .faq-answer { color: rgba(255,255,255,0.6); max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-item.active .faq-answer { max-height: 100px; margin-top: 1rem; }
+    .badge { background: rgba(3, 38, 252, 0.1); border: 1px solid #0326fc; padding: 0.25rem 0.75rem; font-size: 0.75rem; font-family: monospace; display: inline-block; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #0326fc; }
+    .animate-ready { opacity: 0; transform: translateY(20px); }
+    #mobileMenu { transition: opacity 0.3s ease; }
+    #mobileMenu:not(.hidden) { animation: slideDown 0.3s ease; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
+
+  <!-- NAVBAR - FIXED -->
+  <nav class="fixed top-0 left-0 w-full z-50 terminal-panel border-t-0 border-l-0 border-r-0 border-b border-[#0326fc]/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tighter text-white relative group z-50">
+          <span class="text-[#0326fc]">$</span> codeinl∞p
+          <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#0326fc] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <div class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium">
+          <a href="index.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">home</a>
+          <a href="about.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">about</a>
+          <a href="skills.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">skills</a>
+          <a href="projects.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">projects</a>
+          <a href="experience.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">experience</a>
+          <a href="contact.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">contact</a>
+        </div>
+        <button id="mobileMenuBtn" class="md:hidden text-white text-2xl focus:outline-none z-50 w-10 h-10 flex items-center justify-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all">
+          <span id="menuIcon" class="block">⎔</span>
+          <span id="closeIcon" class="hidden">✕</span>
+        </button>
+        <div id="mobileMenu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 hidden md:hidden" style="top: 64px;">
+          <div class="flex flex-col items-center justify-start pt-12 px-6 space-y-6 h-full overflow-y-auto">
+            <a href="index.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">home</a>
+            <a href="about.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">about</a>
+            <a href="skills.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">skills</a>
+            <a href="projects.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">projects</a>
+            <a href="experience.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">experience</a>
+            <a href="contact.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16"></div>
+
+  <!-- Background shapes -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="shape-3d top-20 left-1/4"></div>
+    <div class="shape-3d bottom-40 right-20 w-96 h-96 bg-[#0326fc] opacity-20 blur-[90px]"></div>
+  </div>
+
+  <main class="relative z-10">
+
+    <!-- HERO -->
+    <section class="min-h-[40vh] sm:min-h-[50vh] flex items-center px-4 pt-12 pb-16 sm:pb-20 border-b border-[#0326fc]/20">
+      <div class="max-w-5xl mx-auto">
+        <div class="font-mono text-[#0326fc] text-sm md:text-base tracking-widest mb-3 cmd-prompt animate-ready" id="heroPrompt">cat pricing.md</div>
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4 sm:mb-8 animate-ready" id="heroTitle">
+          <span class="text-white">INVEST IN</span>
+          <span class="text-[#0326fc] block">EXCELLENCE</span>
+        </h1>
+        <p class="text-gray-400 text-lg sm:text-xl max-w-2xl animate-ready" id="heroText">Transparent pricing for elite digital craftsmanship.</p>
+      </div>
+    </section>
+
+    <!-- PRICING GRID -->
+    <section class="py-16 sm:py-24 px-4 border-b border-[#0326fc]/20">
+      <div class="max-w-7xl mx-auto">
+        
+        <!-- Toggle -->
+        <div class="flex justify-center items-center gap-4 sm:gap-6 mb-12 sm:mb-16 animate-ready" id="pricingToggle">
+          <span class="text-white/70 text-sm sm:text-base">MONTHLY</span>
+          <div class="w-14 sm:w-16 h-7 sm:h-8 bg-[#0326fc]/20 border border-[#0326fc] rounded-full flex items-center p-1 cursor-pointer">
+            <div class="w-5 sm:w-6 h-5 sm:h-6 bg-[#0326fc] rounded-full transition-transform duration-300"></div>
+          </div>
+          <span class="text-white font-bold text-sm sm:text-base">YEARLY <span class="text-[#0326fc] text-xs ml-1">(-20%)</span></span>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid md:grid-cols-3 gap-6 sm:gap-8" id="pricingGrid">
+          <!-- Card 1: Starter -->
+          <div class="pricing-card terminal-panel p-6 sm:p-8 animate-ready">
+            <div class="badge inline-block mb-3 sm:mb-4 text-xs">$ echo "STARTER"</div>
+            <div class="mb-4 sm:mb-6"><span class="price-amount text-3xl sm:text-4xl md:text-5xl">$2.5k</span><span class="price-period text-sm sm:text-base">/mo</span></div>
+            <p class="text-gray-400 text-xs sm:text-sm mb-4 sm:mb-6">Perfect for startups & MVPs</p>
+            <div class="space-y-1 sm:space-y-2 mb-6 sm:mb-8">
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>5 days delivery</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>Single page app</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>Responsive design</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>2 revision rounds</span></div>
+            </div>
+            <button class="cta-button text-sm sm:text-base py-2 sm:py-3"><span class="cmd-prompt"></span> SELECT_PLAN →</button>
+          </div>
+
+          <!-- Card 2: Pro (Popular) -->
+          <div class="pricing-card popular terminal-panel p-6 sm:p-8 animate-ready">
+            <div class="badge inline-block mb-3 sm:mb-4 text-xs">$ echo "PRO"</div>
+            <div class="mb-4 sm:mb-6"><span class="price-amount text-3xl sm:text-4xl md:text-5xl">$5k</span><span class="price-period text-sm sm:text-base">/mo</span></div>
+            <p class="text-gray-400 text-xs sm:text-sm mb-4 sm:mb-6">For scaling businesses</p>
+            <div class="space-y-1 sm:space-y-2 mb-6 sm:mb-8">
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>3 days delivery</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>Multi-page app</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>GSAP animations</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>Backend integration</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>Unlimited revisions</span></div>
+            </div>
+            <button class="cta-button text-sm sm:text-base py-2 sm:py-3"><span class="cmd-prompt"></span> SELECT_PLAN →</button>
+          </div>
+
+          <!-- Card 3: Enterprise -->
+          <div class="pricing-card terminal-panel p-6 sm:p-8 animate-ready">
+            <div class="badge inline-block mb-3 sm:mb-4 text-xs">$ echo "ENTERPRISE"</div>
+            <div class="mb-4 sm:mb-6"><span class="price-amount text-3xl sm:text-4xl md:text-5xl">$10k+</span><span class="price-period text-sm sm:text-base">/mo</span></div>
+            <p class="text-gray-400 text-xs sm:text-sm mb-4 sm:mb-6">Custom solutions</p>
+            <div class="space-y-1 sm:space-y-2 mb-6 sm:mb-8">
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>Custom timeline</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>Full-stack</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>3D/WebGL</span></div>
+              <div class="feature-item text-sm"><span class="feature-check">✓</span> <span>24/7 priority</span></div>
+            </div>
+            <button class="cta-button text-sm sm:text-base py-2 sm:py-3"><span class="cmd-prompt"></span> CONTACT_SALES →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 sm:py-24 px-4 border-b border-[#0326fc]/20">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12 sm:mb-16 animate-ready" id="faqHeader">
+          <span class="text-[#0326fc] font-mono text-sm">$ man faq</span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-4">FREQUENTLY <span class="text-[#0326fc]">ASKED</span></h2>
+        </div>
+        <div class="space-y-3 sm:space-y-4 animate-ready" id="faqList">
+          <div class="faq-item terminal-panel p-4 sm:p-6"><div class="faq-question text-sm sm:text-base"><span class="text-[#0326fc] font-mono">Q:</span> What's your turnaround time? <span class="text-[#0326fc] text-lg sm:text-xl">+</span></div><div class="faq-answer text-xs sm:text-sm">2-4 weeks depending on complexity.</div></div>
+          <div class="faq-item terminal-panel p-4 sm:p-6"><div class="faq-question text-sm sm:text-base"><span class="text-[#0326fc] font-mono">Q:</span> Do you offer maintenance? <span class="text-[#0326fc] text-lg sm:text-xl">+</span></div><div class="faq-answer text-xs sm:text-sm">Yes, 30 days support included.</div></div>
+          <div class="faq-item terminal-panel p-4 sm:p-6"><div class="faq-question text-sm sm:text-base"><span class="text-[#0326fc] font-mono">Q:</span> Can I upgrade later? <span class="text-[#0326fc] text-lg sm:text-xl">+</span></div><div class="faq-answer text-xs sm:text-sm">Absolutely, we'll prorate the difference.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 sm:py-24 px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="terminal-panel p-8 sm:p-12 border border-[#0326fc]/40 animate-ready" id="ctaSection">
+          <p class="text-[#0326fc] font-mono text-sm mb-3 sm:mb-4 cmd-prompt">./start_project.sh</p>
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">READY TO <span class="text-[#0326fc]">BUILD?</span></h2>
+          <p class="text-gray-400 text-sm sm:text-base mb-6 sm:mb-8">Let's discuss your vision. Free consultation.</p>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <a href="mailto:vikram@codeinloop.dev" class="border border-[#0326fc] px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base hover:bg-[#0326fc] hover:text-black transition-all"><span class="cmd-prompt"></span> vikram@codeinloop.dev</a>
+            <a href="#" class="bg-[#0326fc] text-black px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-bold hover:shadow-[0_0_30px_#0326fc] transition-all">SCHEDULE CALL →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="terminal-panel border-b-0 border-l-0 border-r-0 border-t border-[#0326fc]/30 py-8 sm:py-12 px-4">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400">
+        <div class="font-mono"> <span class="text-[#0326fc]">codeinl∞p</span> © 2025 </div>
+        <div class="flex gap-4 sm:gap-6"><a href="#" class="hover:text-[#0326fc] transition">github</a><a href="#" class="hover:text-[#0326fc] transition">linkedin</a><a href="#" class="hover:text-[#0326fc] transition">x</a></div>
+        <div class="text-xs">$ echo "let's build something great"</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function() {
+      // Mobile Menu
+      const menuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuIcon = document.getElementById('menuIcon');
+      const closeIcon = document.getElementById('closeIcon');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const isHidden = mobileMenu.classList.contains('hidden');
+          if (isHidden) {
+            mobileMenu.classList.remove('hidden');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          } else {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+          });
+        });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth >= 768) {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      // Cursor
+      const cursor = document.getElementById('cursorGlow');
+      if (cursor) {
+        setTimeout(() => { cursor.style.opacity = '1'; }, 100);
+        window.addEventListener('mousemove', (e) => { gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.8 }); });
+      }
+
+      // FAQ Toggle
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.addEventListener('click', () => {
+          item.classList.toggle('active');
+          const symbol = item.querySelector('.faq-question span:last-child');
+          if (symbol) symbol.textContent = item.classList.contains('active') ? '−' : '+';
+        });
+      });
+
+      // Pricing toggle
+      const toggle = document.querySelector('.w-14, .w-16');
+      if (toggle) {
+        let isYearly = false;
+        toggle.addEventListener('click', () => {
+          isYearly = !isYearly;
+          gsap.to(toggle.querySelector('div'), { x: isYearly ? 32 : 0, duration: 0.3 });
+          const prices = document.querySelectorAll('.price-amount');
+          if (isYearly) {
+            prices[0].innerHTML = '$2k'; prices[1].innerHTML = '$4k'; prices[2].innerHTML = '$8k+';
+          } else {
+            prices[0].innerHTML = '$2.5k'; prices[1].innerHTML = '$5k'; prices[2].innerHTML = '$10k+';
+          }
+        });
+      }
+
+      // GSAP
+      gsap.registerPlugin(ScrollTrigger);
+      const animateElements = document.querySelectorAll('.animate-ready');
+      gsap.set(animateElements, { opacity: 0, y: 20 });
+
+      setTimeout(() => {
+        const tl = gsap.timeline();
+        tl.to('#heroPrompt', { opacity: 1, y: 0, duration: 0.8 })
+          .to('#heroTitle', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+          .to('#heroText', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+          .to('#pricingToggle', { opacity: 1, y: 0, duration: 0.8 }, '-=0.2');
+
+        ScrollTrigger.create({ trigger: '#pricingGrid', start: 'top 80%', onEnter: () => gsap.to('#pricingGrid .animate-ready', { opacity: 1, y: 0, duration: 0.8, stagger: 0.15 }) });
+        ScrollTrigger.create({ trigger: '#faqHeader', start: 'top 85%', onEnter: () => gsap.to('#faqHeader', { opacity: 1, y: 0, duration: 0.8 }) });
+        ScrollTrigger.create({ trigger: '#faqList', start: 'top 80%', onEnter: () => gsap.to('#faqList .faq-item', { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 }) });
+        ScrollTrigger.create({ trigger: '#ctaSection', start: 'top 85%', onEnter: () => gsap.to('#ctaSection', { opacity: 1, y: 0, duration: 0.8 }) });
+      }, 100);
+
+      // Hover effects
+      document.querySelectorAll('a, button, .pricing-card, .faq-item').forEach(el => {
+        el.addEventListener('mouseenter', () => gsap.to(el, { scale: 1.01, duration: 0.2 }));
+        el.addEventListener('mouseleave', () => gsap.to(el, { scale: 1, duration: 0.2 }));
+      });
+    })();
+  </script>
+</body>
+</html>

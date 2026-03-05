@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>skills · Abdul Hannan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000000; font-family: 'Space Grotesk', sans-serif; color: #ffffff; overflow-x: hidden; }
+    .cursor-glow { position: fixed; width: 480px; height: 480px; background: radial-gradient(circle at center, rgba(3, 38, 252, 0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); opacity: 0; }
+    .terminal-panel { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(3, 38, 252, 0.3); }
+    .cmd-prompt::before { content: '$ '; color: #0326fc; font-weight: 600; display: inline-block; }
+    .skill-bar { height: 6px; background: rgba(255,255,255,0.1); width: 100%; position: relative; overflow: hidden; }
+    .skill-fill { position: absolute; top: 0; left: 0; height: 100%; background: #0326fc; width: 0%; box-shadow: 0 0 15px #0326fc; transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+    .shape-3d { position: absolute; width: 300px; height: 300px; background: radial-gradient(circle at 30% 30%, #0326fc, transparent 80%); filter: blur(70px); opacity: 0.2; border-radius: 50%; z-index: 0; pointer-events: none; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #0326fc; }
+    .animate-ready { opacity: 0; transform: translateY(20px); }
+    #mobileMenu { transition: opacity 0.3s ease; }
+    #mobileMenu:not(.hidden) { animation: slideDown 0.3s ease; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
+
+  <!-- NAVBAR - FIXED -->
+  <nav class="fixed top-0 left-0 w-full z-50 terminal-panel border-t-0 border-l-0 border-r-0 border-b border-[#0326fc]/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tighter text-white relative group z-50">
+          <span class="text-[#0326fc]">{`</span> Abdul Hannan`}
+          <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#0326fc] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <div class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium">
+          <a href="index.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">home</a>
+          <a href="about.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">about</a>
+          <a href="skills.html" class="nav-link text-white hover:text-[#0326fc] transition-colors px-2 py-1">[ ~ ] skills</a>
+          <a href="projects.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">projects</a>
+          <a href="experience.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">experience</a>
+          <a href="contact.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">contact</a>
+        </div>
+        <button id="mobileMenuBtn" class="md:hidden text-white text-2xl focus:outline-none z-50 w-10 h-10 flex items-center justify-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all">
+          <span id="menuIcon" class="block">⎔</span>
+          <span id="closeIcon" class="hidden">✕</span>
+        </button>
+        <div id="mobileMenu" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-40 hidden md:hidden" style="top: 64px;">
+          <div class="flex flex-col items-center justify-start pt-12 px-6 space-y-6 h-full overflow-y-auto">
+            <a href="index.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">home</a>
+            <a href="about.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">about</a>
+            <a href="skills.html" class="mobile-link text-2xl text-[#0326fc] font-bold w-full text-center py-4 border-b border-[#0326fc]/20">skills</a>
+            <a href="projects.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">projects</a>
+            <a href="experience.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">experience</a>
+            <a href="contact.html" class="mobile-link text-2xl text-white/70 hover:text-[#0326fc] w-full text-center py-4 border-b border-[#0326fc]/20">contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="h-16"></div>
+
+  <!-- Background -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="shape-3d top-20 left-20"></div>
+    <div class="shape-3d bottom-20 right-20 w-96 h-96 bg-[#0326fc] opacity-20 blur-[90px]"></div>
+  </div>
+
+  <main class="relative z-10">
+
+    <!-- HERO -->
+    <section class="min-h-[40vh] sm:min-h-[50vh] flex items-center px-4 pt-12 pb-16 sm:pb-20 border-b border-[#0326fc]/20">
+      <div class="max-w-5xl mx-auto">
+        <div class="font-mono text-[#0326fc] text-sm mb-3 cmd-prompt animate-ready" id="heroPrompt">ls -la /skills/</div>
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4 sm:mb-6 animate-ready" id="heroTitle">
+          <span class="text-white">TOOLCHAIN</span>
+          <span class="text-[#0326fc] block">& MASTERY</span>
+        </h1>
+        <p class="text-gray-400 text-lg sm:text-xl max-w-2xl animate-ready" id="heroText">  Frontend-first engineering with full-stack execution and production discipline.
+</p>
+      </div>
+    </section>
+
+    <!-- SKILL BARS -->
+    <section class="py-16 sm:py-24 px-4 border-b border-[#0326fc]/20">
+      <div class="max-w-4xl mx-auto">
+        <div class="terminal-panel p-6 sm:p-8 md:p-12 border border-[#0326fc]/40 animate-ready" id="skillPanel">
+          <p class="text-[#0326fc] font-mono text-sm mb-6 sm:mb-8">$ proficiency.log</p>
+          
+          <div class="space-y-6 sm:space-y-8">
+            <div><div class="flex flex-col sm:flex-row sm:justify-between mb-2 font-mono text-sm sm:text-base"><span>> FRONTEND_CORE <span class="text-[#0326fc]">HTML / CSS / TAILWIND CSS</span></span><span class="text-[#0326fc] mt-1 sm:mt-0">98%</span></div><div class="skill-bar"><div class="skill-fill" data-width="98"></div></div></div>
+            <div><div class="flex flex-col sm:flex-row sm:justify-between mb-2 font-mono text-sm sm:text-base"><span>> No-Code_Mastery <span class="text-[#0326fc]">WORDPRESS / ELEMENTOR / WOOCOMMERCE</span></span><span class="text-[#0326fc] mt-1 sm:mt-0">90%</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+            <div><div class="flex flex-col sm:flex-row sm:justify-between mb-2 font-mono text-sm sm:text-base"><span>> Database <span class="text-[#0326fc]">MYSQL</span></span><span class="text-[#0326fc] mt-1 sm:mt-0">98%</span></div><div class="skill-bar"><div class="skill-fill" data-width="98"></div></div></div>
+            <div><div class="flex flex-col sm:flex-row sm:justify-between mb-2 font-mono text-sm sm:text-base"><span>> Backend <span class="text-[#0326fc]">PHP</span></span><span class="text-[#0326fc] mt-1 sm:mt-0">98%</span></div><div class="skill-bar"><div class="skill-fill" data-width="98"></div></div></div>
+            <div><div class="flex flex-col sm:flex-row sm:justify-between mb-2 font-mono text-sm sm:text-base"><span>> Graphics <span class="text-[#0326fc]">CANVA</span></span><span class="text-[#0326fc] mt-1 sm:mt-0">95%</span></div><div class="skill-bar"><div class="skill-fill" data-width="95"></div></div></div>
+            </div>
+          </div>
+
+          <div class="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-[#0326fc]/30">
+            <p class="text-[#0326fc] font-mono text-sm mb-4 sm:mb-6">$ echo $TOOLS</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">Webpack</span>
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">Storybook</span>
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">Vercel</span>
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">Netlify</span>
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">Git</span>
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">GitHub</span>
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">VS Code</span>
+              <span class="border border-[#0326fc]/30 px-3 sm:px-4 py-2 text-center text-sm hover:border-[#0326fc] transition">LeetCode</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERTISE CLUSTERS -->
+    <section class="py-16 sm:py-24 px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12 sm:mb-16 animate-ready" id="clustersHeader">
+          <h2 class="text-3xl sm:text-4xl font-bold">EXPERTISE <span class="text-[#0326fc]">CLUSTERS</span></h2>
+        </div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8" id="clustersGrid">
+          <div class="terminal-panel p-6 sm:p-8 border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
+            <div class="text-3xl sm:text-4xl mb-3 sm:mb-4 text-[#0326fc]">&lt;/&gt;</div>
+            <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">FRONTEND ENGINEERING</h3>
+            <p class="text-gray-400 text-xs sm:text-sm">Component design systems, state machines, performance optimization</p>
+          </div>
+          <div class="terminal-panel p-6 sm:p-8 border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
+            <div class="text-3xl sm:text-4xl mb-3 sm:mb-4 text-[#0326fc]">{()=>}</div>
+            <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">ANIMATION & INTERACTION</h3>
+            <p class="text-gray-400 text-xs sm:text-sm">GSAP timelines, scroll-based motion, performance-friendly micro-interactions.
+</p>
+          </div>
+          <div class="terminal-panel p-6 sm:p-8 border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
+            <div class="text-3xl sm:text-4xl mb-3 sm:mb-4 text-[#0326fc]">⎔</div>
+            <h3 class="text-lg sm:text-xl font-bold mb-2 sm:mb-3">BACKEND & DATA</h3>
+            <p class="text-gray-400 text-xs sm:text-sm">PHP systems, MySQL schemas, auth flows, admin panels, SaaS logic.
+</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="terminal-panel border-b-0 border-l-0 border-r-0 border-t border-[#0326fc]/30 py-8 sm:py-12 px-4">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400">
+        <div class="font-mono"> <span class="text-[#0326fc]">{`Abdul Hannan`}</span> © 2025 </div>
+        <div class="flex gap-4 sm:gap-6"><a href="#" class="hover:text-[#0326fc] transition">github</a><a href="https://www.linkedin.com/in/abdulhannan-projects/" class="hover:text-[#0326fc] transition">linkedin</a><a href="#" class="hover:text-[#0326fc] transition">x</a></div>
+        <div class="text-xs">$ echo "Thanks for visiting!"</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function() {
+      // Mobile Menu
+      const menuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuIcon = document.getElementById('menuIcon');
+      const closeIcon = document.getElementById('closeIcon');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const isHidden = mobileMenu.classList.contains('hidden');
+          if (isHidden) {
+            mobileMenu.classList.remove('hidden');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          } else {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+          });
+        });
+        window.addEventListener('resize', function() {
+          if (window.innerWidth >= 768) {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      // Cursor
+      const cursor = document.getElementById('cursorGlow');
+      if (cursor) {
+        setTimeout(() => { cursor.style.opacity = '1'; }, 100);
+        window.addEventListener('mousemove', (e) => { gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.8 }); });
+      }
+
+      // Animate skill bars
+      const animateBars = () => {
+        document.querySelectorAll('.skill-fill').forEach(fill => {
+          fill.style.width = fill.getAttribute('data-width') + '%';
+        });
+      };
+
+      // GSAP
+      gsap.registerPlugin(ScrollTrigger);
+      const animateElements = document.querySelectorAll('.animate-ready');
+      gsap.set(animateElements, { opacity: 0, y: 20 });
+
+      setTimeout(() => {
+        const tl = gsap.timeline();
+        tl.to('#heroPrompt', { opacity: 1, y: 0, duration: 0.8 })
+          .to('#heroTitle', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+          .to('#heroText', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+          .to('#skillPanel', { opacity: 1, y: 0, duration: 0.8 }, '-=0.2');
+
+        ScrollTrigger.create({ trigger: '#skillPanel', start: 'top 70%', onEnter: animateBars });
+        ScrollTrigger.create({ trigger: '#clustersHeader', start: 'top 85%', onEnter: () => gsap.to('#clustersHeader', { opacity: 1, y: 0, duration: 0.8 }) });
+        ScrollTrigger.create({ trigger: '#clustersGrid', start: 'top 80%', onEnter: () => gsap.to('#clustersGrid .animate-ready', { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }) });
+      }, 100);
+
+      // Hover effects
+      document.querySelectorAll('a, button, .terminal-panel').forEach(el => {
+        el.addEventListener('mouseenter', () => gsap.to(el, { scale: 1.01, duration: 0.2 }));
+        el.addEventListener('mouseleave', () => gsap.to(el, { scale: 1, duration: 0.2 }));
+      });
+    })();
+  </script>
+</body>
+</html>
