@@ -386,5 +386,496 @@
       });
     })();
   </script>
+  <!-- CHATBOT WIDGET - AI Assistant (Customized for Abdul Hannan) -->
+<style>
+  /* Chatbot Styles - Terminal Inspired */
+  .chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9998;
+    font-family: 'Space Grotesk', monospace;
+  }
+  
+  .chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    background: #0326fc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(3, 38, 252, 0.5);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  
+  .chatbot-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(3, 38, 252, 0.8);
+  }
+  
+  .chatbot-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid #0326fc;
+    border-radius: 12px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    animation: slideUp 0.3s ease;
+  }
+  
+  .chatbot-window.open {
+    display: flex;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .chatbot-header {
+    background: #0326fc;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .chatbot-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .chatbot-header .close-btn {
+    cursor: pointer;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+  
+  .chatbot-header .close-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  
+  .chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .message {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  
+  .message.user {
+    background: #0326fc;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .message.bot {
+    background: rgba(3, 38, 252, 0.2);
+    border: 1px solid rgba(3, 38, 252, 0.3);
+    color: #fff;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px;
+    background: rgba(3, 38, 252, 0.2);
+    border: 1px solid rgba(3, 38, 252, 0.3);
+    border-radius: 12px;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .typing-indicator span {
+    width: 6px;
+    height: 6px;
+    background: #0326fc;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+  }
+  
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+  
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-10px); opacity: 1; }
+  }
+  
+  .chatbot-input {
+    padding: 15px;
+    border-top: 1px solid rgba(3, 38, 252, 0.3);
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chatbot-input input {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(3, 38, 252, 0.3);
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 13px;
+    outline: none;
+  }
+  
+  .chatbot-input input:focus {
+    border-color: #0326fc;
+  }
+  
+  .chatbot-input button {
+    background: #0326fc;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .chatbot-input button:hover {
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 480px) {
+    .chatbot-window {
+      width: calc(100vw - 40px);
+      right: 20px;
+      height: 480px;
+    }
+  }
+</style>
+
+<div class="chatbot-container">
+  <div class="chatbot-toggle" id="chatbotToggle">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <path d="M8 10h.01M12 10h.01M16 10h.01" stroke="white" stroke-width="2"/>
+    </svg>
+  </div>
+  
+  <div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+      <h3>
+        <span style="font-size: 18px;">$</span> AI ASSISTANT
+      </h3>
+      <div class="close-btn" id="chatbotClose">✕</div>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="message bot">
+        Hey, I'm the AI assistant for <span style="color: #0326fc;">Abdul Hannan</span>. Ask me anything about his skills, experience, projects, or how we can work together!
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbotInput" placeholder="ask me anything..." />
+      <button id="chatbotSend">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ============================================================
+    // KNOWLEDGE BASE - Customized for Abdul Hannan
+    // Based on your portfolio at hannanbuilds.vercel.app
+    // ============================================================
+    
+    const knowledgeBase = {
+      // Personal Info
+      name: "Abdul Hannan",
+      fullName: "Abdul Hannan",
+      brand: "Hannan Builds",
+      role: "Frontend Architect & Full-Stack Engineer",
+      tagline: "frontend architect · full-stack engineer · digital problem solver",
+      startYear: 2022,
+      experienceYears: 4,
+      problemsSolved: "100+",
+      
+      // Skills - from your site
+      skills: [
+        "WordPress", "Elementor", "MySQL", "PHP", 
+        "HTML5", "CSS3", "Bootstrap", "Tailwind CSS",
+        "JavaScript", "GSAP", "Framer Motion", "React",
+        "Node.js", "Git", "REST APIs"
+      ],
+      frontendSkills: ["HTML", "CSS", "Tailwind CSS", "Bootstrap", "GSAP", "Framer Motion", "JavaScript", "React"],
+      backendSkills: ["PHP", "MySQL", "Node.js"],
+      cmsSkills: ["WordPress", "Elementor", "WooCommerce"],
+      tools: ["Git", "VS Code", "Figma", "Webpack", "Vite"],
+      
+      // Work Philosophy
+      philosophy: [
+        "Clarity over complexity - write self-documenting code",
+        "Motion with meaning - every animation guides attention", 
+        "Future-proof - build for tomorrow's standards today",
+        "Accessibility and performance are non-negotiable"
+      ],
+      
+      // Work Style (from your intro)
+      workStyle: "I don't just write components — I design systems that scale, feel alive, and stay buttery-smooth. My workflow merges hacker mindset with apple-like minimalism.",
+      
+      // Projects - Based on your site's project grid
+      projects: [
+        {
+          name: "WordPress Ecosystem",
+          description: "Custom WordPress themes and plugins with Elementor integration",
+          technologies: ["WordPress", "PHP", "Elementor", "MySQL"],
+          category: "web cms"
+        },
+        {
+          name: "Interactive Portfolio",
+          description: "Terminal-inspired developer portfolio with GSAP animations",
+          technologies: ["HTML", "Tailwind", "GSAP", "JavaScript"],
+          category: "ui experiments"
+        },
+        {
+          name: "SaaS Dashboard",
+          description: "Real-time analytics dashboard for business intelligence",
+          technologies: ["React", "Node.js", "Chart.js"],
+          category: "saas"
+        },
+        {
+          name: "Motion UI Library",
+          description: "Component library with advanced GSAP animations",
+          technologies: ["GSAP", "Tailwind", "JavaScript"],
+          category: "ui"
+        }
+      ],
+      
+      // Contact & Availability
+      contact: {
+        email: "hannan@example.com",  // Update with your actual email
+        responseTime: "under 2 hours"
+      },
+      availability: "Available for freelance projects and full-time opportunities",
+      
+      // Services offered
+      services: [
+        "Custom WordPress development",
+        "Elementor website design & development",
+        "Frontend architecture & component systems",
+        "Interactive animations & GSAP experiences",
+        "Full-stack web applications (React + PHP/Node)",
+        "Performance optimization & SEO",
+        "Responsive & mobile-first design"
+      ],
+      
+      // Why choose Abdul
+      valueProposition: "I engineer award-level interfaces for startups, brands, and SaaS. Every line is a decision focused on accessibility, performance, and visual hierarchy. I build for the next decade, not the next framework."
+    };
+    
+    // ============================================================
+    // Chatbot Response Logic
+    // ============================================================
+    
+    function getResponse(userMessage) {
+      const msg = userMessage.toLowerCase().trim();
+      
+      // Greetings
+      if (msg.match(/hi|hello|hey|namaste|hola|salam|assalam/)) {
+        return "Assalam-o-Alaikum! 👋 I'm the AI assistant for Abdul Hannan. Ask me about his skills, WordPress expertise, projects, or how you can work together!";
+      }
+      
+      // Who are you / Introduction
+      if (msg.match(/who are you|tell me about yourself|introduce|about you|who is abdul|abdul hannan/)) {
+        return `I'm ${knowledgeBase.fullName}, a ${knowledgeBase.role} since ${knowledgeBase.startYear}. I specialize in building award-level interfaces for startups, brands, and SaaS platforms. My expertise spans WordPress, Elementor, PHP, MySQL, and modern frontend technologies like React, GSAP, and Tailwind CSS. I'm passionate about creating digital experiences that are both beautiful and performant.`;
+      }
+      
+      // Skills / Technologies
+      if (msg.match(/skill|technologies|tech stack|tools|know|expertise|what can you do/)) {
+        return `My core skills include:\n\n➤ CMS & Backend: ${knowledgeBase.cmsSkills.join(', ')}\n➤ Frontend: ${knowledgeBase.frontendSkills.slice(0,5).join(', ')}\n➤ Animation: ${knowledgeBase.frontendSkills.slice(4,6).join(', ')}\n➤ Tools: ${knowledgeBase.tools.join(', ')}\n\nI build everything from custom WordPress sites to full-stack web applications with buttery-smooth animations.`;
+      }
+      
+      // WordPress / Elementor specific
+      if (msg.match(/wordpress|elementor|cms|blog|theme|plugin/)) {
+        return `I have extensive experience with WordPress and Elementor. I build custom WordPress themes, develop plugins, and create pixel-perfect Elementor websites. My WordPress workflow combines PHP, MySQL, and modern frontend practices to deliver fast, secure, and scalable sites. Need a custom WordPress solution? I've got you covered!`;
+      }
+      
+      // Frontend specific
+      if (msg.match(/frontend|front-end|html|css|tailwind|bootstrap/)) {
+        return `My frontend expertise includes HTML5, CSS3, Tailwind CSS, Bootstrap, and modern JavaScript. I create responsive, accessible interfaces that work seamlessly across all devices. I also specialize in advanced animations using GSAP and Framer Motion to bring websites to life.`;
+      }
+      
+      // Experience / Years
+      if (msg.match(/experience|years|how long|since when/)) {
+        return `I've been building digital experiences since ${knowledgeBase.startYear}, which is ${knowledgeBase.experienceYears}+ years of professional experience. I've solved over ${knowledgeBase.problemsSolved} problems across various projects, from WordPress sites to complex web applications.`;
+      }
+      
+      // Projects / Portfolio
+      if (msg.match(/project|portfolio|work|build|made|create|show/)) {
+        let projectText = `Here are some of my recent projects:\n\n`;
+        knowledgeBase.projects.forEach(proj => {
+          projectText += `➤ ${proj.name}\n   → ${proj.description}\n   → Stack: ${proj.technologies.join(', ')}\n\n`;
+        });
+        projectText += `Want to see more? Visit the Projects page on my portfolio at hannanbuilds.vercel.app!`;
+        return projectText;
+      }
+      
+      // Services offered
+      if (msg.match(/service|offer|provide|help with|what can you help/)) {
+        let servicesText = `I offer these services:\n\n`;
+        knowledgeBase.services.forEach(service => {
+          servicesText += `➤ ${service}\n`;
+        });
+        servicesText += `\nInterested? Let's discuss your project!`;
+        return servicesText;
+      }
+      
+      // Philosophy / Work ethic
+      if (msg.match(/philosophy|ethic|values|mindset|principles|approach/)) {
+        return `My philosophy: ${knowledgeBase.workStyle}\n\nI believe in:\n${knowledgeBase.philosophy.map(p => `➤ ${p}`).join('\n')}\n\nI build for the next decade, not just the next framework.`;
+      }
+      
+      // Why choose / Value
+      if (msg.match(/why|hire|choose|unique|difference|best/)) {
+        return `${knowledgeBase.valueProposition}\n\nI bring ${knowledgeBase.experienceYears}+ years of experience, ${knowledgeBase.problemsSolved} solved problems, and a commitment to excellence in every project. Plus, I combine technical expertise with a designer's eye for detail.`;
+      }
+      
+      // Contact / Reach
+      if (msg.match(/contact|email|reach|connect|how to|get in touch/)) {
+        return `You can reach me at ${knowledgeBase.contact.email}. I typically respond within ${knowledgeBase.contact.responseTime}. Let's discuss your project and bring your vision to life!`;
+      }
+      
+      // Availability
+      if (msg.match(/available|hire|freelance|work with|collaborate|book/)) {
+        return `Yes! I'm currently ${knowledgeBase.availability}. Whether you need a custom WordPress site, a modern web application, or just want to brainstorm ideas, I'd love to hear from you. Drop me a message!`;
+      }
+      
+      // Pricing / Cost
+      if (msg.match(/price|pricing|cost|how much|rate|budget/)) {
+        return `Pricing varies based on project scope and complexity. I offer flexible packages for WordPress sites, custom web applications, and ongoing maintenance. The best way to get an accurate quote is to share your project requirements via email. Let's chat!`;
+      }
+      
+      // Latest work / Current
+      if (msg.match(/latest|recent|current|now|working on/)) {
+        return `Currently, I'm working on building out my portfolio with terminal-inspired designs and exploring advanced GSAP animations. I'm also available for new projects — WordPress development, custom websites, or full-stack applications. What can I build for you?`;
+      }
+      
+      // Help / Capabilities
+      if (msg.match(/help|what can you|capabilities|assist/)) {
+        return `I can help you with:\n➤ Custom WordPress & Elementor websites\n➤ Modern frontend development (React, Tailwind, GSAP)\n➤ Full-stack web applications (PHP/MySQL)\n➤ Performance optimization & SEO\n➤ Interactive animations & motion design\n➤ Technical consulting\n\nWhat would you like to build?`;
+      }
+      
+      // Default - fallback response
+      return `I can help you with questions about Abdul Hannan's skills, WordPress expertise, projects, services, or how to work together. Try asking: "What skills do you have?" or "Tell me about your WordPress experience" or "How can I hire you?"`;
+    }
+    
+    // ============================================================
+    // Chatbot UI Logic
+    // ============================================================
+    
+    const toggle = document.getElementById('chatbotToggle');
+    const windowEl = document.getElementById('chatbotWindow');
+    const closeBtn = document.getElementById('chatbotClose');
+    const sendBtn = document.getElementById('chatbotSend');
+    const input = document.getElementById('chatbotInput');
+    const messagesContainer = document.getElementById('chatbotMessages');
+    
+    let isTyping = false;
+    
+    function addMessage(text, isUser) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function showTyping() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing-indicator';
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = '<span></span><span></span><span></span>';
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function hideTyping() {
+      const typing = document.getElementById('typingIndicator');
+      if (typing) typing.remove();
+    }
+    
+    function sendMessage() {
+      const message = input.value.trim();
+      if (!message || isTyping) return;
+      
+      addMessage(message, true);
+      input.value = '';
+      showTyping();
+      isTyping = true;
+      
+      setTimeout(() => {
+        const response = getResponse(message);
+        hideTyping();
+        addMessage(response, false);
+        isTyping = false;
+      }, 400);
+    }
+    
+    // Event listeners
+    toggle.addEventListener('click', () => {
+      windowEl.classList.toggle('open');
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      windowEl.classList.remove('open');
+    });
+    
+    sendBtn.addEventListener('click', sendMessage);
+    
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && windowEl.classList.contains('open')) {
+        windowEl.classList.remove('open');
+      }
+    });
+  })();
+</script>
 </body>
 </html>
