@@ -235,5 +235,672 @@
       });
     })();
   </script>
+  <!-- SMART AI CHATBOT - Psychology-Aware Assistant -->
+<style>
+  /* Chatbot Styles */
+  .chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9998;
+    font-family: 'Space Grotesk', monospace;
+  }
+  
+  .chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    background: #0326fc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(3, 38, 252, 0.5);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  
+  .chatbot-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(3, 38, 252, 0.8);
+  }
+  
+  .chatbot-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 380px;
+    height: 550px;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid #0326fc;
+    border-radius: 12px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    animation: slideUp 0.3s ease;
+  }
+  
+  .chatbot-window.open {
+    display: flex;
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .chatbot-header {
+    background: #0326fc;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .chatbot-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .chatbot-header .close-btn {
+    cursor: pointer;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+  
+  .chatbot-header .close-btn:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  
+  .chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .message {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  
+  .message.user {
+    background: #0326fc;
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .message.bot {
+    background: rgba(3, 38, 252, 0.2);
+    border: 1px solid rgba(3, 38, 252, 0.3);
+    color: #fff;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px;
+    background: rgba(3, 38, 252, 0.2);
+    border: 1px solid rgba(3, 38, 252, 0.3);
+    border-radius: 12px;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .typing-indicator span {
+    width: 6px;
+    height: 6px;
+    background: #0326fc;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+  }
+  
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+  
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-10px); opacity: 1; }
+  }
+  
+  .chatbot-input {
+    padding: 15px;
+    border-top: 1px solid rgba(3, 38, 252, 0.3);
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chatbot-input input {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(3, 38, 252, 0.3);
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Space Grotesk', monospace;
+    font-size: 13px;
+    outline: none;
+  }
+  
+  .chatbot-input input:focus {
+    border-color: #0326fc;
+  }
+  
+  .chatbot-input button {
+    background: #0326fc;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  
+  .chatbot-input button:hover {
+    transform: scale(1.05);
+  }
+  
+  @media (max-width: 480px) {
+    .chatbot-window {
+      width: calc(100vw - 40px);
+      right: 20px;
+      height: 500px;
+    }
+  }
+  
+  /* Quick suggestions */
+  .quick-suggestions {
+    padding: 10px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-top: 1px solid rgba(3, 38, 252, 0.2);
+  }
+  
+  .suggestion-chip {
+    background: rgba(3, 38, 252, 0.15);
+    border: 1px solid rgba(3, 38, 252, 0.3);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .suggestion-chip:hover {
+    background: #0326fc;
+    color: black;
+  }
+</style>
+
+<div class="chatbot-container">
+  <div class="chatbot-toggle" id="chatbotToggle">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <path d="M8 10h.01M12 10h.01M16 10h.01" stroke="white" stroke-width="2"/>
+    </svg>
+  </div>
+  
+  <div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+      <h3>
+        <span style="font-size: 18px;">$</span> AI ASSISTANT
+      </h3>
+      <div class="close-btn" id="chatbotClose">✕</div>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="message bot">
+        Hey 👋 I'm the AI assistant for <span style="color: #0326fc;">Abdul Hannan</span>. Ask me anything about his skills, experience, projects, or how we can work together!
+      </div>
+    </div>
+    <div class="quick-suggestions" id="quickSuggestions">
+      <span class="suggestion-chip" data-question="What skills does Abdul Hannan have?">💻 Skills</span>
+      <span class="suggestion-chip" data-question="What projects has he built?">🚀 Projects</span>
+      <span class="suggestion-chip" data-question="What's his work experience?">💼 Experience</span>
+      <span class="suggestion-chip" data-question="How can I hire him?">🤝 Hire me</span>
+      <span class="suggestion-chip" data-question="What's his contact info?">📧 Contact</span>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbotInput" placeholder="Ask me anything..." />
+      <button id="chatbotSend">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ============================================================
+    // COMPLETE KNOWLEDGE BASE - Based on Abdul Hannan's Portfolio
+    // ============================================================
+    
+    const profile = {
+      // Basic Info
+      name: "Abdul Hannan",
+      fullName: "Abdul Hannan",
+      title: "Frontend Architect & Full-Stack Engineer",
+      brand: "hannanbuilds",
+      since: 2022,
+      yearsOfExperience: 4,
+      tagline: "frontend architect · full-stack engineer · digital problem solver",
+      
+      // Philosophy
+      philosophy: [
+        "Clarity over complexity — the best code is code you don't have to debug",
+        "Motion with meaning — every animation guides attention, no gratuitous movement",
+        "Future-proof — build for tomorrow's standards, today",
+        "Radical clarity — readable systems beat clever hacks",
+        "User-first by default — if users notice the tech, it failed",
+        "Never finished — always connect, imagine, launch"
+      ],
+      
+      // Skills
+      skills: {
+        frontend: ["HTML", "CSS", "Tailwind CSS", "Bootstrap", "JavaScript", "GSAP", "Framer Motion"],
+        backend: ["PHP", "MySQL"],
+        cms: ["WordPress", "Elementor", "WooCommerce"],
+        tools: ["Webpack", "Storybook", "Vercel", "Netlify", "Git", "GitHub", "VS Code", "LeetCode"],
+        design: ["Canva"]
+      },
+      
+      skillLevels: {
+        "HTML/CSS/Tailwind": 98,
+        "WordPress/Elementor": 90,
+        "MySQL": 98,
+        "PHP": 98,
+        "Canva": 95
+      },
+      
+      // Experience
+      experience: [
+        {
+          role: "Founder / Full-Stack Engineer",
+          company: "TALENT TREE JP",
+          period: "2025 — PRESENT",
+          achievements: [
+            "Built scalable PHP & MySQL backend systems using WordPress",
+            "Developed responsive frontend with Elementor/WordPress",
+            "Scaled platform to 5000+ active users"
+          ]
+        },
+        {
+          role: "Full-Stack Engineer",
+          company: "Client Projects · Agency Work",
+          period: "2023 — 2025",
+          achievements: [
+            "Delivered 50+ responsive websites & SaaS dashboards",
+            "Built high-performance UI using GSAP animations",
+            "Optimized frontend performance & UX clarity"
+          ]
+        },
+        {
+          role: "Self-Taught Developer",
+          company: "Independent Builder",
+          period: "2022 — 2023",
+          achievements: [
+            "Mastered HTML, CSS, JavaScript fundamentals",
+            "Built 30+ practice & experimental projects",
+            "Focused on performance, clean UI & scalability"
+          ]
+        }
+      ],
+      
+      // Projects
+      projects: [
+        {
+          name: "Talent Tree Job Portal",
+          description: "Full-stack job portal with WordPress backend, PHP, MySQL, serving 5000+ active users",
+          technologies: ["WordPress", "PHP", "MySQL", "Elementor"],
+          year: 2025,
+          category: "WordPress"
+        },
+        {
+          name: "codeinl∞p Portfolio",
+          description: "Elite terminal-inspired portfolio with GSAP animations and 3D effects",
+          technologies: ["HTML", "CSS", "GSAP", "Tailwind"],
+          year: 2024,
+          category: "Web"
+        },
+        {
+          name: "Voice To-Do List",
+          description: "Voice-enabled task management application",
+          technologies: ["JavaScript", "Web Speech API"],
+          year: 2024,
+          category: "Web App"
+        },
+        {
+          name: "Attendance Management System",
+          description: "Complete attendance tracking system for organizations",
+          technologies: ["PHP", "MySQL", "Bootstrap"],
+          year: 2025,
+          category: "SaaS"
+        },
+        {
+          name: "Daily Expense Manager",
+          description: "Personal finance tracking application",
+          technologies: ["PHP", "MySQL", "Tailwind"],
+          year: 2024,
+          category: "SaaS"
+        },
+        {
+          name: "AI Resume Analyzer",
+          description: "AI-powered resume analysis tool",
+          technologies: ["Python", "AI/ML", "JavaScript"],
+          year: 2026,
+          category: "SaaS"
+        }
+      ],
+      
+      // Metrics
+      metrics: {
+        projectsDelivered: "50+",
+        usersScaled: "5000+",
+        yearsExp: 4,
+        problemsSolved: "100+",
+        mentored: "15+"
+      },
+      
+      // Contact
+      contact: {
+        email: "projects.abdulhannan@gmail.com",
+        status: "ACCEPTING NEW PROJECTS",
+        responseTime: "within 24 hours"
+      },
+      
+      // Availability
+      availability: "Available for freelance projects, full-time opportunities, and collaborations",
+      
+      // Work style
+      workStyle: "Frontend-focused full-stack engineer building production-ready systems and scalable digital products"
+    };
+    
+    // ============================================================
+    // SMART INTENT RECOGNITION - Understands user psychology
+    // ============================================================
+    
+    function detectIntent(message) {
+      const msg = message.toLowerCase().trim();
+      
+      // Intent categories with weighted keywords and psychological triggers
+      const intents = {
+        // Who is this person? (Identity questions)
+        identity: {
+          keywords: ['who are you', 'tell me about yourself', 'introduce yourself', 'about you', 'your name', 'hannan', 'who is', 'what do you do', 'background', 'bio'],
+          score: 0
+        },
+        // What can you do? (Skills/Capabilities)
+        skills: {
+          keywords: ['skills', 'technologies', 'tech stack', 'what can you do', 'expertise', 'know', 'proficient', 'languages', 'frameworks', 'tools', 'can you build', 'capable', 'good at'],
+          score: 0
+        },
+        // Work history (Experience)
+        experience: {
+          keywords: ['experience', 'work', 'career', 'job', 'company', 'worked', 'employed', 'past', 'background', 'history', 'where did you work', 'professional', 'roles'],
+          score: 0
+        },
+        // Portfolio (Projects)
+        projects: {
+          keywords: ['projects', 'portfolio', 'built', 'created', 'made', 'work', 'developed', 'applications', 'websites', 'show me', 'what have you', 'examples', 'case studies', 'work samples'],
+          score: 0
+        },
+        // Hire/Collaboration (Business intent)
+        hire: {
+          keywords: ['hire', 'work with', 'collaborate', 'available', 'freelance', 'contract', 'rate', 'cost', 'price', 'pricing', 'charge', 'how much', 'budget', 'interested', 'opportunity', 'open to work', 'looking for'],
+          score: 0
+        },
+        // Contact (Reach out)
+        contact: {
+          keywords: ['contact', 'email', 'reach', 'connect', 'message', 'call', 'phone', 'get in touch', 'how to contact', 'social media', 'discord', 'linkedin', 'twitter'],
+          score: 0
+        },
+        // Philosophy/Work ethic (Cultural fit)
+        philosophy: {
+          keywords: ['philosophy', 'approach', 'methodology', 'work style', 'how do you work', 'process', 'mindset', 'principles', 'values', 'ethics', 'believe', 'why you', 'different'],
+          score: 0
+        },
+        // Talent Tree (Specific project)
+        talentTree: {
+          keywords: ['talent tree', 'talenttree', 'job portal', '5000 users'],
+          score: 0
+        },
+        // Wordpress specific
+        wordpress: {
+          keywords: ['wordpress', 'elementor', 'woocommerce', 'cms', 'wp'],
+          score: 0
+        },
+        // GSAP/Animations
+        animations: {
+          keywords: ['animation', 'gsap', 'motion', 'framer', 'interaction', 'smooth', 'butter', 'effects'],
+          score: 0
+        },
+        // Greeting
+        greeting: {
+          keywords: ['hi', 'hello', 'hey', 'namaste', 'hola', 'good morning', 'good evening', 'greetings', 'what\'s up', 'howdy'],
+          score: 0
+        },
+        // Thanks/Closing
+        thanks: {
+          keywords: ['thank', 'thanks', 'appreciate', 'helpful', 'great', 'awesome', 'cool'],
+          score: 0
+        }
+      };
+      
+      // Calculate scores based on keyword matches
+      for (const [intent, data] of Object.entries(intents)) {
+        let score = 0;
+        for (const keyword of data.keywords) {
+          if (msg.includes(keyword)) {
+            score += keyword.length; // Longer matches = higher weight
+          }
+        }
+        intents[intent].score = score;
+      }
+      
+      // Find highest scoring intent
+      let topIntent = 'general';
+      let topScore = 0;
+      
+      for (const [intent, data] of Object.entries(intents)) {
+        if (data.score > topScore) {
+          topScore = data.score;
+          topIntent = intent;
+        }
+      }
+      
+      return { intent: topIntent, confidence: topScore };
+    }
+    
+    // ============================================================
+    // RESPONSE GENERATOR - Natural, conversational answers
+    // ============================================================
+    
+    function generateResponse(message, intentResult) {
+      const msg = message.toLowerCase();
+      const { intent } = intentResult;
+      
+      // GREETING
+      if (intent === 'greeting') {
+        return "Hey there! 👋 Great to connect with you. I'm Abdul Hannan's AI assistant. Ask me anything about his work — skills, projects, experience, or how to collaborate. What would you like to know?";
+      }
+      
+      // THANKS
+      if (intent === 'thanks') {
+        return "You're welcome! 🙌 If you have more questions about Abdul's work or want to collaborate, feel free to ask. Always happy to help!";
+      }
+      
+      // IDENTITY - Who is Abdul Hannan?
+      if (intent === 'identity') {
+        return `Abdul Hannan is a ${profile.title} with ${profile.yearsOfExperience}+ years of experience. He started his journey in ${profile.since} and has since delivered ${profile.metrics.projectsDelivered} projects, scaled platforms to ${profile.metrics.usersScaled}+ users, and helped ${profile.metrics.mentored}+ developers grow. His philosophy: "${profile.philosophy[0]}"`;
+      }
+      
+      // SKILLS
+      if (intent === 'skills') {
+        return `Abdul's core skills:\n\n🎨 Frontend: ${profile.skills.frontend.join(', ')}\n\n⚙️ Backend: ${profile.skills.backend.join(', ')}\n\n📦 CMS: ${profile.skills.cms.join(', ')}\n\n🛠️ Tools: ${profile.skills.tools.slice(0,6).join(', ')}\n\nHe's particularly strong in PHP (98%), MySQL (98%), HTML/CSS/Tailwind (98%), and WordPress (90%). Always pushing boundaries with GSAP animations!`;
+      }
+      
+      // EXPERIENCE
+      if (intent === 'experience') {
+        let expText = `Abdul has ${profile.yearsOfExperience}+ years of professional experience:\n\n`;
+        profile.experience.forEach(exp => {
+          expText += `➤ ${exp.role} at ${exp.company} (${exp.period})\n`;
+          exp.achievements.forEach(ach => {
+            expText += `   → ${ach}\n`;
+          });
+          expText += `\n`;
+        });
+        return expText + `Total impact: ${profile.metrics.projectsDelivered} projects delivered, ${profile.metrics.usersScaled}+ users served.`;
+      }
+      
+      // PROJECTS
+      if (intent === 'projects') {
+        let projectText = `Here are Abdul's featured projects:\n\n`;
+        profile.projects.forEach(proj => {
+          projectText += `➤ ${proj.name} (${proj.year})\n   → ${proj.description}\n   → Tech: ${proj.technologies.join(', ')}\n\n`;
+        });
+        return projectText + `All projects demonstrate his full-stack capabilities and attention to performance. Want details about any specific project?`;
+      }
+      
+      // HIRE / COLLABORATION
+      if (intent === 'hire') {
+        return `Yes! Abdul is currently ${profile.availability}. He's built 50+ production-ready projects and scaled platforms to 5000+ users. For collaboration inquiries:\n\n📧 Email: ${profile.contact.email}\n💼 Status: ${profile.contact.status}\n⏱️ Response: ${profile.contact.responseTime}\n\nHe's open to freelance, full-time, and consultation work. Let's build something great together!`;
+      }
+      
+      // CONTACT
+      if (intent === 'contact') {
+        return `You can reach Abdul Hannan at:\n\n📧 Email: ${profile.contact.email}\n🌐 Portfolio: hannanbuilds.vercel.app\n💼 Status: ${profile.contact.status}\n\nHe typically responds within ${profile.contact.responseTime}. Ready to discuss your project!`;
+      }
+      
+      // PHILOSOPHY / WORK STYLE
+      if (intent === 'philosophy') {
+        return `Abdul's development philosophy:\n\n${profile.philosophy.map(p => `➤ ${p}`).join('\n\n')}\n\nHis work style: ${profile.workStyle}. He believes great products aren't built faster — they're built clearer.`;
+      }
+      
+      // TALENT TREE (Specific project)
+      if (intent === 'talentTree') {
+        return `Talent Tree Job Portal is one of Abdul's flagship projects! 🚀 He built it as Founder/Full-Stack Engineer, scaling it to 5000+ active users. Tech stack: WordPress, PHP, MySQL, Elementor. It's a full-featured job portal with custom backend logic and responsive frontend. Want to know more about how it works?`;
+      }
+      
+      // WORDPRESS
+      if (intent === 'wordpress') {
+        return `Abdul is highly skilled in WordPress development! He's mastered WordPress, Elementor, and WooCommerce (90% proficiency). He built the Talent Tree Job Portal serving 5000+ users using WordPress + PHP + MySQL. He can handle custom themes, plugins, and complex backend integrations.`;
+      }
+      
+      // ANIMATIONS
+      if (intent === 'animations') {
+        return `Abdul is passionate about motion design! He uses GSAP and Framer Motion to create buttery-smooth, meaningful animations. His philosophy: "Motion with meaning — every animation guides attention, no gratuitous movement." Check out his portfolio (codeinl∞p) for examples of his animation work!`;
+      }
+      
+      // GENERAL - Smart fallback with suggested questions
+      return `I'm here to help you learn about Abdul Hannan! 💡\n\nYou can ask me about:\n• His skills and tech stack\n• His experience and career journey\n• His projects and portfolio\n• How to hire or collaborate\n• His work philosophy\n\nWhat would you like to know?`;
+    }
+    
+    // ============================================================
+    // CHATBOT UI CONTROLLER
+    // ============================================================
+    
+    const toggle = document.getElementById('chatbotToggle');
+    const windowEl = document.getElementById('chatbotWindow');
+    const closeBtn = document.getElementById('chatbotClose');
+    const sendBtn = document.getElementById('chatbotSend');
+    const input = document.getElementById('chatbotInput');
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const suggestionChips = document.querySelectorAll('.suggestion-chip');
+    
+    let isTyping = false;
+    
+    function addMessage(text, isUser) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function showTyping() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing-indicator';
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = '<span></span><span></span><span></span>';
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function hideTyping() {
+      const typing = document.getElementById('typingIndicator');
+      if (typing) typing.remove();
+    }
+    
+    function sendMessage(messageText = null) {
+      const message = messageText || input.value.trim();
+      if (!message || isTyping) return;
+      
+      addMessage(message, true);
+      if (!messageText) input.value = '';
+      showTyping();
+      isTyping = true;
+      
+      // Simulate thinking time based on message complexity
+      const intent = detectIntent(message);
+      const thinkingTime = Math.min(800, 300 + (intent.confidence / 10));
+      
+      setTimeout(() => {
+        const response = generateResponse(message, intent);
+        hideTyping();
+        addMessage(response, false);
+        isTyping = false;
+      }, thinkingTime);
+    }
+    
+    // Event listeners
+    toggle.addEventListener('click', () => {
+      windowEl.classList.toggle('open');
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      windowEl.classList.remove('open');
+    });
+    
+    sendBtn.addEventListener('click', () => sendMessage());
+    
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+    
+    suggestionChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const question = chip.getAttribute('data-question');
+        if (question) sendMessage(question);
+      });
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && windowEl.classList.contains('open')) {
+        windowEl.classList.remove('open');
+      }
+    });
+  })();
+</script>
 </body>
 </html>
