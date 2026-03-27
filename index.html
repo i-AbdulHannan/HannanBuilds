@@ -386,7 +386,7 @@
       });
     })();
   </script>
-  <!-- CHATBOT WIDGET - AI Assistant (Customized for Abdul Hannan) -->
+  <!-- AI CHATBOT - Intelligent Assistant -->
 <style>
   /* Chatbot Styles - Terminal Inspired */
   .chatbot-container {
@@ -420,8 +420,8 @@
     position: fixed;
     bottom: 90px;
     right: 20px;
-    width: 350px;
-    height: 500px;
+    width: 380px;
+    height: 550px;
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(20px);
     border: 1px solid #0326fc;
@@ -584,7 +584,7 @@
     .chatbot-window {
       width: calc(100vw - 40px);
       right: 20px;
-      height: 480px;
+      height: 500px;
     }
   }
 </style>
@@ -606,7 +606,7 @@
     </div>
     <div class="chatbot-messages" id="chatbotMessages">
       <div class="message bot">
-        Hey, I'm the AI assistant for <span style="color: #0326fc;">Abdul Hannan</span>. Ask me anything about his skills, experience, projects, or how we can work together!
+        Hey 👋 I'm the AI assistant for <span style="color: #0326fc;">Abdul Hannan</span>. Ask me anything about his skills, experience, projects, or how we can work together!
       </div>
     </div>
     <div class="chatbot-input">
@@ -617,265 +617,276 @@
 </div>
 
 <script>
-  (function() {
-    // ============================================================
-    // KNOWLEDGE BASE - Customized for Abdul Hannan
-    // Based on your portfolio at hannanbuilds.vercel.app
-    // ============================================================
+(function() {
+  // ============================================
+  // ABDUL HANNAN - COMPLETE KNOWLEDGE BASE
+  // ============================================
+  
+  const profile = {
+    // Personal Info
+    name: "Abdul Hannan",
+    fullName: "Abdul Hannan",
+    brand: "HannanBuilds",
+    title: "Frontend Architect & Full-Stack Engineer",
+    role: "frontend architect",
+    specialty: "WordPress development, frontend architecture, full-stack engineering",
     
-    const knowledgeBase = {
-      // Personal Info
-      name: "Abdul Hannan",
-      fullName: "Abdul Hannan",
-      brand: "Hannan Builds",
-      role: "Frontend Architect & Full-Stack Engineer",
-      tagline: "frontend architect · full-stack engineer · digital problem solver",
+    // Bio & Journey
+    bio: "Abdul Hannan is a frontend architect and full-stack engineer who started his journey in 2022. He specializes in building award-level interfaces for startups, brands, and SaaS platforms. His approach combines hacker mindset with Apple-like minimalism, focusing on accessibility, performance, and visual hierarchy.",
+    
+    // Skills (from portfolio)
+    frontendSkills: ["HTML", "Bootstrap", "Tailwind CSS", "GSAP", "Framer", "JavaScript", "React"],
+    backendSkills: ["PHP", "MySQL", "WordPress", "Node.js"],
+    tools: ["VS Code", "Git", "Figma", "Webpack", "Vite"],
+    
+    allSkills: ["HTML", "Bootstrap", "Tailwind CSS", "GSAP", "Framer", "JavaScript", "React", "PHP", "MySQL", "WordPress", "Node.js", "VS Code", "Git", "Figma", "Webpack", "Vite"],
+    
+    // Experience
+    experience: {
+      years: 4,
       startYear: 2022,
-      experienceYears: 4,
-      problemsSolved: "100+",
-      
-      // Skills - from your site
-      skills: [
-        "WordPress", "Elementor", "MySQL", "PHP", 
-        "HTML5", "CSS3", "Bootstrap", "Tailwind CSS",
-        "JavaScript", "GSAP", "Framer Motion", "React",
-        "Node.js", "Git", "REST APIs"
-      ],
-      frontendSkills: ["HTML", "CSS", "Tailwind CSS", "Bootstrap", "GSAP", "Framer Motion", "JavaScript", "React"],
-      backendSkills: ["PHP", "MySQL", "Node.js"],
-      cmsSkills: ["WordPress", "Elementor", "WooCommerce"],
-      tools: ["Git", "VS Code", "Figma", "Webpack", "Vite"],
-      
-      // Work Philosophy
-      philosophy: [
-        "Clarity over complexity - write self-documenting code",
-        "Motion with meaning - every animation guides attention", 
-        "Future-proof - build for tomorrow's standards today",
-        "Accessibility and performance are non-negotiable"
-      ],
-      
-      // Work Style (from your intro)
-      workStyle: "I don't just write components — I design systems that scale, feel alive, and stay buttery-smooth. My workflow merges hacker mindset with apple-like minimalism.",
-      
-      // Projects - Based on your site's project grid
-      projects: [
-        {
-          name: "WordPress Ecosystem",
-          description: "Custom WordPress themes and plugins with Elementor integration",
-          technologies: ["WordPress", "PHP", "Elementor", "MySQL"],
-          category: "web cms"
-        },
-        {
-          name: "Interactive Portfolio",
-          description: "Terminal-inspired developer portfolio with GSAP animations",
-          technologies: ["HTML", "Tailwind", "GSAP", "JavaScript"],
-          category: "ui experiments"
-        },
-        {
-          name: "SaaS Dashboard",
-          description: "Real-time analytics dashboard for business intelligence",
-          technologies: ["React", "Node.js", "Chart.js"],
-          category: "saas"
-        },
-        {
-          name: "Motion UI Library",
-          description: "Component library with advanced GSAP animations",
-          technologies: ["GSAP", "Tailwind", "JavaScript"],
-          category: "ui"
-        }
-      ],
-      
-      // Contact & Availability
-      contact: {
-        email: "hannan@example.com",  // Update with your actual email
-        responseTime: "under 2 hours"
+      description: "Since 2022, Abdul Hannan has been building award-level interfaces for startups, brands, and SaaS platforms. He specializes in WordPress development and frontend architecture.",
+      focus: "Designing systems that scale, feel alive, and stay buttery-smooth"
+    },
+    
+    // Philosophy
+    philosophy: [
+      "Design systems that scale, feel alive, and stay buttery-smooth",
+      "Hacker mindset with Apple-like minimalism",
+      "Every line is a decision: accessibility, performance, and visual hierarchy",
+      "Build for the next decade, not the next framework"
+    ],
+    
+    // Achievements
+    achievements: {
+      yearsElite: "4+ years elite dev",
+      problemsSolved: "100+ problems solved"
+    },
+    
+    // Projects (based on portfolio style)
+    projects: [
+      {
+        name: "Portfolio Website",
+        description: "Terminal-inspired personal portfolio showcasing skills and work",
+        tech: ["HTML", "Tailwind CSS", "GSAP", "JavaScript"],
+        year: 2025
       },
-      availability: "Available for freelance projects and full-time opportunities",
-      
-      // Services offered
-      services: [
-        "Custom WordPress development",
-        "Elementor website design & development",
-        "Frontend architecture & component systems",
-        "Interactive animations & GSAP experiences",
-        "Full-stack web applications (React + PHP/Node)",
-        "Performance optimization & SEO",
-        "Responsive & mobile-first design"
-      ],
-      
-      // Why choose Abdul
-      valueProposition: "I engineer award-level interfaces for startups, brands, and SaaS. Every line is a decision focused on accessibility, performance, and visual hierarchy. I build for the next decade, not the next framework."
+      {
+        name: "WordPress Solutions",
+        description: "Custom WordPress development for startups and brands",
+        tech: ["WordPress", "PHP", "MySQL", "Elementor"],
+        year: "2024-2025"
+      }
+    ],
+    
+    // What he builds
+    work: {
+      type: "award-level interfaces for startups, brands, and SaaS",
+      focus: "frontend architecture, full-stack development, WordPress solutions"
+    },
+    
+    // Contact (to be updated)
+    contact: {
+      email: "hannan@hannanbuilds.com", // Update with actual email
+      website: "hannanbuilds.vercel.app",
+      github: "https://github.com/hannanbuilds",
+      linkedin: "https://linkedin.com/in/hannanbuilds"
+    },
+    
+    // Availability
+    availability: "Available for freelance projects, WordPress development, and frontend architecture consulting",
+    
+    // USP - Why hire him
+    whyHire: "Abdul Hannan combines hacker mindset with Apple-like minimalism. Every line of code is a decision focused on accessibility, performance, and visual hierarchy. He builds for the next decade, not the next framework. With 4+ years of experience and 100+ problems solved, he delivers award-level interfaces that scale."
+  };
+  
+  // ============================================
+  // INTELLIGENT RESPONSE ENGINE
+  // ============================================
+  
+  function understandIntent(message) {
+    const msg = message.toLowerCase().trim();
+    
+    // Intent categories with human-like understanding
+    const intents = {
+      greeting: /^(hi|hello|hey|namaste|hola|greetings|sup|yo|what'?s up|howdy)$/i,
+      about: /(who are you|tell me about yourself|introduce|about you|your background|who is hannan|tell me about hannan)/i,
+      skills: /(skill|technologies|tech stack|tools|know|expertise|what can you do|capabilities|proficient)/i,
+      frontend: /(frontend|front-end|ui|ux|html|css|tailwind|bootstrap|react|javascript|gsap|framer)/i,
+      backend: /(backend|back-end|php|mysql|wordpress|node|database|server)/i,
+      wordpress: /(wordpress|wp|elementor|theme|plugin|cms)/i,
+      experience: /(experience|work|career|job|company|how long|years|since)/i,
+      projects: /(project|portfolio|build|made|create|work|what have you built|show me)/i,
+      philosophy: /(philosophy|ethic|values|mindset|principles|approach|style)/i,
+      hire: /(hire|available|freelance|work with|collaborate|book|contract|opportunity)/i,
+      why: /(why you|why hire|why choose|unique|different|best)/i,
+      contact: /(contact|email|reach|connect|discord|twitter|x|linkedin|github|social)/i,
+      price: /(price|pricing|cost|rate|how much|budget|charge|fee)/i,
+      help: /(help|what can you|assist|questions|ask)/i,
+      thanks: /(thanks|thank you|appreciate|great|awesome)/i,
+      goodbye: /(bye|goodbye|see you|later|exit|close)/i
     };
     
-    // ============================================================
-    // Chatbot Response Logic
-    // ============================================================
-    
-    function getResponse(userMessage) {
-      const msg = userMessage.toLowerCase().trim();
-      
-      // Greetings
-      if (msg.match(/hi|hello|hey|namaste|hola|salam|assalam/)) {
-        return "Assalam-o-Alaikum! 👋 I'm the AI assistant for Abdul Hannan. Ask me about his skills, WordPress expertise, projects, or how you can work together!";
+    // Detect intent
+    for (const [intent, pattern] of Object.entries(intents)) {
+      if (pattern.test(msg)) {
+        return intent;
       }
-      
-      // Who are you / Introduction
-      if (msg.match(/who are you|tell me about yourself|introduce|about you|who is abdul|abdul hannan/)) {
-        return `I'm ${knowledgeBase.fullName}, a ${knowledgeBase.role} since ${knowledgeBase.startYear}. I specialize in building award-level interfaces for startups, brands, and SaaS platforms. My expertise spans WordPress, Elementor, PHP, MySQL, and modern frontend technologies like React, GSAP, and Tailwind CSS. I'm passionate about creating digital experiences that are both beautiful and performant.`;
-      }
-      
-      // Skills / Technologies
-      if (msg.match(/skill|technologies|tech stack|tools|know|expertise|what can you do/)) {
-        return `My core skills include:\n\n➤ CMS & Backend: ${knowledgeBase.cmsSkills.join(', ')}\n➤ Frontend: ${knowledgeBase.frontendSkills.slice(0,5).join(', ')}\n➤ Animation: ${knowledgeBase.frontendSkills.slice(4,6).join(', ')}\n➤ Tools: ${knowledgeBase.tools.join(', ')}\n\nI build everything from custom WordPress sites to full-stack web applications with buttery-smooth animations.`;
-      }
-      
-      // WordPress / Elementor specific
-      if (msg.match(/wordpress|elementor|cms|blog|theme|plugin/)) {
-        return `I have extensive experience with WordPress and Elementor. I build custom WordPress themes, develop plugins, and create pixel-perfect Elementor websites. My WordPress workflow combines PHP, MySQL, and modern frontend practices to deliver fast, secure, and scalable sites. Need a custom WordPress solution? I've got you covered!`;
-      }
-      
-      // Frontend specific
-      if (msg.match(/frontend|front-end|html|css|tailwind|bootstrap/)) {
-        return `My frontend expertise includes HTML5, CSS3, Tailwind CSS, Bootstrap, and modern JavaScript. I create responsive, accessible interfaces that work seamlessly across all devices. I also specialize in advanced animations using GSAP and Framer Motion to bring websites to life.`;
-      }
-      
-      // Experience / Years
-      if (msg.match(/experience|years|how long|since when/)) {
-        return `I've been building digital experiences since ${knowledgeBase.startYear}, which is ${knowledgeBase.experienceYears}+ years of professional experience. I've solved over ${knowledgeBase.problemsSolved} problems across various projects, from WordPress sites to complex web applications.`;
-      }
-      
-      // Projects / Portfolio
-      if (msg.match(/project|portfolio|work|build|made|create|show/)) {
-        let projectText = `Here are some of my recent projects:\n\n`;
-        knowledgeBase.projects.forEach(proj => {
-          projectText += `➤ ${proj.name}\n   → ${proj.description}\n   → Stack: ${proj.technologies.join(', ')}\n\n`;
-        });
-        projectText += `Want to see more? Visit the Projects page on my portfolio at hannanbuilds.vercel.app!`;
-        return projectText;
-      }
-      
-      // Services offered
-      if (msg.match(/service|offer|provide|help with|what can you help/)) {
-        let servicesText = `I offer these services:\n\n`;
-        knowledgeBase.services.forEach(service => {
-          servicesText += `➤ ${service}\n`;
-        });
-        servicesText += `\nInterested? Let's discuss your project!`;
-        return servicesText;
-      }
-      
-      // Philosophy / Work ethic
-      if (msg.match(/philosophy|ethic|values|mindset|principles|approach/)) {
-        return `My philosophy: ${knowledgeBase.workStyle}\n\nI believe in:\n${knowledgeBase.philosophy.map(p => `➤ ${p}`).join('\n')}\n\nI build for the next decade, not just the next framework.`;
-      }
-      
-      // Why choose / Value
-      if (msg.match(/why|hire|choose|unique|difference|best/)) {
-        return `${knowledgeBase.valueProposition}\n\nI bring ${knowledgeBase.experienceYears}+ years of experience, ${knowledgeBase.problemsSolved} solved problems, and a commitment to excellence in every project. Plus, I combine technical expertise with a designer's eye for detail.`;
-      }
-      
-      // Contact / Reach
-      if (msg.match(/contact|email|reach|connect|how to|get in touch/)) {
-        return `You can reach me at ${knowledgeBase.contact.email}. I typically respond within ${knowledgeBase.contact.responseTime}. Let's discuss your project and bring your vision to life!`;
-      }
-      
-      // Availability
-      if (msg.match(/available|hire|freelance|work with|collaborate|book/)) {
-        return `Yes! I'm currently ${knowledgeBase.availability}. Whether you need a custom WordPress site, a modern web application, or just want to brainstorm ideas, I'd love to hear from you. Drop me a message!`;
-      }
-      
-      // Pricing / Cost
-      if (msg.match(/price|pricing|cost|how much|rate|budget/)) {
-        return `Pricing varies based on project scope and complexity. I offer flexible packages for WordPress sites, custom web applications, and ongoing maintenance. The best way to get an accurate quote is to share your project requirements via email. Let's chat!`;
-      }
-      
-      // Latest work / Current
-      if (msg.match(/latest|recent|current|now|working on/)) {
-        return `Currently, I'm working on building out my portfolio with terminal-inspired designs and exploring advanced GSAP animations. I'm also available for new projects — WordPress development, custom websites, or full-stack applications. What can I build for you?`;
-      }
-      
-      // Help / Capabilities
-      if (msg.match(/help|what can you|capabilities|assist/)) {
-        return `I can help you with:\n➤ Custom WordPress & Elementor websites\n➤ Modern frontend development (React, Tailwind, GSAP)\n➤ Full-stack web applications (PHP/MySQL)\n➤ Performance optimization & SEO\n➤ Interactive animations & motion design\n➤ Technical consulting\n\nWhat would you like to build?`;
-      }
-      
-      // Default - fallback response
-      return `I can help you with questions about Abdul Hannan's skills, WordPress expertise, projects, services, or how to work together. Try asking: "What skills do you have?" or "Tell me about your WordPress experience" or "How can I hire you?"`;
     }
     
-    // ============================================================
-    // Chatbot UI Logic
-    // ============================================================
+    // If no intent matches, do semantic analysis
+    if (msg.includes('work') || msg.includes('do')) return 'about';
+    if (msg.includes('build') || msg.includes('create')) return 'projects';
+    if (msg.includes('know') || msg.includes('learn')) return 'skills';
     
-    const toggle = document.getElementById('chatbotToggle');
-    const windowEl = document.getElementById('chatbotWindow');
-    const closeBtn = document.getElementById('chatbotClose');
-    const sendBtn = document.getElementById('chatbotSend');
-    const input = document.getElementById('chatbotInput');
-    const messagesContainer = document.getElementById('chatbotMessages');
+    return 'general';
+  }
+  
+  function generateResponse(intent, userMessage) {
+    const msg = userMessage.toLowerCase();
     
-    let isTyping = false;
-    
-    function addMessage(text, isUser) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
-      messagesContainer.appendChild(messageDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-    
-    function showTyping() {
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'typing-indicator';
-      typingDiv.id = 'typingIndicator';
-      typingDiv.innerHTML = '<span></span><span></span><span></span>';
-      messagesContainer.appendChild(typingDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-    
-    function hideTyping() {
-      const typing = document.getElementById('typingIndicator');
-      if (typing) typing.remove();
-    }
-    
-    function sendMessage() {
-      const message = input.value.trim();
-      if (!message || isTyping) return;
+    switch(intent) {
+      case 'greeting':
+        const greetings = [
+          `Hey! 👋 Great to connect with you. I'm Abdul Hannan's AI assistant. What would you like to know about his work?`,
+          `Hello! 👋 I'm here to help you learn about Abdul Hannan. Ask me about his skills, experience, or projects!`,
+          `Hi there! 👋 Ready to explore Abdul Hannan's work? Whether you're interested in frontend architecture, WordPress, or just want to chat, I'm here!`
+        ];
+        return greetings[Math.floor(Math.random() * greetings.length)];
       
-      addMessage(message, true);
-      input.value = '';
-      showTyping();
-      isTyping = true;
+      case 'about':
+        return `${profile.bio}\n\nHe started in ${profile.experience.startYear} and has ${profile.experience.years}+ years of elite development experience, solving ${profile.achievements.problemsSolved}. His work focuses on ${profile.work.focus}.`;
       
-      setTimeout(() => {
-        const response = getResponse(message);
-        hideTyping();
-        addMessage(response, false);
-        isTyping = false;
-      }, 400);
+      case 'skills':
+        return `Abdul Hannan's technical toolkit:\n\n➤ Frontend: ${profile.frontendSkills.join(', ')}\n➤ Backend: ${profile.backendSkills.join(', ')}\n➤ Tools: ${profile.tools.join(', ')}\n\nHe specializes in WordPress development and creating buttery-smooth animations with GSAP and Framer.`;
+      
+      case 'frontend':
+        return `Frontend is where Abdul Hannan shines! His frontend arsenal includes:\n➤ ${profile.frontendSkills.join('\n➤ ')}\n\nHe creates award-level interfaces with hacker mindset and Apple-like minimalism. Every animation is intentional, every pixel is perfect.`;
+      
+      case 'backend':
+        return `On the backend side, Abdul Hannan works with:\n➤ ${profile.backendSkills.join('\n➤ ')}\n\nHe builds scalable WordPress solutions, custom PHP applications, and integrates with MySQL databases. Full-stack capabilities with a frontend-first approach.`;
+      
+      case 'wordpress':
+        return `WordPress is one of Abdul Hannan's specialties! He builds:\n➤ Custom WordPress themes and plugins\n➤ Elementor-powered designs\n➤ Scalable CMS solutions\n➤ High-performance WordPress sites for startups and brands\n\nHe combines WordPress flexibility with modern frontend practices.`;
+      
+      case 'experience':
+        return `Abdul Hannan started his development journey in ${profile.experience.startYear}. In ${profile.experience.years}+ years, he's been building award-level interfaces for startups, brands, and SaaS platforms. His philosophy: designing systems that scale, feel alive, and stay buttery-smooth.\n\n${profile.achievements.yearsElite} | ${profile.achievements.problemsSolved}`;
+      
+      case 'projects':
+        return `Here are some of Abdul Hannan's featured projects:\n\n➤ ${profile.projects[0].name} (${profile.projects[0].year}): ${profile.projects[0].description}\n   Tech: ${profile.projects[0].tech.join(', ')}\n\n➤ ${profile.projects[1].name}: ${profile.projects[1].description}\n   Tech: ${profile.projects[1].tech.join(', ')}\n\nWant to see more? Visit hannanbuilds.vercel.app for the complete portfolio!`;
+      
+      case 'philosophy':
+        return `Abdul Hannan's development philosophy:\n\n${profile.philosophy.map(p => `➤ ${p}`).join('\n\n')}\n\nHe believes in building for the next decade, not the next framework. Every line of code is a decision: accessibility, performance, and visual hierarchy are non-negotiable.`;
+      
+      case 'why':
+        return `${profile.whyHire}\n\nHe's solved 100+ problems and brings ${profile.experience.years}+ years of elite development experience to every project. His work speaks for itself.`;
+      
+      case 'hire':
+        return `${profile.availability}\n\n${profile.whyHire}\n\nWant to discuss a project? Just ask for contact details and I'll share how to reach him!`;
+      
+      case 'contact':
+        return `You can connect with Abdul Hannan through:\n➤ Email: ${profile.contact.email}\n➤ Website: ${profile.contact.website}\n➤ GitHub: ${profile.contact.github}\n➤ LinkedIn: ${profile.contact.linkedin}\n\nHe typically responds within 24 hours. What would you like to discuss?`;
+      
+      case 'price':
+        return `For pricing details, it's best to reach out directly! Abdul Hannan offers:\n➤ Custom WordPress development\n➤ Frontend architecture consulting\n➤ Full-stack project development\n➤ Performance optimization\n\nContact him at ${profile.contact.email} for a personalized quote based on your project needs.`;
+      
+      case 'thanks':
+        return `You're welcome! 😊 I'm glad I could help. If you have more questions about Abdul Hannan's work, feel free to ask. Have a great day!`;
+      
+      case 'goodbye':
+        return `Thanks for chatting! 👋 Feel free to reach out anytime through the contact info. Have a great day, and happy building!`;
+      
+      case 'help':
+        return `I can help you with:\n➤ Who Abdul Hannan is and his background\n➤ His skills and technologies\n➤ His work experience and projects\n➤ His development philosophy\n➤ How to contact him or work together\n\nJust ask naturally - "What skills does he have?" or "Tell me about his projects"`;
+      
+      default:
+        // Intelligent fallback based on keywords
+        if (msg.includes('build') || msg.includes('create')) {
+          return `Abdul Hannan builds award-level interfaces for startups, brands, and SaaS platforms. He specializes in WordPress development and frontend architecture. Check out the Projects page to see his work in action!`;
+        }
+        if (msg.includes('hire') || msg.includes('work with')) {
+          return `${profile.availability} To discuss a project, reach out via ${profile.contact.email} or visit his portfolio to see if his style matches your vision!`;
+        }
+        return `That's a great question! I want to make sure I give you the best answer. Could you rephrase or ask about:\n\n➤ Abdul Hannan's skills & technologies\n➤ His experience & projects\n➤ His work philosophy\n➤ How to contact or hire him\n\nWhat would you like to know?`;
     }
+  }
+  
+  // ============================================
+  // CHATBOT UI CONTROLS
+  // ============================================
+  
+  const toggle = document.getElementById('chatbotToggle');
+  const windowEl = document.getElementById('chatbotWindow');
+  const closeBtn = document.getElementById('chatbotClose');
+  const sendBtn = document.getElementById('chatbotSend');
+  const input = document.getElementById('chatbotInput');
+  const messagesContainer = document.getElementById('chatbotMessages');
+  
+  let isTyping = false;
+  
+  function addMessage(text, isUser) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+    messageDiv.innerHTML = text;
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+  
+  function showTyping() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'typing-indicator';
+    typingDiv.id = 'typingIndicator';
+    typingDiv.innerHTML = '<span></span><span></span><span></span>';
+    messagesContainer.appendChild(typingDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+  
+  function hideTyping() {
+    const typing = document.getElementById('typingIndicator');
+    if (typing) typing.remove();
+  }
+  
+  function sendMessage() {
+    const message = input.value.trim();
+    if (!message || isTyping) return;
     
-    // Event listeners
-    toggle.addEventListener('click', () => {
-      windowEl.classList.toggle('open');
-    });
+    addMessage(message, true);
+    input.value = '';
+    showTyping();
+    isTyping = true;
     
-    closeBtn.addEventListener('click', () => {
+    // Simulate thinking delay
+    setTimeout(() => {
+      const intent = understandIntent(message);
+      const response = generateResponse(intent, message);
+      hideTyping();
+      addMessage(response, false);
+      isTyping = false;
+    }, 500 + Math.random() * 400);
+  }
+  
+  // Event listeners
+  toggle.addEventListener('click', () => {
+    windowEl.classList.toggle('open');
+  });
+  
+  closeBtn.addEventListener('click', () => {
+    windowEl.classList.remove('open');
+  });
+  
+  sendBtn.addEventListener('click', sendMessage);
+  
+  input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+  });
+  
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && windowEl.classList.contains('open')) {
       windowEl.classList.remove('open');
-    });
-    
-    sendBtn.addEventListener('click', sendMessage);
-    
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendMessage();
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && windowEl.classList.contains('open')) {
-        windowEl.classList.remove('open');
-      }
-    });
-  })();
+    }
+  });
+})();
 </script>
 </body>
 </html>
