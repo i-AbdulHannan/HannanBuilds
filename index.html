@@ -100,531 +100,642 @@
   </style>
 </head>
 <body>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>⚠️ SYSTEM BREACH ⚠️ ABDUL HANNAN</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      user-select: none;
-    }
-
-    body {
-      overflow: hidden;
-      background: #000;
-    }
-
-    /* MAIN PRELOADER */
-    .god-preloader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000000;
-      z-index: 99999;
-      transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-      overflow: hidden;
-    }
-
-    .god-preloader.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* ========== LAYER 1: MATRIX RAIN - AGGRESSIVE ========== */
-    .matrix-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.7;
-      z-index: 1;
-    }
-
-    /* ========== LAYER 2: CRT FLICKER ========== */
-    .crt-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 6px);
-      pointer-events: none;
-      z-index: 20;
-      animation: crtFlicker 0.05s infinite;
-    }
-
-    @keyframes crtFlicker {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 0.2; }
-    }
-
-    /* ========== LAYER 3: FAST SCAN LINES ========== */
-    .scan-lines {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to bottom, transparent 0%, rgba(3,38,252,0.3) 50%, transparent 100%);
-      animation: fastScan 0.2s linear infinite;
-      pointer-events: none;
-      z-index: 21;
-    }
-
-    @keyframes fastScan {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100%); }
-    }
-
-    /* ========== LAYER 4: RANDOM GLITCH FLASHES ========== */
-    .glitch-flash {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 0, 102, 0.1);
-      pointer-events: none;
-      z-index: 22;
-      animation: randomFlash 0.1s infinite;
-    }
-
-    @keyframes randomFlash {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 0.3; }
-    }
-
-    /* ========== LAYER 5: MAIN TERMINAL ========== */
-    .hack-terminal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 850px;
-      background: rgba(0, 0, 0, 0.94);
-      border: 3px solid #0326fc;
-      border-radius: 12px;
-      box-shadow: 0 0 100px rgba(3, 38, 252, 0.6), inset 0 0 40px rgba(3, 38, 252, 0.2);
-      z-index: 30;
-      animation: terminalShake 0.05s infinite;
-    }
-
-    @keyframes terminalShake {
-      0%, 100% { transform: translate(-50%, -50%) translateX(0); }
-      25% { transform: translate(-50%, -50%) translateX(1px); }
-      75% { transform: translate(-50%, -50%) translateX(-1px); }
-    }
-
-    /* Terminal Header */
-    .hack-header {
-      background: rgba(0, 0, 0, 0.96);
-      padding: 14px 20px;
-      border-bottom: 2px solid #0326fc;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .hack-dots {
-      display: flex;
-      gap: 10px;
-    }
-
-    .hack-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #ff5f56;
-      animation: dotExplode 0.15s infinite alternate;
-    }
-
-    .hack-dot:nth-child(2) { background: #ffbd2e; animation-delay: 0.05s; }
-    .hack-dot:nth-child(3) { background: #27c93f; animation-delay: 0.1s; }
-
-    @keyframes dotExplode {
-      0% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(1.3); opacity: 0.7; box-shadow: 0 0 8px currentColor; }
-    }
-
-    .hack-title {
-      color: #ff0066;
-      font-size: 12px;
-      letter-spacing: 3px;
-      flex: 1;
-      text-align: center;
-      font-family: monospace;
-      font-weight: bold;
-      text-shadow: 0 0 5px #ff0066;
-      animation: titleGlitch 0.1s infinite;
-    }
-
-    @keyframes titleGlitch {
-      0%, 100% { text-shadow: 0 0 3px #ff0066; }
-      50% { text-shadow: -1px 0 #0326fc, 1px 0 #ff0066; letter-spacing: 5px; }
-    }
-
-    /* Terminal Content */
-    .hack-content {
-      padding: 25px;
-      height: 450px;
-      overflow: hidden;
-    }
-
-    .hack-lines {
-      height: 100%;
-      overflow: hidden;
-    }
-
-    .hack-line {
-      font-family: 'Courier New', monospace;
-      font-size: 13px;
-      line-height: 1.9;
-      opacity: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: lineAttack 0.18s forwards;
-    }
-
-    @keyframes lineAttack {
-      0% { opacity: 0; transform: translateX(-50px) skewX(20deg); filter: blur(3px); }
-      100% { opacity: 1; transform: translateX(0) skewX(0); filter: blur(0); }
-    }
-
-    @media (max-width: 768px) {
-      .hack-line { font-size: 10px; white-space: normal; word-break: break-word; }
-      .hack-content { height: 380px; padding: 15px; }
-    }
-
-    .hack-line.prompt { color: #0326fc; text-shadow: 0 0 5px #0326fc; }
-    .hack-line.error { color: #ff0066; text-shadow: 0 0 8px #ff0066; animation: errorShake 0.05s infinite; }
-    .hack-line.success { color: #00ff00; text-shadow: 0 0 6px #00ff00; }
-    .hack-line.critical { color: #ff0066; text-shadow: 0 0 12px #ff0066; font-weight: bold; letter-spacing: 1px; }
-    .hack-line.warning { color: #ffaa00; text-shadow: 0 0 6px #ffaa00; }
-
-    @keyframes errorShake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-2px); }
-      75% { transform: translateX(2px); }
-    }
-
-    /* Progress Bar - EXPLOSIVE */
-    .hack-progress {
-      padding: 20px 25px 25px;
-      background: rgba(0, 0, 0, 0.96);
-      border-top: 2px solid #ff0066;
-    }
-
-    .progress-explode {
-      width: 100%;
-      height: 8px;
-      background: rgba(255, 0, 102, 0.2);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      width: 0%;
-      height: 100%;
-      background: linear-gradient(90deg, #ff0066, #0326fc, #ff0066);
-      box-shadow: 0 0 20px #ff0066;
-      transition: width 0.04s linear;
-      animation: fillRage 0.1s infinite alternate;
-    }
-
-    @keyframes fillRage {
-      0% { filter: brightness(1); }
-      100% { filter: brightness(1.8); }
-    }
-
-    .progress-status {
-      text-align: center;
-      color: #ff0066;
-      font-size: 11px;
-      margin-top: 12px;
-      font-family: monospace;
-      letter-spacing: 2px;
-      font-weight: bold;
-      animation: statusRage 0.2s infinite alternate;
-    }
-
-    @keyframes statusRage {
-      0% { letter-spacing: 2px; text-shadow: 0 0 5px #ff0066; }
-      100% { letter-spacing: 5px; text-shadow: 0 0 15px #ff0066; }
-    }
-
-    /* Percentage - MASSIVE */
-    .hack-percent {
-      font-size: 64px;
-      font-weight: 900;
-      color: #ff0066;
-      text-align: center;
-      margin-top: 15px;
-      letter-spacing: 12px;
-      font-family: monospace;
-      text-shadow: 0 0 25px #ff0066, 0 0 50px #ff0066;
-      animation: percentRage 0.07s infinite;
-    }
-
-    @keyframes percentRage {
-      0%, 100% { transform: scale(1); text-shadow: 0 0 20px #ff0066; }
-      50% { transform: scale(1.08); text-shadow: 0 0 45px #ff0066; letter-spacing: 15px; }
-    }
-
-    /* ========== LAYER 6: EXPLOSION PARTICLES ========== */
-    .explosion-particles {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 40;
-    }
-
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: #ff0066;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #ff0066;
-      animation: particleFly 0.6s ease-out forwards;
-    }
-
-    @keyframes particleFly {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(0) translate(var(--x), var(--y)); }
-    }
-
-    /* ========== LAYER 7: "HACKED" STAMP ========== */
-    .hacked-stamp {
-      position: absolute;
-      bottom: 30px;
-      right: 30px;
-      font-family: monospace;
-      font-size: 14px;
-      color: #ff0066;
-      border: 2px solid #ff0066;
-      padding: 5px 15px;
-      transform: rotate(-10deg);
-      opacity: 0;
-      z-index: 50;
-      letter-spacing: 2px;
-      font-weight: bold;
-      background: rgba(0,0,0,0.8);
-      animation: stampReveal 0.5s ease-out 6.5s forwards;
-    }
-
-    @keyframes stampReveal {
-      0% { opacity: 0; transform: rotate(-10deg) scale(0.5); }
-      100% { opacity: 1; transform: rotate(-10deg) scale(1); }
-    }
-
-    /* ========== LAYER 8: WARNING TRIANGLE ========== */
-    .warning-triangle {
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      width: 50px;
-      height: 50px;
-      background: rgba(255, 0, 102, 0.2);
-      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-      border: 1px solid #ff0066;
-      animation: warningPulse 0.5s infinite alternate;
-      z-index: 50;
-    }
-
-    @keyframes warningPulse {
-      0% { opacity: 0.5; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.1); background: rgba(255, 0, 102, 0.4); }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hack-percent { font-size: 40px; letter-spacing: 6px; }
-      .hacked-stamp { font-size: 10px; bottom: 15px; right: 15px; }
-      .warning-triangle { width: 35px; height: 35px; top: 15px; left: 15px; }
-    }
-  </style>
-</head>
-<body>
-
-<div class="god-preloader" id="godPreloader">
-  <!-- Matrix Canvas -->
-  <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+  <!-- ============================================ -->
+<!-- BRUTAL 360° ATTACK PRE-LOADER - MULTI-DIRECTIONAL ASSAULT -->
+<!-- ============================================ -->
+<style>
+  /* Full Screen - Absolute DOMINATION */
+  .brutal-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 99999;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
   
-  <!-- CRT + Scan + Glitch -->
-  <div class="crt-overlay"></div>
-  <div class="scan-lines"></div>
-  <div class="glitch-flash"></div>
+  .brutal-preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
   
-  <!-- Warning Stamp -->
-  <div class="warning-triangle"></div>
-  <div class="hacked-stamp" id="hackedStamp">⚠️ SYSTEM HACKED ⚠️</div>
+  /* ========== ATTACK FROM ALL DIRECTIONS ========== */
   
-  <!-- Explosion Particles Container -->
-  <div class="explosion-particles" id="explosionParticles"></div>
+  /* LEFT SIDE ATTACK - Glitching Text Wall */
+  .left-attack {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    animation: leftRush 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite alternate;
+    z-index: 2;
+  }
   
-  <!-- Main Terminal -->
-  <div class="hack-terminal">
-    <div class="hack-header">
-      <div class="hack-dots">
-        <div class="hack-dot"></div>
-        <div class="hack-dot"></div>
-        <div class="hack-dot"></div>
+  @keyframes leftRush {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  .left-text {
+    color: #0326fc;
+    font-family: monospace;
+    font-size: 14px;
+    white-space: nowrap;
+    text-shadow: 0 0 5px #0326fc;
+    animation: leftGlitch 0.05s infinite;
+  }
+  
+  /* RIGHT SIDE ATTACK - Code Rain Horizontal */
+  .right-attack {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    animation: rightRush 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite alternate;
+    z-index: 2;
+  }
+  
+  @keyframes rightRush {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  .right-text {
+    color: #ff0066;
+    font-family: monospace;
+    font-size: 14px;
+    white-space: nowrap;
+    text-shadow: 0 0 8px #ff0066;
+    animation: rightGlitch 0.07s infinite;
+  }
+  
+  /* TOP ATTACK - Falling Matrix */
+  .top-attack {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    animation: topFall 0.2s ease-out infinite alternate;
+    z-index: 2;
+  }
+  
+  @keyframes topFall {
+    0% { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  .top-char {
+    color: #0326fc;
+    font-size: 20px;
+    font-weight: bold;
+    animation: topBlink 0.1s infinite;
+  }
+  
+  /* BOTTOM ATTACK - Rising Data */
+  .bottom-attack {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    animation: bottomRise 0.28s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite alternate;
+    z-index: 2;
+  }
+  
+  @keyframes bottomRise {
+    0% { transform: translateY(100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  .bottom-char {
+    color: #ff0066;
+    font-size: 18px;
+    font-weight: bold;
+    animation: bottomPulse 0.08s infinite;
+  }
+  
+  /* DIAGONAL ATTACKS */
+  .diag-tl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0326fc 0%, transparent 100%);
+    opacity: 0.3;
+    animation: diagonal1 0.4s infinite alternate;
+    z-index: 1;
+  }
+  
+  .diag-br {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(225deg, #ff0066 0%, transparent 100%);
+    opacity: 0.3;
+    animation: diagonal2 0.45s infinite alternate;
+    z-index: 1;
+  }
+  
+  @keyframes diagonal1 {
+    0% { transform: translate(-100%, -100%); opacity: 0; }
+    100% { transform: translate(0, 0); opacity: 0.5; }
+  }
+  
+  @keyframes diagonal2 {
+    0% { transform: translate(100%, 100%); opacity: 0; }
+    100% { transform: translate(0, 0); opacity: 0.5; }
+  }
+  
+  /* CENTER TERMINAL - Epicenter of Chaos */
+  .chaos-terminal {
+    position: relative;
+    z-index: 10;
+    width: 85%;
+    max-width: 850px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.96);
+    border: 4px solid;
+    border-image: linear-gradient(45deg, #0326fc, #ff0066, #0326fc);
+    border-image-slice: 1;
+    animation: borderChaos 0.2s infinite;
+    box-shadow: 0 0 100px rgba(3, 38, 252, 0.8), 0 0 50px rgba(255, 0, 102, 0.4);
+    backdrop-filter: blur(12px);
+    transform-origin: center;
+    animation: centerShake 0.05s infinite;
+  }
+  
+  @keyframes borderChaos {
+    0%, 100% { border-color: #0326fc; box-shadow: 0 0 60px #0326fc; }
+    50% { border-color: #ff0066; box-shadow: 0 0 100px #ff0066; }
+  }
+  
+  @keyframes centerShake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(2px, -1px) rotate(0.5deg); }
+    75% { transform: translate(-2px, 1px) rotate(-0.5deg); }
+  }
+  
+  /* Terminal Header - Explosive */
+  .chaos-header {
+    background: rgba(0, 0, 0, 0.98);
+    padding: 18px 25px;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, #0326fc, #ff0066, #0326fc);
+    border-image-slice: 1;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: headerPulse 0.1s infinite;
+  }
+  
+  @keyframes headerPulse {
+    0%, 100% { background: rgba(0, 0, 0, 0.98); }
+    50% { background: rgba(3, 38, 252, 0.2); }
+  }
+  
+  .chaos-dots {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .chaos-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #ff5f56;
+    animation: dotExplode 0.3s infinite alternate;
+  }
+  
+  .chaos-dot:nth-child(2) { background: #ffbd2e; animation-delay: 0.1s; }
+  .chaos-dot:nth-child(3) { background: #27c93f; animation-delay: 0.2s; }
+  
+  @keyframes dotExplode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0.5; box-shadow: 0 0 15px currentColor; }
+  }
+  
+  .chaos-title {
+    color: #0326fc;
+    font-size: 14px;
+    letter-spacing: 4px;
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    font-family: monospace;
+    text-shadow: 0 0 8px #0326fc, 0 0 15px #ff0066;
+    animation: titleGlitch 0.08s infinite;
+  }
+  
+  @keyframes titleGlitch {
+    0%, 100% { text-shadow: 0 0 5px #0326fc; }
+    50% { text-shadow: -2px 0 #ff0066, 2px 0 #0326fc; }
+  }
+  
+  /* Terminal Content - Exploding Text */
+  .chaos-content {
+    padding: 25px 30px;
+    height: 420px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .terminal-lines {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .terminal-line {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: lineAssault 0.3s forwards;
+  }
+  
+  @keyframes lineAssault {
+    0% { opacity: 0; transform: translateX(-50px) skewX(20deg); }
+    100% { opacity: 1; transform: translateX(0) skewX(0); }
+  }
+  
+  @media (max-width: 768px) {
+    .terminal-line { font-size: 10px; white-space: normal; word-break: break-word; }
+    .chaos-content { height: 380px; padding: 20px; }
+    .left-text, .right-text { font-size: 10px; }
+  }
+  
+  .terminal-line.prompt { color: #0326fc; text-shadow: 0 0 8px #0326fc; }
+  .terminal-line.error { color: #ff0066; text-shadow: 0 0 12px #ff0066; animation: errorExplode 0.05s infinite; }
+  .terminal-line.success { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+  .terminal-line.critical { color: #ff0066; text-shadow: 0 0 15px #ff0066; animation: criticalExplode 0.08s infinite; }
+  
+  @keyframes errorExplode {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+  }
+  
+  @keyframes criticalExplode {
+    0%, 100% { text-shadow: 0 0 10px #ff0066; opacity: 1; }
+    50% { text-shadow: 0 0 30px #ff0066; opacity: 0.7; }
+  }
+  
+  /* Progress Bar - Explosive */
+  .chaos-progress {
+    padding: 20px 30px 30px;
+    background: rgba(0, 0, 0, 0.95);
+    border-top: 3px solid;
+    border-image: linear-gradient(90deg, #ff0066, #0326fc, #ff0066);
+    border-image-slice: 1;
+  }
+  
+  .progress-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(3, 38, 252, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff0066, #0326fc, #ff0066);
+    box-shadow: 0 0 20px #ff0066, 0 0 10px #0326fc;
+    transition: width 0.05s linear;
+    animation: fillPulse 0.2s infinite alternate;
+  }
+  
+  @keyframes fillPulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.5); }
+  }
+  
+  .progress-text {
+    text-align: center;
+    color: #ff0066;
+    font-size: 12px;
+    margin-top: 15px;
+    font-family: monospace;
+    letter-spacing: 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: textExplode 0.1s infinite;
+  }
+  
+  @keyframes textExplode {
+    0%, 100% { letter-spacing: 3px; }
+    50% { letter-spacing: 6px; text-shadow: 0 0 10px #ff0066; }
+  }
+  
+  /* Percentage - MASSIVE */
+  .chaos-percentage {
+    font-size: 64px;
+    font-weight: 900;
+    background: linear-gradient(45deg, #0326fc, #ff0066, #0326fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin-top: 20px;
+    letter-spacing: 10px;
+    animation: percentRage 0.1s infinite;
+  }
+  
+  @keyframes percentRage {
+    0%, 100% { transform: scale(1); text-shadow: 0 0 20px #0326fc; }
+    50% { transform: scale(1.05); text-shadow: 0 0 40px #ff0066; }
+  }
+  
+  /* BACKGROUND CHAOS - Multiple Layers */
+  .chaos-bg-1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, #0326fc 0px, #0326fc 1px, transparent 1px, transparent 4px);
+    opacity: 0.1;
+    animation: bgScroll 0.1s linear infinite;
+    z-index: 0;
+  }
+  
+  .chaos-bg-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(90deg, #ff0066 0px, #ff0066 1px, transparent 1px, transparent 6px);
+    opacity: 0.1;
+    animation: bgScroll2 0.15s linear infinite;
+    z-index: 0;
+  }
+  
+  @keyframes bgScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(10px); }
+  }
+  
+  @keyframes bgScroll2 {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(10px); }
+  }
+  
+  /* EXPLOSION PARTICLES */
+  .explosion-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #0326fc;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 20;
+    animation: particleFly 0.5s ease-out forwards;
+  }
+  
+  @keyframes particleFly {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--x, 100px), var(--y, -100px)) scale(0); opacity: 0; }
+  }
+  
+  /* SCREEN CRACK EFFECT */
+  .screen-crack {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, transparent 70%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+    z-index: 25;
+    animation: crackPulse 0.2s infinite;
+  }
+  
+  @keyframes crackPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+  }
+</style>
+
+<div class="brutal-preloader" id="brutalPreloader">
+  <!-- Background Chaos Layers -->
+  <div class="chaos-bg-1"></div>
+  <div class="chaos-bg-2"></div>
+  <div class="screen-crack"></div>
+  
+  <!-- LEFT SIDE ATTACK -->
+  <div class="left-attack" id="leftAttack"></div>
+  
+  <!-- RIGHT SIDE ATTACK -->
+  <div class="right-attack" id="rightAttack"></div>
+  
+  <!-- TOP ATTACK -->
+  <div class="top-attack" id="topAttack"></div>
+  
+  <!-- BOTTOM ATTACK -->
+  <div class="bottom-attack" id="bottomAttack"></div>
+  
+  <!-- DIAGONAL ATTACKS -->
+  <div class="diag-tl"></div>
+  <div class="diag-br"></div>
+  
+  <!-- CENTER CHAOS TERMINAL -->
+  <div style="display: flex; align-items: center; justify-content: center; height: 100%; position: relative; z-index: 15;">
+    <div class="chaos-terminal">
+      <div class="chaos-header">
+        <div class="chaos-dots">
+          <div class="chaos-dot"></div>
+          <div class="chaos-dot"></div>
+          <div class="chaos-dot"></div>
+        </div>
+        <div class="chaos-title">ROOT@HANNANBUILDS:~# SYSTEM_TAKEOVER_IN_PROGRESS</div>
       </div>
-      <div class="hack-title">ROOT@GOD_MODE:~# UNAUTHORIZED_ACCESS</div>
-    </div>
-    
-    <div class="hack-content">
-      <div class="hack-lines" id="terminalLines"></div>
-    </div>
-    
-    <div class="hack-progress">
-      <div class="progress-explode">
-        <div class="progress-fill" id="progressFill"></div>
+      
+      <div class="chaos-content">
+        <div class="terminal-lines" id="terminalLines"></div>
       </div>
-      <div class="progress-status" id="progressStatus">[!] SYSTEM BREACH IN PROGRESS [!]</div>
-      <div class="hack-percent" id="hackPercent">0%</div>
+      
+      <div class="chaos-progress">
+        <div class="progress-container">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">[!] SYSTEM BREACH IN PROGRESS [!]</div>
+        <div class="chaos-percentage" id="chaosPercentage">0%</div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   (function() {
-    // ============================================
-    // MATRIX RAIN - ULTRA AGGRESSIVE
-    // ============================================
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height, columns, drops;
-    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン#%&@!$*+-=><|/\\";
-    
-    function setupMatrix() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      columns = Math.floor(width / 16);
-      drops = [];
-      for (let i = 0; i < columns; i++) {
-        drops[i] = Math.floor(Math.random() * -height);
+    // Create Attack Elements from ALL Directions
+    function createAttacks() {
+      // LEFT ATTACK - Glitching code wall
+      const leftContainer = document.getElementById('leftAttack');
+      for (let i = 0; i < 35; i++) {
+        const span = document.createElement('div');
+        span.className = 'left-text';
+        const codes = ['0x7F', '0x00', '0xFF', 'BREACH', 'HACK', 'ROOT', 'ADMIN', 'SYS', '>_', '#', '$', '%', '&', '@'];
+        span.textContent = codes[Math.floor(Math.random() * codes.length)] + ' ';
+        span.style.animationDelay = Math.random() * 0.5 + 's';
+        span.style.fontSize = (12 + Math.random() * 8) + 'px';
+        leftContainer.appendChild(span);
       }
-    }
-    
-    function drawMatrix() {
-      if (!ctx) return;
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
-      ctx.fillRect(0, 0, width, height);
       
-      for (let i = 0; i < drops.length; i++) {
-        const char = chars[Math.floor(Math.random() * chars.length)];
-        const x = i * 16;
-        const y = drops[i] * 16;
-        
-        ctx.fillStyle = Math.random() > 0.97 ? '#ff0066' : '#0326fc';
-        ctx.font = 'bold 14px monospace';
-        ctx.fillText(char, x, y);
-        
-        if (y > height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
+      // RIGHT ATTACK - Red alert codes
+      const rightContainer = document.getElementById('rightAttack');
+      for (let i = 0; i < 35; i++) {
+        const span = document.createElement('div');
+        span.className = 'right-text';
+        const codes = ['ACCESS', 'GRANTED', 'ROOT', 'SYSTEM', 'BREACH', 'INJECT', 'OVERRIDE', 'KERNEL', 'EXPLOIT'];
+        span.textContent = ' ' + codes[Math.floor(Math.random() * codes.length)];
+        span.style.animationDelay = Math.random() * 0.5 + 's';
+        span.style.fontSize = (12 + Math.random() * 8) + 'px';
+        rightContainer.appendChild(span);
+      }
+      
+      // TOP ATTACK - Falling characters
+      const topContainer = document.getElementById('topAttack');
+      const chars = '01#%&@!$*+-=';
+      for (let i = 0; i < 50; i++) {
+        const span = document.createElement('div');
+        span.className = 'top-char';
+        span.textContent = chars[Math.floor(Math.random() * chars.length)];
+        span.style.animationDelay = Math.random() * 0.3 + 's';
+        span.style.fontSize = (16 + Math.random() * 12) + 'px';
+        topContainer.appendChild(span);
+      }
+      
+      // BOTTOM ATTACK - Rising characters
+      const bottomContainer = document.getElementById('bottomAttack');
+      for (let i = 0; i < 50; i++) {
+        const span = document.createElement('div');
+        span.className = 'bottom-char';
+        span.textContent = chars[Math.floor(Math.random() * chars.length)];
+        span.style.animationDelay = Math.random() * 0.3 + 's';
+        span.style.fontSize = (14 + Math.random() * 10) + 'px';
+        bottomContainer.appendChild(span);
       }
     }
     
-    setupMatrix();
-    const matrixInterval = setInterval(drawMatrix, 25);
-    window.addEventListener('resize', () => setupMatrix());
+    createAttacks();
     
-    // ============================================
-    // EXPLOSION FUNCTION
-    // ============================================
-    const explosionContainer = document.getElementById('explosionParticles');
-    
-    function createExplosion(x, y, intensity = 15) {
-      for (let i = 0; i < intensity; i++) {
+    // Create Explosion Effect
+    function createExplosion(x, y) {
+      const particleCount = 15;
+      for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
-        particle.className = 'particle';
+        particle.className = 'explosion-particle';
         const angle = Math.random() * Math.PI * 2;
-        const distance = 40 + Math.random() * 100;
+        const distance = 50 + Math.random() * 100;
         const xMove = Math.cos(angle) * distance;
         const yMove = Math.sin(angle) * distance;
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
         particle.style.setProperty('--x', xMove + 'px');
         particle.style.setProperty('--y', yMove + 'px');
-        explosionContainer.appendChild(particle);
-        setTimeout(() => particle.remove(), 600);
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.background = Math.random() > 0.5 ? '#0326fc' : '#ff0066';
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 500);
       }
     }
     
-    // Random explosions everywhere
+    // Random explosions during preloader
     setInterval(() => {
-      if (!preloader.classList.contains('fade-out')) {
-        const randomX = Math.random() * window.innerWidth;
-        const randomY = Math.random() * window.innerHeight;
-        createExplosion(randomX, randomY, 8 + Math.random() * 12);
-      }
-    }, 350);
+      const randomX = Math.random() * window.innerWidth;
+      const randomY = Math.random() * window.innerHeight;
+      createExplosion(randomX, randomY);
+    }, 800);
     
-    // ============================================
-    // TERMINAL SEQUENCE - BRUTAL
-    // ============================================
+    // Brutal Terminal Sequence
     const terminalContainer = document.getElementById('terminalLines');
     const progressFill = document.getElementById('progressFill');
-    const progressStatus = document.getElementById('progressStatus');
-    const percentDisplay = document.getElementById('hackPercent');
-    const preloader = document.getElementById('godPreloader');
-    const hackedStamp = document.getElementById('hackedStamp');
+    const progressText = document.getElementById('progressText');
+    const percentageDisplay = document.getElementById('chaosPercentage');
+    const preloader = document.getElementById('brutalPreloader');
     
     const terminalSequence = [
-      { text: "> [!!!] UNAUTHORIZED ACCESS DETECTED [!!!]", type: "critical", delay: 60 },
-      { text: "> [!!!] SYSTEM BREACH IN PROGRESS [!!!]", type: "critical", delay: 70 },
-      { text: "> [!!!] FIREWALLS COMPROMISED [!!!]", type: "critical", delay: 65 },
+      { text: "> [!!!] SYSTEM BREACH DETECTED [!!!]", type: "critical", delay: 100 },
+      { text: "> [!!!] UNAUTHORIZED ACCESS IN PROGRESS [!!!]", type: "critical", delay: 120 },
+      { text: "> [!!!] FIREWALLS COMPROMISED [!!!]", type: "critical", delay: 110 },
       { text: "", type: "empty", delay: 50 },
-      { text: "> [TARGET_SCAN] ABDUL HANNAN", type: "warning", delay: 90 },
-      { text: "> [ROLE] FRONTEND ARCHITECT · FULL STACK ENGINEER", type: "warning", delay: 100 },
-      { text: "> [STATUS] ELITE DEVELOPER · 50+ PROJECTS · 5000+ USERS", type: "warning", delay: 110 },
-      { text: "", type: "empty", delay: 60 },
-      { text: "> [SKILL_MATRIX] DECRYPTING...", type: "prompt", delay: 80 },
-      { text: "> [✓] HTML/CSS/Tailwind ................ [98%] UNLOCKED", type: "success", delay: 70 },
-      { text: "> [✓] PHP/MySQL ...................... [98%] UNLOCKED", type: "success", delay: 70 },
-      { text: "> [✓] WordPress/Elementor ............. [90%] UNLOCKED", type: "success", delay: 70 },
-      { text: "> [✓] GSAP/Framer Motion .............. [85%] UNLOCKED", type: "success", delay: 70 },
-      { text: "> [✓] JavaScript/TypeScript ........... [82%] UNLOCKED", type: "success", delay: 70 },
-      { text: "", type: "empty", delay: 70 },
-      { text: "> [PROJECT_SCAN] DETECTING ASSETS...", type: "prompt", delay: 100 },
-      { text: "> [!] TALENT TREE JOB PORTAL [5000+ USERS] - COMPROMISED", type: "critical", delay: 100 },
-      { text: "> [!] VOICE TO-DO LIST - COMPROMISED", type: "critical", delay: 85 },
-      { text: "> [!] ATTENDANCE MANAGEMENT SYSTEM - COMPROMISED", type: "critical", delay: 90 },
-      { text: "> [!] DAILY EXPENSE MANAGER - COMPROMISED", type: "critical", delay: 85 },
-      { text: "> [!] AI RESUME ANALYZER - COMPROMISED", type: "critical", delay: 100 },
+      { text: "╔══════════════════════════════════════════════════════════════╗", type: "critical", delay: 30 },
+      { text: "║  █████╗ ██████╗ ██████╗ ██╗   ██╗██╗     ██╗  ██╗ █████╗ ███╗   ██╗███╗   ██╗ █████╗ ███╗   ██╗ ║", type: "critical", delay: 50 },
+      { text: "║ ██╔══██╗██╔══██╗██╔══██╗██║   ██║██║     ██║  ██║██╔══██╗████╗  ██║████╗  ██║██╔══██╗████╗  ██║ ║", type: "critical", delay: 50 },
+      { text: "║ ███████║██████╔╝██║  ██║██║   ██║██║     ███████║███████║██╔██╗ ██║██╔██╗ ██║███████║██╔██╗ ██║ ║", type: "critical", delay: 50 },
+      { text: "║ ██╔══██║██╔══██╗██║  ██║██║   ██║██║     ██╔══██║██╔══██║██║╚██╗██║██║╚██╗██║██╔══██║██║╚██╗██║ ║", type: "critical", delay: 50 },
+      { text: "║ ██║  ██║██████╔╝██████╔╝╚██████╔╝███████╗██║  ██║██║  ██║██║ ╚████║██║ ╚████║██║  ██║██║ ╚████║ ║", type: "critical", delay: 50 },
+      { text: "║ ╚═╝  ╚═╝╚═════╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝ ║", type: "critical", delay: 50 },
+      { text: "╚══════════════════════════════════════════════════════════════╝", type: "critical", delay: 30 },
       { text: "", type: "empty", delay: 80 },
-      { text: "> [ROOT_ACCESS] BYPASSING FINAL ENCRYPTION...", type: "prompt", delay: 120 },
+      { text: "> [BRUTEFORCE] CRACKING ENCRYPTION LAYER 1/7...", type: "prompt", delay: 180 },
+      { text: "> [████████████████████████░░░░░░] 78%", type: "warning", delay: 250 },
+      { text: "> [██████████████████████████████] 100%", type: "success", delay: 200 },
+      { text: "> [BREACH] LAYER 1 BYPASSED", type: "success", delay: 150 },
+      { text: "", type: "empty", delay: 60 },
+      { text: "> [BRUTEFORCE] CRACKING ENCRYPTION LAYER 2/7...", type: "prompt", delay: 170 },
+      { text: "> [████████████████░░░░░░░░░░░░] 55%", type: "warning", delay: 220 },
       { text: "> [██████████████████████████████] 100%", type: "success", delay: 180 },
-      { text: "> [ACCESS] GRANTED. TOTAL SYSTEM CONTROL.", type: "success", delay: 140 },
-      { text: "", type: "empty", delay: 70 },
-      { text: "╔═══════════════════════════════════════════════════════════════╗", type: "critical", delay: 35 },
-      { text: "║  ██████╗  ██████╗ ██████╗ ███████╗██╗███╗   ██╗██╗        ║", type: "critical", delay: 55 },
-      { text: "║  ██╔══██╗██╔══██╗██╔══██╗██╔════╝██║████╗  ██║██║        ║", type: "critical", delay: 55 },
-      { text: "║  ██████╔╝██████╔╝██████╔╝█████╗  ██║██╔██╗ ██║██║        ║", type: "critical", delay: 55 },
-      { text: "║  ██╔══██╗██╔══██╗██╔══██╗██╔══╝  ██║██║╚██╗██║██║        ║", type: "critical", delay: 55 },
-      { text: "║  ██║  ██║██████╔╝██║  ██║███████╗██║██║ ╚████║███████╗   ║", type: "critical", delay: 55 },
-      { text: "║  ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝   ║", type: "critical", delay: 55 },
-      { text: "╚═══════════════════════════════════════════════════════════════╝", type: "critical", delay: 35 },
+      { text: "> [BREACH] LAYER 2 BYPASSED", type: "success", delay: 140 },
+      { text: "", type: "empty", delay: 60 },
+      { text: "> [TARGET_PROFILE] DECRYPTING...", type: "prompt", delay: 160 },
+      { text: "> ID: ABDUL_HANNAN", type: "success", delay: 100 },
+      { text: "> ROLE: FRONTEND_ARCHITECT | FULL_STACK_ENGINEER", type: "success", delay: 150 },
+      { text: "> STATUS: ELITE_DEVELOPER [ACTIVE]", type: "critical", delay: 120 },
+      { text: "", type: "empty", delay: 80 },
+      { text: "> [SKILL_MATRIX] DEPLOYING...", type: "prompt", delay: 140 },
+      { text: "> [✓] HTML/CSS/Tailwind ................ [98%] ACTIVE", type: "success", delay: 60 },
+      { text: "> [✓] PHP/MySQL ...................... [98%] ACTIVE", type: "success", delay: 60 },
+      { text: "> [✓] WordPress/Elementor ............. [90%] ACTIVE", type: "success", delay: 60 },
+      { text: "> [✓] GSAP/Framer Motion .............. [85%] ACTIVE", type: "success", delay: 60 },
+      { text: "> [✓] JavaScript/TypeScript ........... [82%] ACTIVE", type: "success", delay: 60 },
+      { text: "", type: "empty", delay: 80 },
+      { text: "> [PROJECT_SCAN] IDENTIFYING ASSETS...", type: "prompt", delay: 180 },
+      { text: "> [!] TALENT TREE JOB PORTAL [5000+ USERS] - DETECTED", type: "critical", delay: 150 },
+      { text: "> [!] VOICE TO-DO LIST - DETECTED", type: "critical", delay: 120 },
+      { text: "> [!] ATTENDANCE MANAGEMENT SYSTEM - DETECTED", type: "critical", delay: 140 },
+      { text: "> [!] DAILY EXPENSE MANAGER - DETECTED", type: "critical", delay: 130 },
+      { text: "> [!] AI RESUME ANALYZER - DETECTED", type: "critical", delay: 160 },
       { text: "", type: "empty", delay: 100 },
-      { text: "> [SYSTEM] ACCESS GRANTED. WELCOME TO THE MATRIX.", type: "success", delay: 180 },
-      { text: "> [REDIRECT] LOADING PORTAL...", type: "prompt", delay: 200 }
+      { text: "> [ROOT_ACCESS] ESTABLISHING DOMINANCE...", type: "prompt", delay: 200 },
+      { text: "> [HANDSHAKE] COMPLETE. TOTAL CONTROL ACQUIRED.", type: "success", delay: 180 },
+      { text: "", type: "empty", delay: 80 },
+      { text: "╔══════════════════════════════════════════════════════════════╗", type: "glitch", delay: 40 },
+      { text: "║  ██████╗  ██████╗ ██████╗ ███████╗██╗███╗   ██╗██╗       ║", type: "glitch", delay: 70 },
+      { text: "║  ██╔══██╗██╔══██╗██╔══██╗██╔════╝██║████╗  ██║██║       ║", type: "glitch", delay: 70 },
+      { text: "║  ██████╔╝██████╔╝██████╔╝█████╗  ██║██╔██╗ ██║██║       ║", type: "glitch", delay: 70 },
+      { text: "║  ██╔══██╗██╔══██╗██╔══██╗██╔══╝  ██║██║╚██╗██║██║       ║", type: "glitch", delay: 70 },
+      { text: "║  ██║  ██║██████╔╝██║  ██║███████╗██║██║ ╚████║███████╗  ║", type: "glitch", delay: 70 },
+      { text: "║  ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝  ║", type: "glitch", delay: 70 },
+      { text: "╚══════════════════════════════════════════════════════════════╝", type: "glitch", delay: 40 },
+      { text: "", type: "empty", delay: 150 },
+      { text: "> [SYSTEM] ACCESS GRANTED. YOU ARE IN.", type: "success", delay: 200 },
+      { text: "> [REDIRECT] LOADING PORTAL...", type: "prompt", delay: 300 }
     ];
     
     let currentLineIndex = 0;
@@ -634,12 +745,11 @@
     let isTyping = false;
     let progressValue = 0;
     let totalSteps = terminalSequence.length;
-    const startTime = Date.now();
-    const MAX_DURATION = 7000;
     
     function addTerminalLine(text, type) {
       const lineDiv = document.createElement('div');
-      lineDiv.className = `hack-line ${type}`;
+      lineDiv.className = `terminal-line ${type}`;
+      if (type === 'glitch') lineDiv.classList.add('glitch-text');
       lineDiv.textContent = text;
       terminalContainer.appendChild(lineDiv);
       terminalContainer.scrollTop = terminalContainer.scrollHeight;
@@ -654,7 +764,8 @@
       isTyping = true;
       
       const lineDiv = document.createElement('div');
-      lineDiv.className = `hack-line ${type}`;
+      lineDiv.className = `terminal-line ${type}`;
+      if (type === 'glitch') lineDiv.classList.add('glitch-text');
       lineDiv.textContent = "";
       terminalContainer.appendChild(lineDiv);
       
@@ -663,30 +774,20 @@
           lineDiv.textContent += currentLineText[currentCharIndex];
           currentCharIndex++;
           terminalContainer.scrollTop = terminalContainer.scrollHeight;
-          setTimeout(typeNextChar, 10 + Math.random() * 6);
+          setTimeout(typeNextChar, 8 + Math.random() * 6);
         } else {
           lineDiv.classList.add('revealed');
           isTyping = false;
           currentLineIndex++;
           
-          const elapsed = Date.now() - startTime;
-          const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-          const lineProgress = (currentLineIndex / totalSteps) * 100;
-          progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
-          
+          progressValue = Math.min(100, (currentLineIndex / totalSteps) * 100);
           progressFill.style.width = progressValue + '%';
-          percentDisplay.textContent = Math.floor(progressValue) + '%';
+          percentageDisplay.textContent = Math.floor(progressValue) + '%';
           
-          if (progressValue < 20) progressStatus.textContent = "[!] BREACHING FIREWALLS [!]";
-          else if (progressValue < 40) progressStatus.textContent = "[#] CRACKING ENCRYPTION [#]";
-          else if (progressValue < 60) progressStatus.textContent = "[*] DECRYPTING USER DATA [*]";
-          else if (progressValue < 80) progressStatus.textContent = "[!] INJECTING PAYLOAD [!]";
-          else progressStatus.textContent = "[✓] SYSTEM TAKEOVER COMPLETE [✓]";
-          
-          // Create explosion on each line completion
-          const randomX = Math.random() * window.innerWidth;
-          const randomY = Math.random() * window.innerHeight;
-          createExplosion(randomX, randomY, 5);
+          if (progressValue < 25) progressText.textContent = "[!] INITIATING SYSTEM BREACH [!]";
+          else if (progressValue < 50) progressText.textContent = "[#] CRACKING ENCRYPTION [#]";
+          else if (progressValue < 75) progressText.textContent = "[*] DECRYPTING USER DATA [*]";
+          else progressText.textContent = "[✓] TOTAL SYSTEM CONTROL [✓]";
           
           setTimeout(processNextLine, delay);
         }
@@ -696,14 +797,13 @@
     }
     
     function processNextLine() {
-      const elapsed = Date.now() - startTime;
-      if (elapsed >= MAX_DURATION) {
-        completePreloader();
-        return;
-      }
-      
       if (currentLineIndex >= terminalSequence.length) {
-        completePreloader();
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 800);
+        }, 800);
         return;
       }
       
@@ -712,78 +812,46 @@
       if (lineData.text === "") {
         addTerminalLine("", lineData.type);
         currentLineIndex++;
-        const elapsed = Date.now() - startTime;
-        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-        const lineProgress = (currentLineIndex / totalSteps) * 100;
-        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressValue = Math.min(100, (currentLineIndex / totalSteps) * 100);
         progressFill.style.width = progressValue + '%';
-        percentDisplay.textContent = Math.floor(progressValue) + '%';
+        percentageDisplay.textContent = Math.floor(progressValue) + '%';
         setTimeout(processNextLine, lineData.delay);
-      } else if (lineData.type === "critical" || lineData.type === "success" || lineData.type === "warning") {
+      } else if (lineData.type === "critical" || lineData.type === "success" || lineData.type === "warning" || lineData.type === "glitch") {
         addTerminalLine(lineData.text, lineData.type);
         currentLineIndex++;
-        const elapsed = Date.now() - startTime;
-        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-        const lineProgress = (currentLineIndex / totalSteps) * 100;
-        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressValue = Math.min(100, (currentLineIndex / totalSteps) * 100);
         progressFill.style.width = progressValue + '%';
-        percentDisplay.textContent = Math.floor(progressValue) + '%';
+        percentageDisplay.textContent = Math.floor(progressValue) + '%';
         setTimeout(processNextLine, lineData.delay);
       } else if (lineData.type === "prompt") {
         typeLine(lineData);
       }
     }
     
-    function completePreloader() {
-      progressFill.style.width = '100%';
-      percentDisplay.textContent = '100%';
-      progressStatus.textContent = "[✓] SYSTEM TAKEOVER COMPLETE [✓]";
-      
-      // FINAL MASSIVE EXPLOSIONS
-      for (let i = 0; i < 60; i++) {
-        setTimeout(() => {
-          const randomX = Math.random() * window.innerWidth;
-          const randomY = Math.random() * window.innerHeight;
-          createExplosion(randomX, randomY, 12);
-        }, i * 25);
-      }
-      
-      // Add HACKED stamp
-      hackedStamp.style.opacity = '1';
-      hackedStamp.style.transform = 'rotate(-10deg) scale(1)';
-      
-      setTimeout(() => {
-        preloader.classList.add('fade-out');
-        setTimeout(() => {
-          preloader.style.display = 'none';
-          clearInterval(matrixInterval);
-          document.body.style.overflow = '';
-        }, 1200);
-      }, 600);
-    }
+    setTimeout(processNextLine, 200);
     
-    setTimeout(processNextLine, 150);
+    // Aggressive random attacks
+    setInterval(() => {
+      const percentEl = document.getElementById('chaosPercentage');
+      if (percentEl && !preloader.classList.contains('fade-out')) {
+        if (Math.random() > 0.7) {
+          percentEl.classList.add('glitch-text');
+          setTimeout(() => percentEl.classList.remove('glitch-text'), 100);
+        }
+      }
+    }, 300);
     
     // Lock body
     document.body.style.overflow = 'hidden';
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.body.style.overflow = '';
-      }, 8000);
+      }, 13000);
     });
-    
-    // Continuous explosions during progress
-    setInterval(() => {
-      if (!preloader.classList.contains('fade-out') && progressValue > 10 && progressValue < 95) {
-        const randomX = Math.random() * window.innerWidth;
-        const randomY = Math.random() * window.innerHeight;
-        createExplosion(randomX, randomY, 4 + Math.random() * 8);
-      }
-    }, 200);
   })();
 </script>
-</body>
-</html>
 
   <!-- Cursor Glow -->
   <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
