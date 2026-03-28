@@ -100,6 +100,499 @@
   </style>
 </head>
 <body>
+  <!-- ============================================ -->
+<!-- ELITE HACKER PRE-LOADER - Live System Hack   -->
+<!-- ============================================ -->
+<style>
+  /* Hacker Preloader - Full Screen Matrix Style */
+  .hacker-preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', 'Space Grotesk', monospace;
+    backdrop-filter: blur(0px);
+    transition: opacity 0.5s ease;
+  }
+  
+  .hacker-preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Matrix Rain Canvas */
+  #matrixCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+    z-index: 1;
+  }
+  
+  /* Terminal Window */
+  .hacker-terminal {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 750px;
+    background: rgba(0, 0, 0, 0.92);
+    border: 2px solid #0326fc;
+    border-radius: 12px;
+    box-shadow: 0 0 50px rgba(3, 38, 252, 0.4), inset 0 0 20px rgba(3, 38, 252, 0.1);
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+    animation: terminalGlow 1.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes terminalGlow {
+    0% { box-shadow: 0 0 30px rgba(3, 38, 252, 0.3), inset 0 0 15px rgba(3, 38, 252, 0.05); border-color: #0326fc; }
+    100% { box-shadow: 0 0 70px rgba(3, 38, 252, 0.7), inset 0 0 35px rgba(3, 38, 252, 0.2); border-color: #4c6eff; }
+  }
+  
+  /* Terminal Header */
+  .terminal-header {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 12px 20px;
+    border-bottom: 1px solid #0326fc;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .terminal-dots {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff5f56;
+  }
+  
+  .terminal-dot:nth-child(2) { background: #ffbd2e; }
+  .terminal-dot:nth-child(3) { background: #27c93f; }
+  
+  .terminal-title {
+    color: #0326fc;
+    font-size: 12px;
+    letter-spacing: 2px;
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Terminal Content */
+  .terminal-content {
+    padding: 25px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .terminal-line {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateX(-10px);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  
+  .terminal-line.revealed {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.2s ease;
+  }
+  
+  .terminal-line.prompt {
+    color: #0326fc;
+  }
+  
+  .terminal-line.error {
+    color: #ff4444;
+    text-shadow: 0 0 5px #ff0000;
+  }
+  
+  .terminal-line.success {
+    color: #00ff00;
+    text-shadow: 0 0 3px #00ff00;
+  }
+  
+  .terminal-line.warning {
+    color: #ffaa00;
+  }
+  
+  .blinking-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 16px;
+    background: #0326fc;
+    vertical-align: middle;
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  /* Progress Bar */
+  .hack-progress {
+    margin-top: 20px;
+    padding: 0 25px 25px 25px;
+  }
+  
+  .progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(3, 38, 252, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: #0326fc;
+    box-shadow: 0 0 10px #0326fc;
+    transition: width 0.1s linear;
+  }
+  
+  .progress-text {
+    text-align: center;
+    color: #0326fc;
+    font-size: 11px;
+    margin-top: 10px;
+    font-family: monospace;
+    letter-spacing: 1px;
+  }
+  
+  /* Glitch Effect */
+  .glitch-text {
+    animation: glitch 0.3s infinite;
+  }
+  
+  @keyframes glitch {
+    0% { text-shadow: -2px 0 #ff0000, 2px 0 #00ff00; opacity: 1; }
+    50% { text-shadow: 2px 0 #ff0000, -2px 0 #00ff00; }
+    100% { text-shadow: -1px 0 #ff0000, 1px 0 #00ff00; }
+  }
+  
+  /* Scan Line Effect */
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, rgba(3, 38, 252, 0.03) 50%, transparent 100%);
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+    z-index: 3;
+  }
+  
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  
+  /* Percentage Display */
+  .hack-percentage {
+    font-size: 48px;
+    font-weight: bold;
+    color: #0326fc;
+    font-family: monospace;
+    text-align: center;
+    margin-top: 15px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 15px #0326fc;
+  }
+  
+  @media (max-width: 600px) {
+    .terminal-content { padding: 15px; min-height: 350px; }
+    .terminal-line { font-size: 10px; }
+    .hack-percentage { font-size: 32px; }
+  }
+</style>
+
+<div class="hacker-preloader" id="hackerPreloader">
+  <canvas id="matrixCanvas"></canvas>
+  <div class="scan-line"></div>
+  
+  <div class="hacker-terminal">
+    <div class="terminal-header">
+      <div class="terminal-dots">
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+      </div>
+      <div class="terminal-title">ROOT@codeinl∞p:~# SYSTEM_INITIALIZATION</div>
+    </div>
+    
+    <div class="terminal-content" id="terminalLines">
+      <!-- Lines will be added dynamically -->
+    </div>
+    
+    <div class="hack-progress">
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">INITIALIZING SECURE SHELL...</div>
+      <div class="hack-percentage" id="hackPercentage">0%</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let columns, drops;
+    let matrixChars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+    
+    function setupMatrix() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      
+      columns = Math.floor(width / 20);
+      drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor(Math.random() * -height);
+      }
+    }
+    
+    function drawMatrix() {
+      if (!ctx) return;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+      ctx.fillRect(0, 0, width, height);
+      
+      ctx.fillStyle = '#0326fc';
+      ctx.font = '15px monospace';
+      
+      for (let i = 0; i < drops.length; i++) {
+        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        const x = i * 20;
+        const y = drops[i] * 20;
+        
+        ctx.fillText(char, x, y);
+        
+        if (y > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    
+    setupMatrix();
+    const matrixInterval = setInterval(drawMatrix, 35);
+    window.addEventListener('resize', () => {
+      setupMatrix();
+    });
+    
+    // Hacker Terminal Animation Sequence
+    const terminalContainer = document.getElementById('terminalLines');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const percentageDisplay = document.getElementById('hackPercentage');
+    const preloader = document.getElementById('hackerPreloader');
+    
+    // Epic hacker dialogue sequence
+    const terminalSequence = [
+      { text: "> INITIALIZING SECURE CONNECTION...", type: "prompt", delay: 200 },
+      { text: "> ESTABLISHING ENCRYPTED TUNNEL [AES-256-GCM]", type: "prompt", delay: 300 },
+      { text: "> CONNECTING TO MAINFRAME: codeinl∞p.sec", type: "prompt", delay: 250 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "┌─────────────────────────────────────────────────┐", type: "normal", delay: 50 },
+      { text: "│  SYSTEM: HANNANBUILDS V.4.2.7                │", type: "normal", delay: 80 },
+      { text: "│  PROTOCOL: SSH-2.0                           │", type: "normal", delay: 80 },
+      { text: "│  ENCRYPTION: 256-bit Quantum Safe            │", type: "normal", delay: 80 },
+      { text: "│  STATUS: ACTIVE                              │", type: "success", delay: 100 },
+      { text: "└─────────────────────────────────────────────────┘", type: "normal", delay: 50 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "> BRUTE FORCING ACCESS TOKENS...", type: "prompt", delay: 300 },
+      { text: "> [████████░░░░░░░░░░░░] 38%", type: "normal", delay: 400 },
+      { text: "> [████████████████████] 100%", type: "success", delay: 300 },
+      { text: "> ACCESS GRANTED.", type: "success", delay: 200 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "> DECRYPTING USER PROFILE...", type: "prompt", delay: 250 },
+      { text: "> ID: abdul_hannan_dev_2025", type: "normal", delay: 150 },
+      { text: "> ROLE: FRONTEND_ARCHITECT / FULL_STACK_ENGINEER", type: "normal", delay: 180 },
+      { text: "> STATUS: ELITE_DEVELOPER [ACTIVE]", type: "success", delay: 200 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "> LOADING SKILL MATRIX...", type: "prompt", delay: 250 },
+      { text: "> [✓] HTML/CSS/Tailwind .............. 98%", type: "success", delay: 100 },
+      { text: "> [✓] PHP/MySQL ...................... 98%", type: "success", delay: 100 },
+      { text: "> [✓] WordPress/Elementor ............. 90%", type: "success", delay: 100 },
+      { text: "> [✓] GSAP/Framer Motion .............. 85%", type: "success", delay: 100 },
+      { text: "> [✓] JavaScript/TypeScript ........... 82%", type: "success", delay: 100 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "> SCANNING PORTFOLIO ARCHIVE...", type: "prompt", delay: 300 },
+      { text: "> FOUND: TALENT TREE JOB PORTAL [5000+ USERS]", type: "normal", delay: 200 },
+      { text: "> FOUND: VOICE TO-DO LIST [AI-ENABLED]", type: "normal", delay: 180 },
+      { text: "> FOUND: ATTENDANCE MANAGEMENT SYSTEM [ENTERPRISE]", type: "normal", delay: 200 },
+      { text: "> FOUND: DAILY EXPENSE MANAGER [SAAS]", type: "normal", delay: 160 },
+      { text: "> FOUND: AI RESUME ANALYZER [MACHINE LEARNING]", type: "normal", delay: 220 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "> ESTABLISHING SECURE HANDSHAKE...", type: "prompt", delay: 250 },
+      { text: "> HANDSHAKE COMPLETE.", type: "success", delay: 200 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "╔═══════════════════════════════════════════════════╗", type: "normal", delay: 50 },
+      { text: "║  WELCOME, USER. ACCESS GRANTED.                  ║", type: "glitch", delay: 150 },
+      { text: "║  SYSTEM: HANNANBUILDS.VERCEL.APP                 ║", type: "normal", delay: 100 },
+      { text: "║  STATUS: ONLINE | READY                          ║", type: "success", delay: 100 },
+      { text: "╚═══════════════════════════════════════════════════╝", type: "normal", delay: 50 },
+      { text: "", type: "empty", delay: 200 },
+      { text: "> LOADING VISUAL INTERFACE...", type: "prompt", delay: 300 },
+      { text: "> COMPLETE.", type: "success", delay: 200 },
+      { text: "> REDIRECTING TO PORTAL...", type: "prompt", delay: 400 }
+    ];
+    
+    let currentLineIndex = 0;
+    let currentCharIndex = 0;
+    let currentLineText = "";
+    let currentType = "";
+    let isTyping = false;
+    let progressValue = 0;
+    let totalSteps = terminalSequence.length;
+    
+    function addTerminalLine(text, type, isTypingLine = false) {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = `terminal-line ${type}`;
+      if (type === 'glitch') lineDiv.classList.add('glitch-text');
+      lineDiv.textContent = text;
+      terminalContainer.appendChild(lineDiv);
+      lineDiv.classList.add('revealed');
+      terminalContainer.scrollTop = terminalContainer.scrollHeight;
+      return lineDiv;
+    }
+    
+    function typeLine(lineData) {
+      const { text, type, delay } = lineData;
+      currentLineText = text;
+      currentType = type;
+      currentCharIndex = 0;
+      isTyping = true;
+      
+      const lineDiv = document.createElement('div');
+      lineDiv.className = `terminal-line ${type}`;
+      if (type === 'glitch') lineDiv.classList.add('glitch-text');
+      lineDiv.textContent = "";
+      terminalContainer.appendChild(lineDiv);
+      
+      function typeNextChar() {
+        if (currentCharIndex < currentLineText.length) {
+          lineDiv.textContent += currentLineText[currentCharIndex];
+          currentCharIndex++;
+          terminalContainer.scrollTop = terminalContainer.scrollHeight;
+          setTimeout(typeNextChar, 15 + Math.random() * 10);
+        } else {
+          lineDiv.classList.add('revealed');
+          isTyping = false;
+          currentLineIndex++;
+          
+          // Update progress
+          progressValue = (currentLineIndex / totalSteps) * 100;
+          progressFill.style.width = progressValue + '%';
+          percentageDisplay.textContent = Math.floor(progressValue) + '%';
+          
+          if (progressValue < 30) progressText.textContent = "INITIALIZING SECURE PROTOCOLS...";
+          else if (progressValue < 60) progressText.textContent = "DECRYPTING USER DATA...";
+          else if (progressValue < 90) progressText.textContent = "LOADING PORTFOLIO MATRIX...";
+          else progressText.textContent = "FINALIZING CONNECTION...";
+          
+          setTimeout(processNextLine, delay);
+        }
+      }
+      
+      typeNextChar();
+    }
+    
+    function processNextLine() {
+      if (currentLineIndex >= terminalSequence.length) {
+        // Preloader complete - fade out and show website
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          setTimeout(() => {
+            preloader.style.display = 'none';
+            clearInterval(matrixInterval);
+          }, 500);
+        }, 800);
+        return;
+      }
+      
+      const lineData = terminalSequence[currentLineIndex];
+      
+      if (lineData.text === "") {
+        addTerminalLine("", lineData.type);
+        currentLineIndex++;
+        progressValue = (currentLineIndex / totalSteps) * 100;
+        progressFill.style.width = progressValue + '%';
+        percentageDisplay.textContent = Math.floor(progressValue) + '%';
+        setTimeout(processNextLine, lineData.delay);
+      } else if (lineData.type === "normal" || lineData.type === "success" || lineData.type === "warning" || lineData.type === "glitch") {
+        addTerminalLine(lineData.text, lineData.type);
+        currentLineIndex++;
+        progressValue = (currentLineIndex / totalSteps) * 100;
+        progressFill.style.width = progressValue + '%';
+        percentageDisplay.textContent = Math.floor(progressValue) + '%';
+        
+        if (progressValue < 30) progressText.textContent = "INITIALIZING SECURE PROTOCOLS...";
+        else if (progressValue < 60) progressText.textContent = "DECRYPTING USER DATA...";
+        else if (progressValue < 90) progressText.textContent = "LOADING PORTFOLIO MATRIX...";
+        else progressText.textContent = "FINALIZING CONNECTION...";
+        
+        setTimeout(processNextLine, lineData.delay);
+      } else if (lineData.type === "prompt") {
+        typeLine(lineData);
+      }
+    }
+    
+    // Start the sequence after a short delay
+    setTimeout(processNextLine, 500);
+    
+    // Glitch effect on percentage occasionally
+    setInterval(() => {
+      const percentEl = document.getElementById('hackPercentage');
+      if (percentEl && !preloader.classList.contains('fade-out')) {
+        const original = percentEl.textContent;
+        if (Math.random() > 0.9) {
+          percentEl.classList.add('glitch-text');
+          setTimeout(() => percentEl.classList.remove('glitch-text'), 150);
+        }
+      }
+    }, 800);
+    
+    // Prevent scrolling during preloader
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.body.style.overflow = '';
+      }, 10000);
+    });
+  })();
+</script>
 
   <!-- Cursor Glow -->
   <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
