@@ -105,12 +105,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>DIMENSIONAL BREACH · ABDUL HANNAN</title>
+  <title>⚠️ SYSTEM BREACH ⚠️ ABDUL HANNAN</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      user-select: none;
     }
 
     body {
@@ -118,8 +119,8 @@
       background: #000;
     }
 
-    /* MAIN PRELOADER CONTAINER */
-    .dimensional-preloader {
+    /* MAIN PRELOADER */
+    .god-preloader {
       position: fixed;
       top: 0;
       left: 0;
@@ -127,594 +128,641 @@
       height: 100%;
       background: #000000;
       z-index: 99999;
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1);
       overflow: hidden;
     }
 
-    .dimensional-preloader.fade-out {
+    .god-preloader.fade-out {
       opacity: 0;
       pointer-events: none;
     }
 
-    /* ========== LAYER 1: COSMIC WORMHOLE ========== */
-    .wormhole-canvas {
+    /* ========== LAYER 1: MATRIX RAIN - AGGRESSIVE ========== */
+    .matrix-canvas {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      opacity: 0.7;
       z-index: 1;
     }
 
-    /* ========== LAYER 2: HOLOGRAPHIC DATA STREAMS ========== */
-    .data-streams {
+    /* ========== LAYER 2: CRT FLICKER ========== */
+    .crt-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 2;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 6px);
       pointer-events: none;
-    }
-
-    .stream {
-      position: absolute;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(to bottom, 
-        transparent, 
-        #0326fc, 
-        #ff0066, 
-        #0326fc, 
-        transparent);
-      animation: streamFlow 2s linear infinite;
-      opacity: 0;
-    }
-
-    @keyframes streamFlow {
-      0% { transform: translateY(-100%); opacity: 0; }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% { transform: translateY(100%); opacity: 0; }
-    }
-
-    /* ========== LAYER 3: FLOATING DIGITAL RUNES ========== */
-    .digital-runes {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    .rune {
-      position: absolute;
-      font-family: monospace;
-      font-size: 14px;
-      font-weight: bold;
-      color: rgba(3, 38, 252, 0.6);
-      text-shadow: 0 0 10px #0326fc;
-      animation: runeFloat 8s ease-in-out infinite;
-      opacity: 0;
-    }
-
-    @keyframes runeFloat {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-    }
-
-    /* ========== LAYER 4: THE PORTAL (CENTERPIECE) ========== */
-    .portal-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      z-index: 10;
-      cursor: pointer;
-    }
-
-    .portal-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 2px solid #0326fc;
-      animation: ringExpand 3s ease-out infinite;
-    }
-
-    .portal-ring:nth-child(1) { width: 100px; height: 100px; animation-delay: 0s; }
-    .portal-ring:nth-child(2) { width: 150px; height: 150px; animation-delay: 0.4s; }
-    .portal-ring:nth-child(3) { width: 200px; height: 200px; animation-delay: 0.8s; }
-    .portal-ring:nth-child(4) { width: 250px; height: 250px; animation-delay: 1.2s; }
-    .portal-ring:nth-child(5) { width: 300px; height: 300px; animation-delay: 1.6s; }
-    .portal-ring:nth-child(6) { width: 350px; height: 350px; animation-delay: 2s; }
-
-    @keyframes ringExpand {
-      0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.8); border-color: #0326fc; }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); border-color: #ff0066; }
-    }
-
-    .portal-core {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80px;
-      height: 80px;
-      background: radial-gradient(circle, #0326fc, #ff0066, #0326fc);
-      border-radius: 50%;
-      box-shadow: 0 0 80px #0326fc, 0 0 150px #ff0066;
-      animation: corePulse 0.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes corePulse {
-      0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-      100% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
-    }
-
-    /* ========== LAYER 5: HOLOGRAPHIC PROFILE ========== */
-    .hologram {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      text-align: center;
-      z-index: 15;
-      pointer-events: none;
-      animation: hologramFlicker 0.1s infinite;
-    }
-
-    @keyframes hologramFlicker {
-      0%, 100% { opacity: 0.9; text-shadow: 0 0 20px #0326fc; }
-      50% { opacity: 0.7; text-shadow: 0 0 40px #ff0066; }
-    }
-
-    .hologram-name {
-      font-family: 'Space Grotesk', monospace;
-      font-size: 4rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #0326fc, #ff0066, #0326fc);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: 4px;
-      animation: nameReveal 1s ease-out forwards;
-      opacity: 0;
-      transform: scale(0.8);
-    }
-
-    .hologram-title {
-      font-family: monospace;
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.7);
-      letter-spacing: 3px;
-      margin-top: 15px;
-      animation: titleReveal 1s ease-out 0.3s forwards;
-      opacity: 0;
-    }
-
-    @keyframes nameReveal {
-      0% { opacity: 0; transform: scale(0.5); letter-spacing: 20px; filter: blur(10px); }
-      100% { opacity: 1; transform: scale(1); letter-spacing: 4px; filter: blur(0); }
-    }
-
-    @keyframes titleReveal {
-      0% { opacity: 0; transform: translateY(20px); letter-spacing: 10px; }
-      100% { opacity: 1; transform: translateY(0); letter-spacing: 3px; }
-    }
-
-    /* ========== LAYER 6: STATS CARDS ========== */
-    .stats-cards {
-      position: absolute;
-      bottom: 40px;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
       z-index: 20;
-      flex-wrap: wrap;
-      padding: 0 20px;
+      animation: crtFlicker 0.05s infinite;
     }
 
-    .stat-card {
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid #0326fc;
-      padding: 12px 24px;
-      text-align: center;
-      font-family: monospace;
-      animation: cardFloat 2s ease-in-out infinite;
-      opacity: 0;
-      transform: translateY(30px);
+    @keyframes crtFlicker {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 0.2; }
     }
 
-    .stat-number {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #0326fc;
-      text-shadow: 0 0 10px #0326fc;
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      color: rgba(255, 255, 255, 0.6);
-      letter-spacing: 1px;
-      margin-top: 5px;
-    }
-
-    @keyframes cardFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    /* ========== LAYER 7: ENERGY ORBS ========== */
-    .energy-orbs {
+    /* ========== LAYER 3: FAST SCAN LINES ========== */
+    .scan-lines {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      z-index: 5;
+      background: linear-gradient(to bottom, transparent 0%, rgba(3,38,252,0.3) 50%, transparent 100%);
+      animation: fastScan 0.2s linear infinite;
       pointer-events: none;
+      z-index: 21;
     }
 
-    .orb {
+    @keyframes fastScan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* ========== LAYER 4: RANDOM GLITCH FLASHES ========== */
+    .glitch-flash {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 0, 102, 0.1);
+      pointer-events: none;
+      z-index: 22;
+      animation: randomFlash 0.1s infinite;
+    }
+
+    @keyframes randomFlash {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ========== LAYER 5: MAIN TERMINAL ========== */
+    .hack-terminal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 850px;
+      background: rgba(0, 0, 0, 0.94);
+      border: 3px solid #0326fc;
+      border-radius: 12px;
+      box-shadow: 0 0 100px rgba(3, 38, 252, 0.6), inset 0 0 40px rgba(3, 38, 252, 0.2);
+      z-index: 30;
+      animation: terminalShake 0.05s infinite;
+    }
+
+    @keyframes terminalShake {
+      0%, 100% { transform: translate(-50%, -50%) translateX(0); }
+      25% { transform: translate(-50%, -50%) translateX(1px); }
+      75% { transform: translate(-50%, -50%) translateX(-1px); }
+    }
+
+    /* Terminal Header */
+    .hack-header {
+      background: rgba(0, 0, 0, 0.96);
+      padding: 14px 20px;
+      border-bottom: 2px solid #0326fc;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hack-dots {
+      display: flex;
+      gap: 10px;
+    }
+
+    .hack-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ff5f56;
+      animation: dotExplode 0.15s infinite alternate;
+    }
+
+    .hack-dot:nth-child(2) { background: #ffbd2e; animation-delay: 0.05s; }
+    .hack-dot:nth-child(3) { background: #27c93f; animation-delay: 0.1s; }
+
+    @keyframes dotExplode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.3); opacity: 0.7; box-shadow: 0 0 8px currentColor; }
+    }
+
+    .hack-title {
+      color: #ff0066;
+      font-size: 12px;
+      letter-spacing: 3px;
+      flex: 1;
+      text-align: center;
+      font-family: monospace;
+      font-weight: bold;
+      text-shadow: 0 0 5px #ff0066;
+      animation: titleGlitch 0.1s infinite;
+    }
+
+    @keyframes titleGlitch {
+      0%, 100% { text-shadow: 0 0 3px #ff0066; }
+      50% { text-shadow: -1px 0 #0326fc, 1px 0 #ff0066; letter-spacing: 5px; }
+    }
+
+    /* Terminal Content */
+    .hack-content {
+      padding: 25px;
+      height: 450px;
+      overflow: hidden;
+    }
+
+    .hack-lines {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .hack-line {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      opacity: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: lineAttack 0.18s forwards;
+    }
+
+    @keyframes lineAttack {
+      0% { opacity: 0; transform: translateX(-50px) skewX(20deg); filter: blur(3px); }
+      100% { opacity: 1; transform: translateX(0) skewX(0); filter: blur(0); }
+    }
+
+    @media (max-width: 768px) {
+      .hack-line { font-size: 10px; white-space: normal; word-break: break-word; }
+      .hack-content { height: 380px; padding: 15px; }
+    }
+
+    .hack-line.prompt { color: #0326fc; text-shadow: 0 0 5px #0326fc; }
+    .hack-line.error { color: #ff0066; text-shadow: 0 0 8px #ff0066; animation: errorShake 0.05s infinite; }
+    .hack-line.success { color: #00ff00; text-shadow: 0 0 6px #00ff00; }
+    .hack-line.critical { color: #ff0066; text-shadow: 0 0 12px #ff0066; font-weight: bold; letter-spacing: 1px; }
+    .hack-line.warning { color: #ffaa00; text-shadow: 0 0 6px #ffaa00; }
+
+    @keyframes errorShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-2px); }
+      75% { transform: translateX(2px); }
+    }
+
+    /* Progress Bar - EXPLOSIVE */
+    .hack-progress {
+      padding: 20px 25px 25px;
+      background: rgba(0, 0, 0, 0.96);
+      border-top: 2px solid #ff0066;
+    }
+
+    .progress-explode {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 0, 102, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff0066, #0326fc, #ff0066);
+      box-shadow: 0 0 20px #ff0066;
+      transition: width 0.04s linear;
+      animation: fillRage 0.1s infinite alternate;
+    }
+
+    @keyframes fillRage {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.8); }
+    }
+
+    .progress-status {
+      text-align: center;
+      color: #ff0066;
+      font-size: 11px;
+      margin-top: 12px;
+      font-family: monospace;
+      letter-spacing: 2px;
+      font-weight: bold;
+      animation: statusRage 0.2s infinite alternate;
+    }
+
+    @keyframes statusRage {
+      0% { letter-spacing: 2px; text-shadow: 0 0 5px #ff0066; }
+      100% { letter-spacing: 5px; text-shadow: 0 0 15px #ff0066; }
+    }
+
+    /* Percentage - MASSIVE */
+    .hack-percent {
+      font-size: 64px;
+      font-weight: 900;
+      color: #ff0066;
+      text-align: center;
+      margin-top: 15px;
+      letter-spacing: 12px;
+      font-family: monospace;
+      text-shadow: 0 0 25px #ff0066, 0 0 50px #ff0066;
+      animation: percentRage 0.07s infinite;
+    }
+
+    @keyframes percentRage {
+      0%, 100% { transform: scale(1); text-shadow: 0 0 20px #ff0066; }
+      50% { transform: scale(1.08); text-shadow: 0 0 45px #ff0066; letter-spacing: 15px; }
+    }
+
+    /* ========== LAYER 6: EXPLOSION PARTICLES ========== */
+    .explosion-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    .particle {
       position: absolute;
       width: 4px;
       height: 4px;
-      background: #0326fc;
+      background: #ff0066;
       border-radius: 50%;
-      box-shadow: 0 0 15px #0326fc;
-      animation: orbTravel 4s linear infinite;
+      box-shadow: 0 0 10px #ff0066;
+      animation: particleFly 0.6s ease-out forwards;
     }
 
-    @keyframes orbTravel {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+    @keyframes particleFly {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0) translate(var(--x), var(--y)); }
     }
 
-    /* ========== LAYER 8: PROGRESS - FUTURISTIC ========== */
-    .futuristic-progress {
+    /* ========== LAYER 7: "HACKED" STAMP ========== */
+    .hacked-stamp {
       position: absolute;
-      bottom: 120px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 300px;
-      text-align: center;
-      z-index: 25;
-    }
-
-    .progress-ring-future {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 15px;
-    }
-
-    .progress-ring-future svg {
-      transform: rotate(-90deg);
-    }
-
-    .progress-ring-future circle {
-      fill: none;
-      stroke: #0326fc;
-      stroke-width: 2;
-      stroke-dasharray: 251;
-      stroke-dashoffset: 251;
-      transition: stroke-dashoffset 0.05s linear;
-    }
-
-    .progress-percent-future {
+      bottom: 30px;
+      right: 30px;
       font-family: monospace;
-      color: #0326fc;
       font-size: 14px;
+      color: #ff0066;
+      border: 2px solid #ff0066;
+      padding: 5px 15px;
+      transform: rotate(-10deg);
+      opacity: 0;
+      z-index: 50;
       letter-spacing: 2px;
-      text-shadow: 0 0 10px #0326fc;
+      font-weight: bold;
+      background: rgba(0,0,0,0.8);
+      animation: stampReveal 0.5s ease-out 6.5s forwards;
     }
 
-    /* ========== LAYER 9: GLITCH CORRUPTION ========== */
-    .glitch-corruption {
+    @keyframes stampReveal {
+      0% { opacity: 0; transform: rotate(-10deg) scale(0.5); }
+      100% { opacity: 1; transform: rotate(-10deg) scale(1); }
+    }
+
+    /* ========== LAYER 8: WARNING TRIANGLE ========== */
+    .warning-triangle {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        45deg,
-        rgba(3, 38, 252, 0.05) 0px,
-        rgba(3, 38, 252, 0.05) 2px,
-        transparent 2px,
-        transparent 8px
-      );
-      pointer-events: none;
-      z-index: 30;
-      animation: corruptionShift 0.2s linear infinite;
+      top: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 0, 102, 0.2);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      border: 1px solid #ff0066;
+      animation: warningPulse 0.5s infinite alternate;
+      z-index: 50;
     }
 
-    @keyframes corruptionShift {
-      0% { background-position: 0 0; }
-      100% { background-position: 10px 10px; }
+    @keyframes warningPulse {
+      0% { opacity: 0.5; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.1); background: rgba(255, 0, 102, 0.4); }
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .hologram-name { font-size: 2rem; }
-      .portal-container { width: 280px; height: 280px; }
-      .portal-ring:nth-child(1) { width: 70px; height: 70px; }
-      .portal-ring:nth-child(2) { width: 105px; height: 105px; }
-      .portal-ring:nth-child(3) { width: 140px; height: 140px; }
-      .portal-ring:nth-child(4) { width: 175px; height: 175px; }
-      .portal-ring:nth-child(5) { width: 210px; height: 210px; }
-      .portal-ring:nth-child(6) { width: 245px; height: 245px; }
-      .portal-core { width: 50px; height: 50px; }
-      .stats-cards { gap: 15px; bottom: 20px; }
-      .stat-card { padding: 8px 16px; }
-      .stat-number { font-size: 1.2rem; }
+      .hack-percent { font-size: 40px; letter-spacing: 6px; }
+      .hacked-stamp { font-size: 10px; bottom: 15px; right: 15px; }
+      .warning-triangle { width: 35px; height: 35px; top: 15px; left: 15px; }
     }
   </style>
 </head>
 <body>
 
-<div class="dimensional-preloader" id="dimensionalPreloader">
-  <!-- Layer 1: Wormhole Canvas -->
-  <canvas id="wormholeCanvas" class="wormhole-canvas"></canvas>
+<div class="god-preloader" id="godPreloader">
+  <!-- Matrix Canvas -->
+  <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
   
-  <!-- Layer 2: Data Streams -->
-  <div class="data-streams" id="dataStreams"></div>
+  <!-- CRT + Scan + Glitch -->
+  <div class="crt-overlay"></div>
+  <div class="scan-lines"></div>
+  <div class="glitch-flash"></div>
   
-  <!-- Layer 3: Digital Runes -->
-  <div class="digital-runes" id="digitalRunes"></div>
+  <!-- Warning Stamp -->
+  <div class="warning-triangle"></div>
+  <div class="hacked-stamp" id="hackedStamp">⚠️ SYSTEM HACKED ⚠️</div>
   
-  <!-- Layer 4: Portal -->
-  <div class="portal-container">
-    <div class="portal-ring"></div>
-    <div class="portal-ring"></div>
-    <div class="portal-ring"></div>
-    <div class="portal-ring"></div>
-    <div class="portal-ring"></div>
-    <div class="portal-ring"></div>
-    <div class="portal-core"></div>
-  </div>
+  <!-- Explosion Particles Container -->
+  <div class="explosion-particles" id="explosionParticles"></div>
   
-  <!-- Layer 5: Hologram -->
-  <div class="hologram">
-    <div class="hologram-name">ABDUL HANNAN</div>
-    <div class="hologram-title">FRONTEND ARCHITECT · FULL STACK ENGINEER</div>
-  </div>
-  
-  <!-- Layer 6: Stats Cards -->
-  <div class="stats-cards" id="statsCards">
-    <div class="stat-card"><div class="stat-number">50+</div><div class="stat-label">PROJECTS</div></div>
-    <div class="stat-card"><div class="stat-number">5K+</div><div class="stat-label">USERS</div></div>
-    <div class="stat-card"><div class="stat-number">4+</div><div class="stat-label">YEARS</div></div>
-    <div class="stat-card"><div class="stat-number">98%</div><div class="stat-label">SATISFACTION</div></div>
-  </div>
-  
-  <!-- Layer 7: Energy Orbs -->
-  <div class="energy-orbs" id="energyOrbs"></div>
-  
-  <!-- Layer 8: Progress -->
-  <div class="futuristic-progress">
-    <div class="progress-ring-future">
-      <svg width="80" height="80">
-        <circle cx="40" cy="40" r="38" stroke="rgba(3,38,252,0.3)" stroke-width="2" fill="none"/>
-        <circle id="progressRing" cx="40" cy="40" r="38" stroke="#0326fc" stroke-width="2" fill="none" stroke-dasharray="251" stroke-dashoffset="251"/>
-      </svg>
+  <!-- Main Terminal -->
+  <div class="hack-terminal">
+    <div class="hack-header">
+      <div class="hack-dots">
+        <div class="hack-dot"></div>
+        <div class="hack-dot"></div>
+        <div class="hack-dot"></div>
+      </div>
+      <div class="hack-title">ROOT@GOD_MODE:~# UNAUTHORIZED_ACCESS</div>
     </div>
-    <div class="progress-percent-future" id="progressPercent">0%</div>
+    
+    <div class="hack-content">
+      <div class="hack-lines" id="terminalLines"></div>
+    </div>
+    
+    <div class="hack-progress">
+      <div class="progress-explode">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-status" id="progressStatus">[!] SYSTEM BREACH IN PROGRESS [!]</div>
+      <div class="hack-percent" id="hackPercent">0%</div>
+    </div>
   </div>
-  
-  <!-- Layer 9: Glitch Corruption -->
-  <div class="glitch-corruption"></div>
 </div>
 
 <script>
   (function() {
     // ============================================
-    // WORMHOLE EFFECT - NEVER SEEN BEFORE
+    // MATRIX RAIN - ULTRA AGGRESSIVE
     // ============================================
-    const canvas = document.getElementById('wormholeCanvas');
+    const canvas = document.getElementById('matrixCanvas');
     const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-    let particleCount = 500;
+    let width, height, columns, drops;
+    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン#%&@!$*+-=><|/\\";
     
-    function initWormhole() {
+    function setupMatrix() {
       width = window.innerWidth;
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
-      
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          radius: Math.random() * 3 + 1,
-          speed: Math.random() * 3 + 1,
-          angle: Math.random() * Math.PI * 2,
-          color: Math.random() > 0.7 ? '#ff0066' : '#0326fc'
-        });
+      columns = Math.floor(width / 16);
+      drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor(Math.random() * -height);
       }
     }
     
-    function drawWormhole() {
+    function drawMatrix() {
       if (!ctx) return;
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
       ctx.fillRect(0, 0, width, height);
       
-      const centerX = width / 2;
-      const centerY = height / 2;
-      
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        const dx = p.x - centerX;
-        const dy = p.y - centerY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx);
+      for (let i = 0; i < drops.length; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * 16;
+        const y = drops[i] * 16;
         
-        const newDistance = distance + p.speed;
-        const newX = centerX + Math.cos(angle) * newDistance;
-        const newY = centerY + Math.sin(angle) * newDistance;
+        ctx.fillStyle = Math.random() > 0.97 ? '#ff0066' : '#0326fc';
+        ctx.font = 'bold 14px monospace';
+        ctx.fillText(char, x, y);
         
-        p.x = newX;
-        p.y = newY;
-        
-        if (newDistance > Math.max(width, height)) {
-          p.x = centerX + Math.cos(angle) * 10;
-          p.y = centerY + Math.sin(angle) * 10;
+        if (y > height && Math.random() > 0.975) {
+          drops[i] = 0;
         }
-        
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-        
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = p.color;
+        drops[i]++;
       }
     }
     
-    initWormhole();
-    const wormholeInterval = setInterval(drawWormhole, 16);
-    window.addEventListener('resize', () => initWormhole());
+    setupMatrix();
+    const matrixInterval = setInterval(drawMatrix, 25);
+    window.addEventListener('resize', () => setupMatrix());
     
     // ============================================
-    // DATA STREAMS - HOLOGRAPHIC LINES
+    // EXPLOSION FUNCTION
     // ============================================
-    const streamsContainer = document.getElementById('dataStreams');
-    for (let i = 0; i < 30; i++) {
-      const stream = document.createElement('div');
-      stream.className = 'stream';
-      stream.style.left = (i * 3.5) + '%';
-      stream.style.animationDelay = (i * 0.1) + 's';
-      stream.style.animationDuration = (1.5 + Math.random()) + 's';
-      streamsContainer.appendChild(stream);
+    const explosionContainer = document.getElementById('explosionParticles');
+    
+    function createExplosion(x, y, intensity = 15) {
+      for (let i = 0; i < intensity; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 40 + Math.random() * 100;
+        const xMove = Math.cos(angle) * distance;
+        const yMove = Math.sin(angle) * distance;
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.setProperty('--x', xMove + 'px');
+        particle.style.setProperty('--y', yMove + 'px');
+        explosionContainer.appendChild(particle);
+        setTimeout(() => particle.remove(), 600);
+      }
     }
     
-    // ============================================
-    // DIGITAL RUNES - SACRED SYMBOLS
-    // ============================================
-    const runesContainer = document.getElementById('digitalRunes');
-    const runeSymbols = ['⌘', '⌥', '⇧', '⌃', '⎋', '⌫', '⌦', '⏎', '⇪', '⇥', '␣', '⌤', '⌨', '', '⚡', '∞', '∫', '∑', '∏', '√', '∆', '∇', '∂', '∝', '⊗', '⊕', '⊖', '⊘', '⊙', '⊚', '⦿', '⬤', '◉', '◎', '◌', '◍', '●', '◐', '◑', '◒', '◓'];
-    
-    for (let i = 0; i < 150; i++) {
-      const rune = document.createElement('div');
-      rune.className = 'rune';
-      rune.textContent = runeSymbols[Math.floor(Math.random() * runeSymbols.length)];
-      rune.style.left = Math.random() * 100 + '%';
-      rune.style.animationDelay = Math.random() * 10 + 's';
-      rune.style.animationDuration = 6 + Math.random() * 8 + 's';
-      rune.style.fontSize = (12 + Math.random() * 20) + 'px';
-      rune.style.opacity = 0.2 + Math.random() * 0.4;
-      runesContainer.appendChild(rune);
-      
-      setTimeout(() => {
-        rune.style.opacity = '0.8';
-      }, Math.random() * 3000);
-    }
-    
-    // ============================================
-    // ENERGY ORBS - TRAVELING PARTICLES
-    // ============================================
-    const orbsContainer = document.getElementById('energyOrbs');
-    
-    function createOrb() {
-      const orb = document.createElement('div');
-      orb.className = 'orb';
-      const startX = Math.random() * window.innerWidth;
-      const startY = Math.random() * window.innerHeight;
-      const endX = (Math.random() - 0.5) * 800;
-      const endY = (Math.random() - 0.5) * 600;
-      orb.style.left = startX + 'px';
-      orb.style.top = startY + 'px';
-      orb.style.setProperty('--tx', endX + 'px');
-      orb.style.setProperty('--ty', endY + 'px');
-      orb.style.animationDuration = 2 + Math.random() * 3 + 's';
-      orbsContainer.appendChild(orb);
-      setTimeout(() => orb.remove(), 4000);
-    }
-    
+    // Random explosions everywhere
     setInterval(() => {
       if (!preloader.classList.contains('fade-out')) {
-        for (let i = 0; i < 5; i++) createOrb();
+        const randomX = Math.random() * window.innerWidth;
+        const randomY = Math.random() * window.innerHeight;
+        createExplosion(randomX, randomY, 8 + Math.random() * 12);
       }
-    }, 800);
+    }, 350);
     
     // ============================================
-    // STATS CARDS ANIMATION
+    // TERMINAL SEQUENCE - BRUTAL
     // ============================================
-    const cards = document.querySelectorAll('.stat-card');
-    setTimeout(() => {
-      cards.forEach((card, i) => {
-        setTimeout(() => {
-          card.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        }, i * 150);
-      });
-    }, 500);
+    const terminalContainer = document.getElementById('terminalLines');
+    const progressFill = document.getElementById('progressFill');
+    const progressStatus = document.getElementById('progressStatus');
+    const percentDisplay = document.getElementById('hackPercent');
+    const preloader = document.getElementById('godPreloader');
+    const hackedStamp = document.getElementById('hackedStamp');
     
-    // ============================================
-    // PROGRESS SYSTEM
-    // ============================================
-    const progressRing = document.getElementById('progressRing');
-    const progressPercent = document.getElementById('progressPercent');
-    const preloader = document.getElementById('dimensionalPreloader');
+    const terminalSequence = [
+      { text: "> [!!!] UNAUTHORIZED ACCESS DETECTED [!!!]", type: "critical", delay: 60 },
+      { text: "> [!!!] SYSTEM BREACH IN PROGRESS [!!!]", type: "critical", delay: 70 },
+      { text: "> [!!!] FIREWALLS COMPROMISED [!!!]", type: "critical", delay: 65 },
+      { text: "", type: "empty", delay: 50 },
+      { text: "> [TARGET_SCAN] ABDUL HANNAN", type: "warning", delay: 90 },
+      { text: "> [ROLE] FRONTEND ARCHITECT · FULL STACK ENGINEER", type: "warning", delay: 100 },
+      { text: "> [STATUS] ELITE DEVELOPER · 50+ PROJECTS · 5000+ USERS", type: "warning", delay: 110 },
+      { text: "", type: "empty", delay: 60 },
+      { text: "> [SKILL_MATRIX] DECRYPTING...", type: "prompt", delay: 80 },
+      { text: "> [✓] HTML/CSS/Tailwind ................ [98%] UNLOCKED", type: "success", delay: 70 },
+      { text: "> [✓] PHP/MySQL ...................... [98%] UNLOCKED", type: "success", delay: 70 },
+      { text: "> [✓] WordPress/Elementor ............. [90%] UNLOCKED", type: "success", delay: 70 },
+      { text: "> [✓] GSAP/Framer Motion .............. [85%] UNLOCKED", type: "success", delay: 70 },
+      { text: "> [✓] JavaScript/TypeScript ........... [82%] UNLOCKED", type: "success", delay: 70 },
+      { text: "", type: "empty", delay: 70 },
+      { text: "> [PROJECT_SCAN] DETECTING ASSETS...", type: "prompt", delay: 100 },
+      { text: "> [!] TALENT TREE JOB PORTAL [5000+ USERS] - COMPROMISED", type: "critical", delay: 100 },
+      { text: "> [!] VOICE TO-DO LIST - COMPROMISED", type: "critical", delay: 85 },
+      { text: "> [!] ATTENDANCE MANAGEMENT SYSTEM - COMPROMISED", type: "critical", delay: 90 },
+      { text: "> [!] DAILY EXPENSE MANAGER - COMPROMISED", type: "critical", delay: 85 },
+      { text: "> [!] AI RESUME ANALYZER - COMPROMISED", type: "critical", delay: 100 },
+      { text: "", type: "empty", delay: 80 },
+      { text: "> [ROOT_ACCESS] BYPASSING FINAL ENCRYPTION...", type: "prompt", delay: 120 },
+      { text: "> [██████████████████████████████] 100%", type: "success", delay: 180 },
+      { text: "> [ACCESS] GRANTED. TOTAL SYSTEM CONTROL.", type: "success", delay: 140 },
+      { text: "", type: "empty", delay: 70 },
+      { text: "╔═══════════════════════════════════════════════════════════════╗", type: "critical", delay: 35 },
+      { text: "║  ██████╗  ██████╗ ██████╗ ███████╗██╗███╗   ██╗██╗        ║", type: "critical", delay: 55 },
+      { text: "║  ██╔══██╗██╔══██╗██╔══██╗██╔════╝██║████╗  ██║██║        ║", type: "critical", delay: 55 },
+      { text: "║  ██████╔╝██████╔╝██████╔╝█████╗  ██║██╔██╗ ██║██║        ║", type: "critical", delay: 55 },
+      { text: "║  ██╔══██╗██╔══██╗██╔══██╗██╔══╝  ██║██║╚██╗██║██║        ║", type: "critical", delay: 55 },
+      { text: "║  ██║  ██║██████╔╝██║  ██║███████╗██║██║ ╚████║███████╗   ║", type: "critical", delay: 55 },
+      { text: "║  ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝   ║", type: "critical", delay: 55 },
+      { text: "╚═══════════════════════════════════════════════════════════════╝", type: "critical", delay: 35 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "> [SYSTEM] ACCESS GRANTED. WELCOME TO THE MATRIX.", type: "success", delay: 180 },
+      { text: "> [REDIRECT] LOADING PORTAL...", type: "prompt", delay: 200 }
+    ];
     
-    let progress = 0;
-    const duration = 7000;
+    let currentLineIndex = 0;
+    let currentCharIndex = 0;
+    let currentLineText = "";
+    let currentType = "";
+    let isTyping = false;
+    let progressValue = 0;
+    let totalSteps = terminalSequence.length;
     const startTime = Date.now();
-    const circumference = 251;
+    const MAX_DURATION = 7000;
     
-    function updateProgress() {
+    function addTerminalLine(text, type) {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = `hack-line ${type}`;
+      lineDiv.textContent = text;
+      terminalContainer.appendChild(lineDiv);
+      terminalContainer.scrollTop = terminalContainer.scrollHeight;
+      return lineDiv;
+    }
+    
+    function typeLine(lineData) {
+      const { text, type, delay } = lineData;
+      currentLineText = text;
+      currentType = type;
+      currentCharIndex = 0;
+      isTyping = true;
+      
+      const lineDiv = document.createElement('div');
+      lineDiv.className = `hack-line ${type}`;
+      lineDiv.textContent = "";
+      terminalContainer.appendChild(lineDiv);
+      
+      function typeNextChar() {
+        if (currentCharIndex < currentLineText.length) {
+          lineDiv.textContent += currentLineText[currentCharIndex];
+          currentCharIndex++;
+          terminalContainer.scrollTop = terminalContainer.scrollHeight;
+          setTimeout(typeNextChar, 10 + Math.random() * 6);
+        } else {
+          lineDiv.classList.add('revealed');
+          isTyping = false;
+          currentLineIndex++;
+          
+          const elapsed = Date.now() - startTime;
+          const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+          const lineProgress = (currentLineIndex / totalSteps) * 100;
+          progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+          
+          progressFill.style.width = progressValue + '%';
+          percentDisplay.textContent = Math.floor(progressValue) + '%';
+          
+          if (progressValue < 20) progressStatus.textContent = "[!] BREACHING FIREWALLS [!]";
+          else if (progressValue < 40) progressStatus.textContent = "[#] CRACKING ENCRYPTION [#]";
+          else if (progressValue < 60) progressStatus.textContent = "[*] DECRYPTING USER DATA [*]";
+          else if (progressValue < 80) progressStatus.textContent = "[!] INJECTING PAYLOAD [!]";
+          else progressStatus.textContent = "[✓] SYSTEM TAKEOVER COMPLETE [✓]";
+          
+          // Create explosion on each line completion
+          const randomX = Math.random() * window.innerWidth;
+          const randomY = Math.random() * window.innerHeight;
+          createExplosion(randomX, randomY, 5);
+          
+          setTimeout(processNextLine, delay);
+        }
+      }
+      
+      typeNextChar();
+    }
+    
+    function processNextLine() {
       const elapsed = Date.now() - startTime;
-      progress = Math.min(100, (elapsed / duration) * 100);
-      
-      const offset = circumference - (progress / 100) * circumference;
-      progressRing.style.strokeDashoffset = offset;
-      progressPercent.textContent = Math.floor(progress) + '%';
-      
-      if (progress < 100) {
-        requestAnimationFrame(updateProgress);
-      } else {
+      if (elapsed >= MAX_DURATION) {
         completePreloader();
+        return;
+      }
+      
+      if (currentLineIndex >= terminalSequence.length) {
+        completePreloader();
+        return;
+      }
+      
+      const lineData = terminalSequence[currentLineIndex];
+      
+      if (lineData.text === "") {
+        addTerminalLine("", lineData.type);
+        currentLineIndex++;
+        const elapsed = Date.now() - startTime;
+        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+        const lineProgress = (currentLineIndex / totalSteps) * 100;
+        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressFill.style.width = progressValue + '%';
+        percentDisplay.textContent = Math.floor(progressValue) + '%';
+        setTimeout(processNextLine, lineData.delay);
+      } else if (lineData.type === "critical" || lineData.type === "success" || lineData.type === "warning") {
+        addTerminalLine(lineData.text, lineData.type);
+        currentLineIndex++;
+        const elapsed = Date.now() - startTime;
+        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+        const lineProgress = (currentLineIndex / totalSteps) * 100;
+        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressFill.style.width = progressValue + '%';
+        percentDisplay.textContent = Math.floor(progressValue) + '%';
+        setTimeout(processNextLine, lineData.delay);
+      } else if (lineData.type === "prompt") {
+        typeLine(lineData);
       }
     }
     
-    requestAnimationFrame(updateProgress);
-    
-    // ============================================
-    // COMPLETE PRELOADER
-    // ============================================
     function completePreloader() {
-      progressRing.style.strokeDashoffset = '0';
-      progressPercent.textContent = '100%';
+      progressFill.style.width = '100%';
+      percentDisplay.textContent = '100%';
+      progressStatus.textContent = "[✓] SYSTEM TAKEOVER COMPLETE [✓]";
       
-      // Final burst of orbs
-      for (let i = 0; i < 50; i++) {
-        setTimeout(() => createOrb(), i * 20);
+      // FINAL MASSIVE EXPLOSIONS
+      for (let i = 0; i < 60; i++) {
+        setTimeout(() => {
+          const randomX = Math.random() * window.innerWidth;
+          const randomY = Math.random() * window.innerHeight;
+          createExplosion(randomX, randomY, 12);
+        }, i * 25);
       }
       
-      // Pulse effect on portal
-      const portalCore = document.querySelector('.portal-core');
-      portalCore.style.animation = 'corePulse 0.1s ease-in-out infinite alternate';
+      // Add HACKED stamp
+      hackedStamp.style.opacity = '1';
+      hackedStamp.style.transform = 'rotate(-10deg) scale(1)';
       
       setTimeout(() => {
         preloader.classList.add('fade-out');
         setTimeout(() => {
           preloader.style.display = 'none';
-          clearInterval(wormholeInterval);
+          clearInterval(matrixInterval);
           document.body.style.overflow = '';
         }, 1200);
-      }, 500);
+      }, 600);
     }
+    
+    setTimeout(processNextLine, 150);
     
     // Lock body
     document.body.style.overflow = 'hidden';
@@ -724,34 +772,14 @@
       }, 8000);
     });
     
-    // ============================================
-    // RARE EFFECT: HOLOGRAM GLITCH
-    // ============================================
+    // Continuous explosions during progress
     setInterval(() => {
-      if (!preloader.classList.contains('fade-out')) {
-        const hologram = document.querySelector('.hologram');
-        if (Math.random() > 0.85) {
-          hologram.style.animation = 'hologramFlicker 0.05s infinite';
-          setTimeout(() => {
-            hologram.style.animation = 'hologramFlicker 0.1s infinite';
-          }, 200);
-        }
+      if (!preloader.classList.contains('fade-out') && progressValue > 10 && progressValue < 95) {
+        const randomX = Math.random() * window.innerWidth;
+        const randomY = Math.random() * window.innerHeight;
+        createExplosion(randomX, randomY, 4 + Math.random() * 8);
       }
-    }, 1500);
-    
-    // ============================================
-    // RARE EFFECT: PORTAL COLOR SHIFT
-    // ============================================
-    let colorPhase = 0;
-    setInterval(() => {
-      if (!preloader.classList.contains('fade-out')) {
-        colorPhase = (colorPhase + 0.02) % (Math.PI * 2);
-        const blueIntensity = 0.3 + Math.sin(colorPhase) * 0.2;
-        const redIntensity = 0.3 + Math.cos(colorPhase) * 0.2;
-        const portalCore = document.querySelector('.portal-core');
-        portalCore.style.boxShadow = `0 0 ${60 + Math.sin(colorPhase) * 20}px #0326fc, 0 0 ${100 + Math.cos(colorPhase) * 30}px #ff0066`;
-      }
-    }, 100);
+    }, 200);
   })();
 </script>
 </body>
