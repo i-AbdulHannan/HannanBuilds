@@ -101,512 +101,615 @@
 </head>
 <body>
   <!-- ============================================ -->
-// CINEMATIC MASTERPIECE PRELOADER
-// PROFESSIONAL · PREMIUM · ADDICTIVE
-// "YEH KYA BANAYA HAI" - HAR KOI YAHI BOLEGA
-// 7 SECONDS OF PURE ART
+// SYSTEM TAKEOVER - ULTRA BRUTAL PRELOADER
+// "MERI PHATT GAYI" - HAR KOI BOLEGA
+// 7 SECONDS OF PURE HACKER DOMINATION
 <!-- ============================================ -->
 <style>
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
   }
 
-  .masterpiece-preloader {
+  body {
+    overflow: hidden;
+  }
+
+  .takeover-preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: #0a0a0f;
+    background: #000000;
     z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
+    font-family: 'Courier New', monospace;
   }
 
-  .masterpiece-preloader.fade-out {
+  .takeover-preloader.fade-out {
     opacity: 0;
     pointer-events: none;
   }
 
-  /* 3D Perspective Container */
-  .masterpiece-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1200px;
-  }
-
-  /* Main Floating Geometric Shape */
-  .floating-geometry {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    transform-style: preserve-3d;
-    animation: floatGeometry 6s ease-in-out infinite;
-  }
-
-  @keyframes floatGeometry {
-    0%, 100% { transform: rotateX(20deg) rotateY(25deg) translateY(0); }
-    50% { transform: rotateX(25deg) rotateY(30deg) translateY(-15px); }
-  }
-
-  .geo-face {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: rgba(3, 38, 252, 0.08);
-    border: 1px solid rgba(3, 38, 252, 0.3);
-    backdrop-filter: blur(2px);
-  }
-
-  .geo-front { transform: translateZ(100px); }
-  .geo-back { transform: translateZ(-100px) rotateY(180deg); }
-  .geo-right { transform: translateX(100px) rotateY(90deg); }
-  .geo-left { transform: translateX(-100px) rotateY(-90deg); }
-  .geo-top { transform: translateY(-100px) rotateX(90deg); }
-  .geo-bottom { transform: translateY(100px) rotateX(-90deg); }
-
-  /* Inner Glow */
-  .inner-glow {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, #0326fc 0%, transparent 70%);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(20px);
-    animation: glowPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes glowPulse {
-    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
-    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
-  }
-
-  /* Main Title - Cinematic Typography */
-  .masterpiece-title {
-    position: absolute;
-    text-align: center;
-    z-index: 10;
-    top: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-  }
-
-  .name-title {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 4.5rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    background: linear-gradient(135deg, #ffffff 0%, #0326fc 60%, #ffffff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    opacity: 0;
-    animation: textReveal 0.8s ease-out forwards;
-    white-space: nowrap;
-  }
-
-  .role-title {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 4px;
-    margin-top: 15px;
-    opacity: 0;
-    animation: textReveal 0.8s ease-out 0.2s forwards;
-  }
-
-  @keyframes textReveal {
-    0% { opacity: 0; transform: translateY(30px); letter-spacing: 15px; filter: blur(8px); }
-    100% { opacity: 1; transform: translateY(0); letter-spacing: 2px; filter: blur(0); }
-  }
-
-  /* Particle System - Premium Sparkles */
-  .sparkle-system {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  .sparkle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #0326fc;
-    border-radius: 50%;
-    opacity: 0;
-    box-shadow: 0 0 6px #0326fc;
-  }
-
-  /* Light Orbs */
-  .light-orb {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(3, 38, 252, 0.15) 0%, transparent 70%);
-    animation: orbFloat 8s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-    50% { transform: translate(50px, -30px) scale(1.2); opacity: 0.5; }
-  }
-
-  /* Progress Bar - Ultra Premium */
-  .premium-progress {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    text-align: center;
-    z-index: 20;
-  }
-
-  .progress-bar-premium {
-    width: 100%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 12px;
-  }
-
-  .progress-fill-premium {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #0326fc, #ffffff, #0326fc);
-    transition: width 0.05s linear;
-    position: relative;
-  }
-
-  .progress-fill-premium::after {
-    content: '';
-    position: absolute;
-    right: -4px;
-    top: -3px;
-    width: 8px;
-    height: 8px;
-    background: #0326fc;
-    border-radius: 50%;
-    filter: blur(2px);
-  }
-
-  .progress-label {
-    font-family: 'Space Grotesk', monospace;
-    color: #0326fc;
-    font-size: 12px;
-    letter-spacing: 2px;
-    margin-top: 12px;
-  }
-
-  /* Stats Counter */
-  .stats-container {
-    position: absolute;
-    bottom: 80px;
-    right: 40px;
-    text-align: right;
-    z-index: 20;
-    opacity: 0;
-    animation: statsFade 0.6s ease-out 0.5s forwards;
-  }
-
-  @keyframes statsFade {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .stat-item {
-    font-family: monospace;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 5px 0;
-  }
-
-  .stat-number {
-    color: #0326fc;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  /* Left Side - Years */
-  .left-stats {
-    position: absolute;
-    bottom: 80px;
-    left: 40px;
-    z-index: 20;
-    opacity: 0;
-    animation: statsFade 0.6s ease-out 0.5s forwards;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .name-title { font-size: 2rem; white-space: normal; padding: 0 20px; }
-    .role-title { font-size: 0.8rem; letter-spacing: 2px; }
-    .floating-geometry { width: 120px; height: 120px; }
-    .geo-face { width: 120px; height: 120px; }
-    .geo-front { transform: translateZ(60px); }
-    .geo-back { transform: translateZ(-60px) rotateY(180deg); }
-    .geo-right { transform: translateX(60px) rotateY(90deg); }
-    .geo-left { transform: translateX(-60px) rotateY(-90deg); }
-    .geo-top { transform: translateY(-60px) rotateX(90deg); }
-    .geo-bottom { transform: translateY(60px) rotateX(-90deg); }
-    .stats-container, .left-stats { display: none; }
-    .premium-progress { width: 250px; bottom: 40px; }
-  }
-
-  /* Grain Texture */
-  .grain-texture {
+  /* Full Screen Matrix Rain - Aggressive */
+  .matrix-rain-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.03"/%3E%3C/svg%3E');
+    opacity: 0.6;
+    z-index: 1;
+  }
+
+  /* CRT Screen Effect */
+  .crt-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg, 
+      rgba(0, 0, 0, 0.15) 0px, 
+      rgba(0, 0, 0, 0.15) 2px, 
+      transparent 2px, 
+      transparent 6px);
     pointer-events: none;
-    z-index: 100;
+    z-index: 10;
+    animation: crtFlicker 0.1s infinite;
+  }
+
+  @keyframes crtFlicker {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.2; }
+  }
+
+  /* Scan Lines - Fast & Aggressive */
+  .scan-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, 
+      transparent 0%, 
+      rgba(3, 38, 252, 0.2) 50%, 
+      transparent 100%);
+    animation: fastScan 0.3s linear infinite;
+    pointer-events: none;
+    z-index: 11;
+  }
+
+  @keyframes fastScan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  /* Main Terminal - Aggressive */
+  .takeover-terminal {
+    position: relative;
+    z-index: 20;
+    width: 90%;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.92);
+    border: 3px solid #0326fc;
+    border-radius: 8px;
+    box-shadow: 0 0 80px rgba(3, 38, 252, 0.6), inset 0 0 30px rgba(3, 38, 252, 0.2);
+    backdrop-filter: blur(8px);
+    animation: terminalShake 0.08s infinite;
+  }
+
+  @keyframes terminalShake {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, 1px); }
+  }
+
+  /* Terminal Header - Glitching */
+  .takeover-header {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 15px 20px;
+    border-bottom: 2px solid #0326fc;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header-dots {
+    display: flex;
+    gap: 10px;
+  }
+
+  .header-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ff5f56;
+    animation: dotExplode 0.2s infinite alternate;
+  }
+
+  .header-dot:nth-child(2) { background: #ffbd2e; animation-delay: 0.07s; }
+  .header-dot:nth-child(3) { background: #27c93f; animation-delay: 0.14s; }
+
+  @keyframes dotExplode {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.3); opacity: 0.6; box-shadow: 0 0 10px currentColor; }
+  }
+
+  .header-title {
+    color: #0326fc;
+    font-size: 13px;
+    letter-spacing: 3px;
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    font-family: monospace;
+    text-shadow: 0 0 5px #0326fc;
+    animation: titleGlitch 0.05s infinite;
+  }
+
+  @keyframes titleGlitch {
+    0%, 100% { text-shadow: 0 0 3px #0326fc; }
+    50% { text-shadow: -1px 0 #ff0066, 1px 0 #0326fc; letter-spacing: 5px; }
+  }
+
+  /* Terminal Content */
+  .takeover-content {
+    padding: 25px;
+    height: 420px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .terminal-lines {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .terminal-line {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.9;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: lineAssault 0.2s forwards;
+  }
+
+  @keyframes lineAssault {
+    0% { opacity: 0; transform: translateX(-40px) skewX(15deg); }
+    100% { opacity: 1; transform: translateX(0) skewX(0); }
+  }
+
+  @media (max-width: 768px) {
+    .terminal-line { font-size: 10px; white-space: normal; word-break: break-word; }
+    .takeover-content { height: 380px; padding: 15px; }
+  }
+
+  .terminal-line.prompt { color: #0326fc; text-shadow: 0 0 6px #0326fc; }
+  .terminal-line.error { color: #ff0066; text-shadow: 0 0 10px #ff0066; animation: errorShake 0.05s infinite; }
+  .terminal-line.success { color: #00ff00; text-shadow: 0 0 8px #00ff00; }
+  .terminal-line.critical { color: #ff0066; text-shadow: 0 0 15px #ff0066; font-weight: bold; }
+  .terminal-line.warning { color: #ffaa00; text-shadow: 0 0 8px #ffaa00; }
+
+  @keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+  }
+
+  /* Progress Bar - Aggressive */
+  .takeover-progress {
+    padding: 20px 25px 25px;
+    background: rgba(0, 0, 0, 0.95);
+    border-top: 2px solid #0326fc;
+  }
+
+  .progress-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(3, 38, 252, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #0326fc, #ff0066, #0326fc);
+    box-shadow: 0 0 15px #ff0066;
+    transition: width 0.05s linear;
+    animation: fillPulse 0.1s infinite alternate;
+  }
+
+  @keyframes fillPulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.5); }
+  }
+
+  .progress-status {
+    text-align: center;
+    color: #ff0066;
+    font-size: 11px;
+    margin-top: 12px;
+    font-family: monospace;
+    letter-spacing: 2px;
+    font-weight: bold;
+    animation: statusPulse 0.3s infinite alternate;
+  }
+
+  @keyframes statusPulse {
+    0% { letter-spacing: 2px; text-shadow: 0 0 5px #ff0066; }
+    100% { letter-spacing: 4px; text-shadow: 0 0 15px #ff0066; }
+  }
+
+  /* Percentage - Massive */
+  .takeover-percentage {
+    font-size: 56px;
+    font-weight: 900;
+    color: #ff0066;
+    text-align: center;
+    margin-top: 15px;
+    letter-spacing: 8px;
+    font-family: monospace;
+    text-shadow: 0 0 20px #ff0066, 0 0 40px #ff0066;
+    animation: percentRage 0.08s infinite;
+  }
+
+  @keyframes percentRage {
+    0%, 100% { transform: scale(1); text-shadow: 0 0 15px #ff0066; }
+    50% { transform: scale(1.05); text-shadow: 0 0 30px #ff0066; }
+  }
+
+  /* Glitch Overlay */
+  .glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 102, 0.05);
+    pointer-events: none;
+    z-index: 30;
+    animation: glitchFlash 0.1s infinite;
+  }
+
+  @keyframes glitchFlash {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.3; }
+  }
+
+  /* Random Static */
+  .static-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E');
+    pointer-events: none;
+    z-index: 31;
+    animation: staticFlicker 0.05s infinite;
+  }
+
+  @keyframes staticFlicker {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Random Explosion Particles */
+  .explosion-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ff0066;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 40;
+    animation: particleExplode 0.5s ease-out forwards;
+  }
+
+  @keyframes particleExplode {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0); }
   }
 </style>
 
-<div class="masterpiece-preloader" id="masterpiecePreloader">
-  <div class="grain-texture"></div>
+<div class="takeover-preloader" id="takeoverPreloader">
+  <canvas id="matrixRainCanvas" class="matrix-rain-canvas"></canvas>
+  <div class="crt-effect"></div>
+  <div class="scan-lines"></div>
+  <div class="glitch-overlay"></div>
+  <div class="static-overlay"></div>
   
-  <div class="masterpiece-container">
-    <!-- Floating 3D Geometry -->
-    <div class="floating-geometry">
-      <div class="geo-face geo-front"></div>
-      <div class="geo-face geo-back"></div>
-      <div class="geo-face geo-right"></div>
-      <div class="geo-face geo-left"></div>
-      <div class="geo-face geo-top"></div>
-      <div class="geo-face geo-bottom"></div>
-      <div class="inner-glow"></div>
-    </div>
-
-    <!-- Title -->
-    <div class="masterpiece-title">
-      <div class="name-title">ABDUL HANNAN</div>
-      <div class="role-title">FRONTEND ARCHITECT · FULL STACK ENGINEER</div>
-    </div>
-
-    <!-- Sparkle System -->
-    <div class="sparkle-system" id="sparkleSystem"></div>
-
-    <!-- Light Orbs -->
-    <div class="light-orb" style="top: 10%; left: -5%;"></div>
-    <div class="light-orb" style="bottom: 10%; right: -5%; animation-delay: 2s;"></div>
-    <div class="light-orb" style="top: 50%; right: 20%; width: 200px; height: 200px; animation-delay: 4s;"></div>
-
-    <!-- Stats - Right Side -->
-    <div class="stats-container">
-      <div class="stat-item"><span class="stat-number">50+</span> Projects Delivered</div>
-      <div class="stat-item"><span class="stat-number">5000+</span> Users Scaled</div>
-      <div class="stat-item"><span class="stat-number">4+</span> Years Experience</div>
-    </div>
-
-    <!-- Stats - Left Side -->
-    <div class="left-stats">
-      <div class="stat-item"><span class="stat-number">98%</span> Client Satisfaction</div>
-      <div class="stat-item"><span class="stat-number">24/7</span> Support</div>
-      <div class="stat-item"><span class="stat-number">∞</span> Passion</div>
-    </div>
-
-    <!-- Premium Progress -->
-    <div class="premium-progress">
-      <div class="progress-bar-premium">
-        <div class="progress-fill-premium" id="progressFillPremium"></div>
+  <div class="takeover-terminal">
+    <div class="takeover-header">
+      <div class="header-dots">
+        <div class="header-dot"></div>
+        <div class="header-dot"></div>
+        <div class="header-dot"></div>
       </div>
-      <div class="progress-label" id="progressLabel">INITIALIZING PORTFOLIO</div>
+      <div class="header-title">ROOT@SYSTEM:~# UNAUTHORIZED_ACCESS</div>
+    </div>
+    
+    <div class="takeover-content">
+      <div class="terminal-lines" id="terminalLines"></div>
+    </div>
+    
+    <div class="takeover-progress">
+      <div class="progress-container">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-status" id="progressStatus">[!] SYSTEM BREACH IN PROGRESS [!]</div>
+      <div class="takeover-percentage" id="takeoverPercentage">0%</div>
     </div>
   </div>
 </div>
 
 <script>
   (function() {
-    const preloader = document.getElementById('masterpiecePreloader');
-    const progressFill = document.getElementById('progressFillPremium');
-    const progressLabel = document.getElementById('progressLabel');
-    const sparkleSystem = document.getElementById('sparkleSystem');
+    // Matrix Rain Effect
+    const canvas = document.getElementById('matrixRainCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, columns, drops;
+    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン#%&@!$*+-=><";
     
-    let progress = 0;
-    const duration = 7000; // 7 seconds
-    const startTime = Date.now();
+    function setupMatrix() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      columns = Math.floor(width / 18);
+      drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.floor(Math.random() * -height);
+      }
+    }
     
-    // Progress labels sequence
-    const labels = [
-      "INITIALIZING PORTFOLIO",
-      "LOADING EXPERIENCE",
-      "PREPARING SHOWCASE",
-      "ALMOST READY",
-      "READY TO LAUNCH"
+    function drawMatrix() {
+      if (!ctx) return;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+      ctx.fillRect(0, 0, width, height);
+      
+      for (let i = 0; i < drops.length; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * 18;
+        const y = drops[i] * 18;
+        
+        ctx.fillStyle = Math.random() > 0.98 ? '#ff0066' : '#0326fc';
+        ctx.font = 'bold 15px monospace';
+        ctx.fillText(char, x, y);
+        
+        if (y > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+    
+    setupMatrix();
+    const matrixInterval = setInterval(drawMatrix, 30);
+    window.addEventListener('resize', () => setupMatrix());
+    
+    // Create random explosion
+    function createExplosion(x, y) {
+      for (let i = 0; i < 12; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'explosion-particle';
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 30 + Math.random() * 80;
+        const xMove = Math.cos(angle) * distance;
+        const yMove = Math.sin(angle) * distance;
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.setProperty('--x', xMove + 'px');
+        particle.style.setProperty('--y', yMove + 'px');
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 500);
+      }
+    }
+    
+    // Random explosions during preloader
+    setInterval(() => {
+      const randomX = Math.random() * window.innerWidth;
+      const randomY = Math.random() * window.innerHeight;
+      if (Math.random() > 0.85) createExplosion(randomX, randomY);
+    }, 400);
+    
+    // Terminal Lines
+    const terminalContainer = document.getElementById('terminalLines');
+    const progressFill = document.getElementById('progressFill');
+    const progressStatus = document.getElementById('progressStatus');
+    const percentageDisplay = document.getElementById('takeoverPercentage');
+    const preloader = document.getElementById('takeoverPreloader');
+    
+    // Brutal Terminal Sequence
+    const terminalSequence = [
+      { text: "> [!!!] UNAUTHORIZED ACCESS DETECTED [!!!]", type: "critical", delay: 80 },
+      { text: "> [!!!] SYSTEM BREACH IN PROGRESS [!!!]", type: "critical", delay: 90 },
+      { text: "> [!!!] FIREWALLS COMPROMISED [!!!]", type: "critical", delay: 85 },
+      { text: "", type: "empty", delay: 60 },
+      { text: "> [TARGET] ABDUL HANNAN // FRONTEND ARCHITECT", type: "warning", delay: 120 },
+      { text: "> [TARGET] FULL STACK ENGINEER // 50+ PROJECTS", type: "warning", delay: 110 },
+      { text: "> [TARGET] 5000+ USERS SCALED // 4+ YEARS EXP", type: "warning", delay: 115 },
+      { text: "", type: "empty", delay: 70 },
+      { text: "> [SKILL_MATRIX] DECRYPTING...", type: "prompt", delay: 100 },
+      { text: "> [✓] HTML/CSS/Tailwind ................ [98%] UNLOCKED", type: "success", delay: 80 },
+      { text: "> [✓] PHP/MySQL ...................... [98%] UNLOCKED", type: "success", delay: 80 },
+      { text: "> [✓] WordPress/Elementor ............. [90%] UNLOCKED", type: "success", delay: 80 },
+      { text: "> [✓] GSAP/Framer Motion .............. [85%] UNLOCKED", type: "success", delay: 80 },
+      { text: "> [✓] JavaScript/TypeScript ........... [82%] UNLOCKED", type: "success", delay: 80 },
+      { text: "", type: "empty", delay: 80 },
+      { text: "> [PROJECT_SCAN] IDENTIFYING ASSETS...", type: "prompt", delay: 130 },
+      { text: "> [!] TALENT TREE JOB PORTAL [5000+ USERS] - COMPROMISED", type: "critical", delay: 120 },
+      { text: "> [!] VOICE TO-DO LIST - COMPROMISED", type: "critical", delay: 100 },
+      { text: "> [!] ATTENDANCE MANAGEMENT SYSTEM - COMPROMISED", type: "critical", delay: 110 },
+      { text: "> [!] DAILY EXPENSE MANAGER - COMPROMISED", type: "critical", delay: 100 },
+      { text: "> [!] AI RESUME ANALYZER - COMPROMISED", type: "critical", delay: 115 },
+      { text: "", type: "empty", delay: 90 },
+      { text: "> [ROOT_ACCESS] BYPASSING FINAL LAYER...", type: "prompt", delay: 140 },
+      { text: "> [██████████████████████████████] 100%", type: "success", delay: 180 },
+      { text: "> [ACCESS] GRANTED. TOTAL CONTROL ACQUIRED.", type: "success", delay: 150 },
+      { text: "", type: "empty", delay: 100 },
+      { text: "╔══════════════════════════════════════════════════════════════╗", type: "critical", delay: 40 },
+      { text: "║  █████╗ ██████╗ ██████╗ ██╗   ██╗██╗     ██╗  ██╗ █████╗ ███╗   ██╗███╗   ██╗ █████╗ ███╗   ██╗ ║", type: "critical", delay: 60 },
+      { text: "║ ██╔══██╗██╔══██╗██╔══██╗██║   ██║██║     ██║  ██║██╔══██╗████╗  ██║████╗  ██║██╔══██╗████╗  ██║ ║", type: "critical", delay: 60 },
+      { text: "║ ███████║██████╔╝██║  ██║██║   ██║██║     ███████║███████║██╔██╗ ██║██╔██╗ ██║███████║██╔██╗ ██║ ║", type: "critical", delay: 60 },
+      { text: "║ ██╔══██║██╔══██╗██║  ██║██║   ██║██║     ██╔══██║██╔══██║██║╚██╗██║██║╚██╗██║██╔══██║██║╚██╗██║ ║", type: "critical", delay: 60 },
+      { text: "║ ██║  ██║██████╔╝██████╔╝╚██████╔╝███████╗██║  ██║██║  ██║██║ ╚████║██║ ╚████║██║  ██║██║ ╚████║ ║", type: "critical", delay: 60 },
+      { text: "║ ╚═╝  ╚═╝╚═════╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═══╝ ║", type: "critical", delay: 60 },
+      { text: "╚══════════════════════════════════════════════════════════════╝", type: "critical", delay: 40 },
+      { text: "", type: "empty", delay: 120 },
+      { text: "> [SYSTEM] ACCESS GRANTED. WELCOME.", type: "success", delay: 200 },
+      { text: "> [REDIRECT] LOADING PORTAL...", type: "prompt", delay: 250 }
     ];
     
-    let labelIndex = 0;
+    let currentLineIndex = 0;
+    let currentCharIndex = 0;
+    let currentLineText = "";
+    let currentType = "";
+    let isTyping = false;
+    let progressValue = 0;
+    let totalSteps = terminalSequence.length;
+    const startTime = Date.now();
+    const MAX_DURATION = 7000;
     
-    function updateLabel() {
-      if (labelIndex < labels.length) {
-        progressLabel.style.opacity = '0';
-        setTimeout(() => {
-          progressLabel.textContent = labels[labelIndex];
-          progressLabel.style.opacity = '1';
-        }, 150);
-        labelIndex++;
-      }
+    function addTerminalLine(text, type) {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = `terminal-line ${type}`;
+      lineDiv.textContent = text;
+      terminalContainer.appendChild(lineDiv);
+      terminalContainer.scrollTop = terminalContainer.scrollHeight;
+      return lineDiv;
     }
     
-    // Create sparkle effect
-    function createSparkle() {
-      const sparkle = document.createElement('div');
-      sparkle.className = 'sparkle';
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      sparkle.style.left = x + 'px';
-      sparkle.style.top = y + 'px';
-      sparkle.style.animation = `sparkleFade ${0.6 + Math.random() * 0.8}s ease-out forwards`;
-      sparkleSystem.appendChild(sparkle);
+    function typeLine(lineData) {
+      const { text, type, delay } = lineData;
+      currentLineText = text;
+      currentType = type;
+      currentCharIndex = 0;
+      isTyping = true;
       
-      setTimeout(() => sparkle.remove(), 800);
-    }
-    
-    // Sparkle animation
-    const sparkleStyle = document.createElement('style');
-    sparkleStyle.textContent = `
-      @keyframes sparkleFade {
-        0% { opacity: 1; transform: scale(1); width: 3px; height: 3px; }
-        100% { opacity: 0; transform: scale(0); width: 0; height: 0; }
-      }
-    `;
-    document.head.appendChild(sparkleStyle);
-    
-    // Continuous sparkles
-    const sparkleInterval = setInterval(() => {
-      if (!preloader.classList.contains('fade-out')) {
-        for (let i = 0; i < 3; i++) {
-          setTimeout(() => createSparkle(), i * 50);
+      const lineDiv = document.createElement('div');
+      lineDiv.className = `terminal-line ${type}`;
+      lineDiv.textContent = "";
+      terminalContainer.appendChild(lineDiv);
+      
+      function typeNextChar() {
+        if (currentCharIndex < currentLineText.length) {
+          lineDiv.textContent += currentLineText[currentCharIndex];
+          currentCharIndex++;
+          terminalContainer.scrollTop = terminalContainer.scrollHeight;
+          setTimeout(typeNextChar, 12 + Math.random() * 8);
+        } else {
+          lineDiv.classList.add('revealed');
+          isTyping = false;
+          currentLineIndex++;
+          
+          const elapsed = Date.now() - startTime;
+          const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+          const lineProgress = (currentLineIndex / totalSteps) * 100;
+          progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+          
+          progressFill.style.width = progressValue + '%';
+          percentageDisplay.textContent = Math.floor(progressValue) + '%';
+          
+          if (progressValue < 20) progressStatus.textContent = "[!] BREACHING FIREWALLS [!]";
+          else if (progressValue < 40) progressStatus.textContent = "[#] CRACKING ENCRYPTION [#]";
+          else if (progressValue < 60) progressStatus.textContent = "[*] DECRYPTING USER DATA [*]";
+          else if (progressValue < 80) progressStatus.textContent = "[!] INJECTING PAYLOAD [!]";
+          else progressStatus.textContent = "[✓] SYSTEM TAKEOVER COMPLETE [✓]";
+          
+          // Random explosion on progress
+          if (Math.random() > 0.6) {
+            const randomX = Math.random() * window.innerWidth;
+            const randomY = Math.random() * window.innerHeight;
+            createExplosion(randomX, randomY);
+          }
+          
+          setTimeout(processNextLine, delay);
         }
       }
-    }, 300);
+      
+      typeNextChar();
+    }
     
-    // Particle burst at milestones
-    function createSparkleBurst() {
+    function processNextLine() {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= MAX_DURATION) {
+        completePreloader();
+        return;
+      }
+      
+      if (currentLineIndex >= terminalSequence.length) {
+        completePreloader();
+        return;
+      }
+      
+      const lineData = terminalSequence[currentLineIndex];
+      
+      if (lineData.text === "") {
+        addTerminalLine("", lineData.type);
+        currentLineIndex++;
+        const elapsed = Date.now() - startTime;
+        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+        const lineProgress = (currentLineIndex / totalSteps) * 100;
+        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressFill.style.width = progressValue + '%';
+        percentageDisplay.textContent = Math.floor(progressValue) + '%';
+        setTimeout(processNextLine, lineData.delay);
+      } else if (lineData.type === "critical" || lineData.type === "success" || lineData.type === "warning") {
+        addTerminalLine(lineData.text, lineData.type);
+        currentLineIndex++;
+        const elapsed = Date.now() - startTime;
+        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+        const lineProgress = (currentLineIndex / totalSteps) * 100;
+        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressFill.style.width = progressValue + '%';
+        percentageDisplay.textContent = Math.floor(progressValue) + '%';
+        setTimeout(processNextLine, lineData.delay);
+      } else if (lineData.type === "prompt") {
+        typeLine(lineData);
+      }
+    }
+    
+    function completePreloader() {
+      progressFill.style.width = '100%';
+      percentageDisplay.textContent = '100%';
+      progressStatus.textContent = "[✓] SYSTEM TAKEOVER COMPLETE [✓]";
+      
+      // Final explosion
       for (let i = 0; i < 30; i++) {
         setTimeout(() => {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const angle = Math.random() * Math.PI * 2;
-          const distance = 100 + Math.random() * 150;
-          const centerX = window.innerWidth / 2;
-          const centerY = window.innerHeight / 2;
-          sparkle.style.left = centerX + Math.cos(angle) * distance + 'px';
-          sparkle.style.top = centerY + Math.sin(angle) * distance + 'px';
-          sparkle.style.animation = `sparkleFade 0.8s ease-out forwards`;
-          sparkleSystem.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 800);
-        }, i * 15);
+          const randomX = Math.random() * window.innerWidth;
+          const randomY = Math.random() * window.innerHeight;
+          createExplosion(randomX, randomY);
+        }, i * 30);
       }
-    }
-    
-    // Update Progress
-    function updateProgress() {
-      const elapsed = Date.now() - startTime;
-      progress = Math.min(100, (elapsed / duration) * 100);
-      
-      progressFill.style.width = progress + '%';
-      
-      // Update label based on progress
-      if (progress >= 20 && progress < 40 && labelIndex === 1) updateLabel();
-      else if (progress >= 40 && progress < 60 && labelIndex === 2) updateLabel();
-      else if (progress >= 60 && progress < 80 && labelIndex === 3) updateLabel();
-      else if (progress >= 80 && labelIndex === 4) updateLabel();
-      
-      // Milestone effects
-      if (progress >= 25 && progress < 26) {
-        createSparkleBurst();
-        const geometry = document.querySelector('.floating-geometry');
-        geometry.style.animation = 'floatGeometry 4s ease-in-out infinite';
-      }
-      if (progress >= 50 && progress < 51) {
-        createSparkleBurst();
-        const orbs = document.querySelectorAll('.light-orb');
-        orbs.forEach(orb => orb.style.animationDuration = '5s');
-      }
-      if (progress >= 75 && progress < 76) {
-        createSparkleBurst();
-        const title = document.querySelector('.name-title');
-        title.style.animation = 'none';
-        title.offsetHeight;
-        title.style.animation = 'textReveal 0.6s ease-out forwards';
-      }
-      
-      if (progress < 100) {
-        requestAnimationFrame(updateProgress);
-      } else {
-        completePreloader();
-      }
-    }
-    
-    // Start first label
-    setTimeout(() => updateLabel(), 200);
-    
-    // Start progress
-    requestAnimationFrame(updateProgress);
-    
-    // Complete Preloader
-    function completePreloader() {
-      // Final sparkle explosion
-      for (let i = 0; i < 60; i++) {
-        setTimeout(() => {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const angle = Math.random() * Math.PI * 2;
-          const distance = 80 + Math.random() * 120;
-          const centerX = window.innerWidth / 2;
-          const centerY = window.innerHeight / 2;
-          sparkle.style.left = centerX + Math.cos(angle) * distance + 'px';
-          sparkle.style.top = centerY + Math.sin(angle) * distance + 'px';
-          sparkle.style.width = '4px';
-          sparkle.style.height = '4px';
-          sparkle.style.background = '#0326fc';
-          sparkle.style.animation = `sparkleFade 0.5s ease-out forwards`;
-          sparkleSystem.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 500);
-        }, i * 8);
-      }
-      
-      // Final label
-      progressLabel.textContent = "WELCOME";
       
       setTimeout(() => {
         preloader.classList.add('fade-out');
         setTimeout(() => {
           preloader.style.display = 'none';
-          clearInterval(sparkleInterval);
-        }, 1200);
-      }, 400);
+          clearInterval(matrixInterval);
+          document.body.style.overflow = '';
+        }, 800);
+      }, 500);
     }
     
-    // Lock body during preloader
+    setTimeout(processNextLine, 200);
+    
+    // Lock body
     document.body.style.overflow = 'hidden';
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.body.style.overflow = '';
-      }, 8000);
-    });
   })();
 </script>
 
