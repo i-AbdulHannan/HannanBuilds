@@ -101,416 +101,513 @@
 </head>
 <body>
   <!-- ============================================ -->
-<!-- ELITE MINIMALIST PRE-LOADER - 7 SECONDS MAX -->
+// CINEMATIC MASTERPIECE PRELOADER
+// "YEH KYA BANAYA HAI" - HAR KOI YAHI BOLEGA
+// 7 SECONDS OF PURE ART
 <!-- ============================================ -->
 <style>
-  /* Minimalist Preloader - Pure Power */
-  .elite-preloader {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .cinematic-preloader {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000000;
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
     z-index: 99999;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    justify-content: center;
+    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
   }
-  
-  .elite-preloader.fade-out {
+
+  .cinematic-preloader.fade-out {
     opacity: 0;
     pointer-events: none;
   }
-  
-  /* Central Terminal - Clean & Powerful */
-  .elite-terminal {
+
+  /* 3D Perspective Container */
+  .cinematic-container {
     position: relative;
-    width: 90%;
-    max-width: 700px;
-    z-index: 10;
-    border-left: 3px solid #0326fc;
-    padding-left: 30px;
-    animation: terminalBreath 2s ease-in-out infinite;
-  }
-  
-  @keyframes terminalBreath {
-    0%, 100% { border-left-color: #0326fc; opacity: 0.9; }
-    50% { border-left-color: #ffffff; opacity: 1; }
-  }
-  
-  /* Typing Line */
-  .elite-line {
-    font-family: 'Courier New', 'Space Grotesk', monospace;
-    font-size: 14px;
-    letter-spacing: 1px;
-    line-height: 2;
-    color: #ffffff;
-    opacity: 0;
-    transform: translateX(-15px);
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  
-  @media (max-width: 768px) {
-    .elite-line { font-size: 11px; white-space: normal; word-break: break-word; }
-    .elite-terminal { padding-left: 20px; }
-  }
-  
-  .elite-line.revealed {
-    opacity: 1;
-    transform: translateX(0);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  .elite-line.prompt { color: #0326fc; }
-  .elite-line.success { color: #ffffff; letter-spacing: 2px; }
-  .elite-line.command { color: #888888; font-size: 12px; }
-  
-  /* Progress Bar - Ultra Clean */
-  .elite-progress {
-    margin-top: 40px;
-    width: 90%;
-    max-width: 500px;
-  }
-  
-  .progress-track {
     width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-    position: relative;
-  }
-  
-  .progress-fill {
-    width: 0%;
     height: 100%;
-    background: #0326fc;
-    transition: width 0.08s linear;
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
   }
-  
-  .progress-fill::after {
-    content: '';
+
+  /* Main Floating Cube - 3D Masterpiece */
+  .floating-cube {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    transform-style: preserve-3d;
+    animation: cubeSpin 8s infinite linear;
+  }
+
+  @keyframes cubeSpin {
+    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+  }
+
+  .cube-face {
     position: absolute;
-    right: -4px;
-    top: -3px;
-    width: 6px;
-    height: 6px;
+    width: 180px;
+    height: 180px;
+    background: rgba(3, 38, 252, 0.15);
+    border: 2px solid #0326fc;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 30px rgba(3, 38, 252, 0.5);
+  }
+
+  .cube-front { transform: translateZ(90px); }
+  .cube-back { transform: translateZ(-90px) rotateY(180deg); }
+  .cube-right { transform: translateX(90px) rotateY(90deg); }
+  .cube-left { transform: translateX(-90px) rotateY(-90deg); }
+  .cube-top { transform: translateY(-90px) rotateX(90deg); }
+  .cube-bottom { transform: translateY(90px) rotateX(-90deg); }
+
+  /* Glowing Core */
+  .core-glow {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #0326fc, transparent);
+    border-radius: 50%;
+    filter: blur(25px);
+    animation: corePulse 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes corePulse {
+    0% { opacity: 0.4; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+  }
+
+  /* Main Title - Cinematic */
+  .cinematic-title {
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    animation: titleReveal 1s ease-out forwards;
+  }
+
+  @keyframes titleReveal {
+    0% { opacity: 0; transform: translateY(50px) scale(0.8); letter-spacing: 20px; filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 4px; filter: blur(0); }
+  }
+
+  .cinematic-title h1 {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #0326fc 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .cinematic-title p {
+    font-family: monospace;
+    color: #0326fc;
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    margin-top: 15px;
+  }
+
+  /* Particle Explosion System */
+  .particle-system {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
     background: #0326fc;
     border-radius: 50%;
     opacity: 0;
-    animation: dotPulse 0.5s infinite;
+    box-shadow: 0 0 10px #0326fc;
   }
-  
-  @keyframes dotPulse {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.5); }
+
+  /* Light Beams */
+  .light-beam {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, #0326fc 100%);
+    opacity: 0;
+    animation: beamFlash 2s ease-in-out infinite;
+    pointer-events: none;
   }
-  
-  /* Percentage - Clean Typography */
-  .elite-percentage {
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
+
+  @keyframes beamFlash {
+    0%, 100% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 0.15; transform: scale(1); }
+  }
+
+  /* Energy Wave Ring */
+  .energy-ring {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid #0326fc;
+    border-radius: 50%;
+    opacity: 0;
+    animation: ringExpand 2s ease-out infinite;
+  }
+
+  @keyframes ringExpand {
+    0% { width: 100px; height: 100px; opacity: 0.8; }
+    100% { width: 500px; height: 500px; opacity: 0; }
+  }
+
+  /* Text Particles - Floating Letters */
+  .float-letter {
+    position: absolute;
+    font-family: monospace;
+    font-size: 12px;
     color: #0326fc;
+    opacity: 0;
+    font-weight: bold;
+    pointer-events: none;
+  }
+
+  /* Progress - Ultra Smooth */
+  .cinematic-progress {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
     text-align: center;
-    margin-top: 20px;
+    z-index: 20;
+  }
+
+  .progress-ring {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+  }
+
+  .progress-ring svg {
+    transform: rotate(-90deg);
+  }
+
+  .progress-ring circle {
+    fill: none;
+    stroke: #0326fc;
+    stroke-width: 2;
+    stroke-dasharray: 188;
+    stroke-dashoffset: 188;
+    transition: stroke-dashoffset 0.05s linear;
+  }
+
+  .progress-percent {
+    font-family: monospace;
+    color: #0326fc;
+    font-size: 14px;
     letter-spacing: 2px;
   }
-  
-  /* Subtle Matrix Rain - Very Minimal */
-  .matrix-minimal {
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cinematic-title h1 { font-size: 2rem; letter-spacing: 2px; }
+    .floating-cube { width: 120px; height: 120px; }
+    .cube-face { width: 120px; height: 120px; }
+    .cube-front { transform: translateZ(60px); }
+    .cube-back { transform: translateZ(-60px) rotateY(180deg); }
+    .cube-right { transform: translateX(60px) rotateY(90deg); }
+    .cube-left { transform: translateX(-60px) rotateY(-90deg); }
+    .cube-top { transform: translateY(-60px) rotateX(90deg); }
+    .cube-bottom { transform: translateY(60px) rotateX(-90deg); }
+  }
+
+  /* Cinematic Grain Effect */
+  .grain {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.08;
+    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.05"/%3E%3C/svg%3E');
     pointer-events: none;
-    z-index: 0;
-  }
-  
-  /* Scan Line - One Clean Line */
-  .scan-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #0326fc;
+    z-index: 100;
     opacity: 0.3;
-    animation: scanMove 3s linear infinite;
-    pointer-events: none;
-    z-index: 5;
-  }
-  
-  @keyframes scanMove {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100vh); }
-  }
-  
-  /* Glitch Effect - Rare & Powerful */
-  .glitch {
-    animation: subtleGlitch 0.1s ease-in-out;
-  }
-  
-  @keyframes subtleGlitch {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(-1px, 0); }
-    75% { transform: translate(1px, 0); }
   }
 </style>
 
-<div class="elite-preloader" id="elitePreloader">
-  <canvas id="matrixMinimal" class="matrix-minimal"></canvas>
-  <div class="scan-line"></div>
-  
-  <div class="elite-terminal">
-    <div id="terminalLines"></div>
-  </div>
-  
-  <div class="elite-progress">
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
+<div class="cinematic-preloader" id="cinematicPreloader">
+  <div class="grain"></div>
+  <div class="cinematic-container">
+    <!-- 3D Cube -->
+    <div class="floating-cube">
+      <div class="cube-face cube-front"></div>
+      <div class="cube-face cube-back"></div>
+      <div class="cube-face cube-right"></div>
+      <div class="cube-face cube-left"></div>
+      <div class="cube-face cube-top"></div>
+      <div class="cube-face cube-bottom"></div>
+      <div class="core-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
     </div>
-    <div class="elite-percentage" id="elitePercentage">0%</div>
+
+    <!-- Cinematic Title -->
+    <div class="cinematic-title">
+      <h1 id="mainTitle">HANNAN</h1>
+      <p id="subtitle">// LOADING EXPERIENCE</p>
+    </div>
+
+    <!-- Particle System -->
+    <div class="particle-system" id="particleSystem"></div>
+
+    <!-- Light Beam -->
+    <div class="light-beam"></div>
+
+    <!-- Energy Rings -->
+    <div class="energy-ring" style="animation-delay: 0s;"></div>
+    <div class="energy-ring" style="animation-delay: 0.6s;"></div>
+    <div class="energy-ring" style="animation-delay: 1.2s;"></div>
+
+    <!-- Progress -->
+    <div class="cinematic-progress">
+      <div class="progress-ring">
+        <svg width="60" height="60">
+          <circle cx="30" cy="30" r="30" stroke="rgba(3,38,252,0.3)" stroke-width="2" fill="none"/>
+          <circle id="progressCircle" cx="30" cy="30" r="30" stroke="#0326fc" stroke-width="2" fill="none" stroke-dasharray="188" stroke-dashoffset="188"/>
+        </svg>
+      </div>
+      <div class="progress-percent" id="progressPercent">0%</div>
+    </div>
   </div>
 </div>
 
 <script>
   (function() {
-    // Minimal Matrix Effect - Very Subtle
-    const canvas = document.getElementById('matrixMinimal');
-    const ctx = canvas.getContext('2d');
+    const preloader = document.getElementById('cinematicPreloader');
+    const progressCircle = document.getElementById('progressCircle');
+    const progressPercent = document.getElementById('progressPercent');
+    const mainTitle = document.getElementById('mainTitle');
+    const subtitle = document.getElementById('subtitle');
+    const particleSystem = document.getElementById('particleSystem');
     
-    let width, height, columns, drops;
-    const chars = "01";
+    let progress = 0;
+    const duration = 7000; // 7 seconds
+    const startTime = Date.now();
     
-    function setupMatrix() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      columns = Math.floor(width / 25);
-      drops = [];
-      for (let i = 0; i < columns; i++) {
-        drops[i] = Math.floor(Math.random() * -height);
-      }
-    }
-    
-    function drawMatrix() {
-      if (!ctx) return;
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, width, height);
-      ctx.fillStyle = '#0326fc';
-      ctx.font = '12px monospace';
-      
-      for (let i = 0; i < drops.length; i++) {
-        const char = chars[Math.floor(Math.random() * chars.length)];
-        const x = i * 25;
-        const y = drops[i] * 20;
-        ctx.fillText(char, x, y);
-        
-        if (y > height && Math.random() > 0.98) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-    
-    setupMatrix();
-    const matrixInterval = setInterval(drawMatrix, 50);
-    window.addEventListener('resize', () => setupMatrix());
-    
-    // Terminal Lines Container
-    const terminalContainer = document.getElementById('terminalLines');
-    const progressFill = document.getElementById('progressFill');
-    const percentageDisplay = document.getElementById('elitePercentage');
-    const preloader = document.getElementById('elitePreloader');
-    
-    // Clean Terminal Sequence - 7 Seconds Total
-    const terminalSequence = [
-      { text: "$ whoami", type: "prompt", delay: 200 },
-      { text: "abdul_hannan", type: "success", delay: 300 },
-      { text: "", type: "empty", delay: 100 },
-      { text: "$ pwd", type: "prompt", delay: 200 },
-      { text: "/home/abdul_hannan/portfolio", type: "success", delay: 250 },
-      { text: "", type: "empty", delay: 100 },
-      { text: "$ ls -la skills/", type: "prompt", delay: 200 },
-      { text: "HTML/CSS/Tailwind     [98%]", type: "command", delay: 150 },
-      { text: "PHP/MySQL            [98%]", type: "command", delay: 150 },
-      { text: "WordPress/Elementor  [90%]", type: "command", delay: 150 },
-      { text: "GSAP/Framer Motion   [85%]", type: "command", delay: 150 },
-      { text: "JavaScript/TypeScript[82%]", type: "command", delay: 150 },
-      { text: "", type: "empty", delay: 100 },
-      { text: "$ cat projects.md", type: "prompt", delay: 200 },
-      { text: "→ Talent Tree Job Portal (5000+ users)", type: "command", delay: 180 },
-      { text: "→ Voice To-Do List", type: "command", delay: 150 },
-      { text: "→ Attendance Management System", type: "command", delay: 150 },
-      { text: "→ Daily Expense Manager", type: "command", delay: 150 },
-      { text: "→ AI Resume Analyzer", type: "command", delay: 180 },
-      { text: "", type: "empty", delay: 100 },
-      { text: "$ echo $STATUS", type: "prompt", delay: 200 },
-      { text: "FRONTEND_ARCHITECT | FULL_STACK_ENGINEER", type: "success", delay: 250 },
-      { text: "", type: "empty", delay: 100 },
-      { text: "$ ./initialize_portfolio", type: "prompt", delay: 300 },
-      { text: "✓ System ready.", type: "success", delay: 200 },
-      { text: "→ Loading interface...", type: "command", delay: 400 }
+    // Title Animation Sequence
+    const titles = [
+      { main: "HANNAN", sub: "// LOADING EXPERIENCE", delay: 0 },
+      { main: "BUILDER", sub: "// 50+ PROJECTS DELIVERED", delay: 1800 },
+      { main: "ARCHITECT", sub: "// 5000+ USERS SCALED", delay: 3600 },
+      { main: "READY", sub: "// INITIATE PORTAL", delay: 5400 }
     ];
     
-    let currentLineIndex = 0;
-    let currentCharIndex = 0;
-    let currentLineText = "";
-    let currentType = "";
-    let isTyping = false;
-    let progressValue = 0;
-    let totalSteps = terminalSequence.length;
+    let titleIndex = 0;
     
-    // Calculate total time to ensure 7 seconds max
-    const startTime = Date.now();
-    const MAX_DURATION = 7000; // 7 seconds
-    
-    function addTerminalLine(text, type) {
-      const lineDiv = document.createElement('div');
-      lineDiv.className = `elite-line ${type}`;
-      lineDiv.textContent = text;
-      terminalContainer.appendChild(lineDiv);
-      lineDiv.classList.add('revealed');
-      terminalContainer.scrollTop = terminalContainer.scrollHeight;
-      return lineDiv;
-    }
-    
-    function typeLine(lineData) {
-      const { text, type, delay } = lineData;
-      currentLineText = text;
-      currentType = type;
-      currentCharIndex = 0;
-      isTyping = true;
-      
-      const lineDiv = document.createElement('div');
-      lineDiv.className = `elite-line ${type}`;
-      lineDiv.textContent = "";
-      terminalContainer.appendChild(lineDiv);
-      
-      function typeNextChar() {
-        if (currentCharIndex < currentLineText.length) {
-          lineDiv.textContent += currentLineText[currentCharIndex];
-          currentCharIndex++;
-          terminalContainer.scrollTop = terminalContainer.scrollHeight;
-          setTimeout(typeNextChar, 20 + Math.random() * 15);
-        } else {
-          lineDiv.classList.add('revealed');
-          isTyping = false;
-          currentLineIndex++;
-          
-          // Update progress based on time and line index
-          const elapsed = Date.now() - startTime;
-          const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-          const lineProgress = (currentLineIndex / totalSteps) * 100;
-          progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
-          
-          progressFill.style.width = progressValue + '%';
-          percentageDisplay.textContent = Math.floor(progressValue) + '%';
-          
-          setTimeout(processNextLine, delay);
-        }
+    function updateTitle() {
+      if (titleIndex < titles.length) {
+        const current = titles[titleIndex];
+        mainTitle.style.opacity = '0';
+        subtitle.style.opacity = '0';
+        
+        setTimeout(() => {
+          mainTitle.textContent = current.main;
+          subtitle.textContent = current.sub;
+          mainTitle.style.animation = 'none';
+          subtitle.style.animation = 'none';
+          mainTitle.offsetHeight;
+          subtitle.offsetHeight;
+          mainTitle.style.animation = 'titleReveal 0.6s ease-out forwards';
+          subtitle.style.animation = 'titleReveal 0.6s ease-out forwards 0.1s';
+        }, 200);
+        
+        titleIndex++;
       }
-      
-      typeNextChar();
     }
     
-    function processNextLine() {
-      // Force complete at 7 seconds
+    // Create Particle Explosion Effect
+    function createParticleBurst() {
+      const particleCount = 40;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 150 + Math.random() * 200;
+        const x = window.innerWidth / 2 + Math.cos(angle) * distance;
+        const y = window.innerHeight / 2 + Math.sin(angle) * distance;
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.animation = `particleExplode 0.8s ease-out forwards`;
+        particleSystem.appendChild(particle);
+        
+        setTimeout(() => particle.remove(), 800);
+      }
+    }
+    
+    // Particle animation keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes particleExplode {
+        0% { opacity: 1; transform: scale(1); width: 4px; height: 4px; }
+        100% { opacity: 0; transform: scale(0); width: 0; height: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Floating Letters Animation
+    function createFloatingLetters() {
+      const letters = ['<', '/', '>', '{', '}', '(', ')', ';', '$', '#', '!', '&', '0', '1'];
+      for (let i = 0; i < 25; i++) {
+        const letter = document.createElement('div');
+        letter.className = 'float-letter';
+        letter.textContent = letters[Math.floor(Math.random() * letters.length)];
+        letter.style.left = Math.random() * window.innerWidth + 'px';
+        letter.style.top = Math.random() * window.innerHeight + 'px';
+        letter.style.animation = `floatLetter ${3 + Math.random() * 4}s ease-in-out infinite`;
+        letter.style.animationDelay = Math.random() * 3 + 's';
+        document.body.appendChild(letter);
+        
+        setTimeout(() => letter.remove(), 7000);
+      }
+    }
+    
+    // Floating animation
+    const floatStyle = document.createElement('style');
+    floatStyle.textContent = `
+      @keyframes floatLetter {
+        0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+        10% { opacity: 0.6; }
+        50% { opacity: 0.8; transform: translateY(-50px) rotate(180deg); }
+        90% { opacity: 0.4; }
+        100% { opacity: 0; transform: translateY(-100px) rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(floatStyle);
+    
+    // Update Progress
+    function updateProgress() {
       const elapsed = Date.now() - startTime;
-      if (elapsed >= MAX_DURATION) {
+      progress = Math.min(100, (elapsed / duration) * 100);
+      
+      const circumference = 188;
+      const offset = circumference - (progress / 100) * circumference;
+      progressCircle.style.strokeDashoffset = offset;
+      progressPercent.textContent = Math.floor(progress) + '%';
+      
+      if (progress < 100) {
+        requestAnimationFrame(updateProgress);
+      } else {
         completePreloader();
-        return;
-      }
-      
-      if (currentLineIndex >= terminalSequence.length) {
-        completePreloader();
-        return;
-      }
-      
-      const lineData = terminalSequence[currentLineIndex];
-      
-      if (lineData.text === "") {
-        addTerminalLine("", lineData.type);
-        currentLineIndex++;
-        
-        const elapsed = Date.now() - startTime;
-        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-        const lineProgress = (currentLineIndex / totalSteps) * 100;
-        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
-        
-        progressFill.style.width = progressValue + '%';
-        percentageDisplay.textContent = Math.floor(progressValue) + '%';
-        
-        setTimeout(processNextLine, lineData.delay);
-      } else if (lineData.type === "success" || lineData.type === "command") {
-        addTerminalLine(lineData.text, lineData.type);
-        currentLineIndex++;
-        
-        const elapsed = Date.now() - startTime;
-        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-        const lineProgress = (currentLineIndex / totalSteps) * 100;
-        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
-        
-        progressFill.style.width = progressValue + '%';
-        percentageDisplay.textContent = Math.floor(progressValue) + '%';
-        
-        setTimeout(processNextLine, lineData.delay);
-      } else if (lineData.type === "prompt") {
-        typeLine(lineData);
       }
     }
     
+    // Trigger effects at specific progress points
+    let effectsTriggered = {
+      at20: false,
+      at40: false,
+      at60: false,
+      at80: false
+    };
+    
+    function checkEffects() {
+      if (progress >= 20 && !effectsTriggered.at20) {
+        effectsTriggered.at20 = true;
+        createParticleBurst();
+        createFloatingLetters();
+      }
+      if (progress >= 40 && !effectsTriggered.at40) {
+        effectsTriggered.at40 = true;
+        createParticleBurst();
+        const cube = document.querySelector('.floating-cube');
+        cube.style.animationDuration = '4s';
+      }
+      if (progress >= 60 && !effectsTriggered.at60) {
+        effectsTriggered.at60 = true;
+        createParticleBurst();
+        const rings = document.querySelectorAll('.energy-ring');
+        rings.forEach(ring => ring.style.animationDuration = '1s');
+      }
+      if (progress >= 80 && !effectsTriggered.at80) {
+        effectsTriggered.at80 = true;
+        createParticleBurst();
+        createFloatingLetters();
+      }
+    }
+    
+    // Update progress with effects
+    const originalUpdate = updateProgress;
+    window.updateProgress = function() {
+      originalUpdate();
+      checkEffects();
+    };
+    
+    // Title timing
+    setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= 1800 && elapsed < 3600 && titleIndex === 1) updateTitle();
+      else if (elapsed >= 3600 && elapsed < 5400 && titleIndex === 2) updateTitle();
+      else if (elapsed >= 5400 && titleIndex === 3) updateTitle();
+    }, 100);
+    
+    // First title
+    setTimeout(() => updateTitle(), 100);
+    
+    // Start progress
+    requestAnimationFrame(updateProgress);
+    
+    // Complete Preloader
     function completePreloader() {
-      // Force 100%
-      progressFill.style.width = '100%';
-      percentageDisplay.textContent = '100%';
+      // Final particle explosion
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => createParticleBurst(), i * 20);
+      }
       
-      // Add final glitch effect
-      const percentEl = document.getElementById('elitePercentage');
-      percentEl.classList.add('glitch');
+      // Final title
+      mainTitle.style.animation = 'none';
+      subtitle.style.animation = 'none';
+      mainTitle.textContent = "ENTER";
+      subtitle.textContent = "// ACCESS GRANTED";
+      mainTitle.style.animation = 'titleReveal 0.5s ease-out forwards';
+      subtitle.style.animation = 'titleReveal 0.5s ease-out forwards 0.1s';
+      
+      // Final glow
+      const core = document.querySelector('.core-glow');
+      core.style.animation = 'corePulse 0.2s ease-in-out infinite alternate';
       
       setTimeout(() => {
         preloader.classList.add('fade-out');
         setTimeout(() => {
           preloader.style.display = 'none';
-          clearInterval(matrixInterval);
-        }, 600);
-      }, 300);
+        }, 1200);
+      }, 800);
     }
     
-    // Start sequence
-    setTimeout(processNextLine, 100);
-    
-    // Force complete after 7 seconds
-    setTimeout(() => {
-      completePreloader();
-    }, MAX_DURATION);
-    
-    // Rare glitch effect on percentage
-    setInterval(() => {
-      const percentEl = document.getElementById('elitePercentage');
-      if (percentEl && !preloader.classList.contains('fade-out')) {
-        if (Math.random() > 0.92) {
-          percentEl.classList.add('glitch');
-          setTimeout(() => percentEl.classList.remove('glitch'), 150);
-        }
-      }
-    }, 800);
-    
-    // Lock body during preloader
+    // Lock body
     document.body.style.overflow = 'hidden';
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.body.style.overflow = '';
-      }, MAX_DURATION + 500);
+      }, 8000);
     });
+    
+    // Add floating particles continuously
+    setInterval(() => {
+      if (!preloader.classList.contains('fade-out')) {
+        if (Math.random() > 0.7) createFloatingLetters();
+      }
+    }, 1500);
   })();
 </script>
 
