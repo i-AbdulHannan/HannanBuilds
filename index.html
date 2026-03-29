@@ -100,516 +100,599 @@
   </style>
 </head>
 <body>
-  <!-- ============================================ -->
-// CINEMATIC MASTERPIECE PRELOADER
-// PROFESSIONAL · PREMIUM · ADDICTIVE
-// "YEH KYA BANAYA HAI" - HAR KOI YAHI BOLEGA
-// 7 SECONDS OF PURE ART
-<!-- ============================================ -->
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+    }
 
-  .masterpiece-preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0f;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
-  }
+    body {
+      overflow: hidden;
+      background: #000;
+    }
 
-  .masterpiece-preloader.fade-out {
-    opacity: 0;
-    pointer-events: none;
-  }
+    /* MAIN PRELOADER */
+    .analog-preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      z-index: 99999;
+      transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
 
-  /* 3D Perspective Container */
-  .masterpiece-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1200px;
-  }
+    .analog-preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-  /* Main Floating Geometric Shape */
-  .floating-geometry {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    transform-style: preserve-3d;
-    animation: floatGeometry 6s ease-in-out infinite;
-  }
+    /* ========== VHS TAPE NOISE ========== */
+    .vhs-noise {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E');
+      pointer-events: none;
+      z-index: 2;
+      animation: noiseShift 0.15s steps(2) infinite;
+    }
 
-  @keyframes floatGeometry {
-    0%, 100% { transform: rotateX(20deg) rotateY(25deg) translateY(0); }
-    50% { transform: rotateX(25deg) rotateY(30deg) translateY(-15px); }
-  }
+    @keyframes noiseShift {
+      0% { transform: translate(0, 0); opacity: 0.2; }
+      100% { transform: translate(2px, -1px); opacity: 0.3; }
+    }
 
-  .geo-face {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: rgba(3, 38, 252, 0.08);
-    border: 1px solid rgba(3, 38, 252, 0.3);
-    backdrop-filter: blur(2px);
-  }
+    /* ========== VHS TRACKING LINES ========== */
+    .tracking-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg, 
+        rgba(0,0,0,0.8) 0px, 
+        rgba(0,0,0,0.8) 2px, 
+        transparent 2px, 
+        transparent 8px);
+      pointer-events: none;
+      z-index: 3;
+      animation: trackingMove 0.3s linear infinite;
+    }
 
-  .geo-front { transform: translateZ(100px); }
-  .geo-back { transform: translateZ(-100px) rotateY(180deg); }
-  .geo-right { transform: translateX(100px) rotateY(90deg); }
-  .geo-left { transform: translateX(-100px) rotateY(-90deg); }
-  .geo-top { transform: translateY(-100px) rotateX(90deg); }
-  .geo-bottom { transform: translateY(100px) rotateX(-90deg); }
+    @keyframes trackingMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(4px); }
+    }
 
-  /* Inner Glow */
-  .inner-glow {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, #0326fc 0%, transparent 70%);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(20px);
-    animation: glowPulse 2s ease-in-out infinite;
-  }
+    /* ========== VHS HEAD SWITCHING EFFECT ========== */
+    .head-switch {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30%;
+      background: linear-gradient(to bottom, 
+        rgba(255,255,255,0.3) 0%, 
+        transparent 30%);
+      animation: headSwitch 0.2s steps(2) infinite;
+      pointer-events: none;
+      z-index: 4;
+    }
 
-  @keyframes glowPulse {
-    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
-    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
-  }
+    @keyframes headSwitch {
+      0% { transform: translateY(-100%); opacity: 0; }
+      50% { transform: translateY(0); opacity: 0.5; }
+      100% { transform: translateY(-100%); opacity: 0; }
+    }
 
-  /* Main Title - Cinematic Typography */
-  .masterpiece-title {
-    position: absolute;
-    text-align: center;
-    z-index: 10;
-    top: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-  }
+    /* ========== CRT CURVATURE ========== */
+    .crt-curve {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(ellipse at center, 
+        transparent 60%, 
+        rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+      z-index: 10;
+    }
 
-  .name-title {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 4.5rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    background: linear-gradient(135deg, #ffffff 0%, #0326fc 60%, #ffffff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    opacity: 0;
-    animation: textReveal 0.8s ease-out forwards;
-    white-space: nowrap;
-  }
+    /* ========== SCANLINES - SLOW & HAUNTING ========== */
+    .haunt-scan {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.3);
+      filter: blur(2px);
+      animation: hauntScan 8s linear infinite;
+      pointer-events: none;
+      z-index: 11;
+    }
 
-  .role-title {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 4px;
-    margin-top: 15px;
-    opacity: 0;
-    animation: textReveal 0.8s ease-out 0.2s forwards;
-  }
+    @keyframes hauntScan {
+      0% { transform: translateY(-100%); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
 
-  @keyframes textReveal {
-    0% { opacity: 0; transform: translateY(30px); letter-spacing: 15px; filter: blur(8px); }
-    100% { opacity: 1; transform: translateY(0); letter-spacing: 2px; filter: blur(0); }
-  }
+    /* ========== STATIC TV FRAME ========== */
+    .tv-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 20px solid #1a1a1a;
+      box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+      pointer-events: none;
+      z-index: 20;
+    }
 
-  /* Particle System - Premium Sparkles */
-  .sparkle-system {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
+    @media (max-width: 768px) {
+      .tv-frame { border-width: 8px; }
+    }
 
-  .sparkle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #0326fc;
-    border-radius: 50%;
-    opacity: 0;
-    box-shadow: 0 0 6px #0326fc;
-  }
+    /* ========== MAIN CRT DISPLAY ========== */
+    .crt-display {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      max-width: 750px;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      border: 2px solid rgba(255,255,255,0.2);
+      z-index: 15;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
 
-  /* Light Orbs */
-  .light-orb {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(3, 38, 252, 0.15) 0%, transparent 70%);
-    animation: orbFloat 8s ease-in-out infinite;
-    pointer-events: none;
-  }
+    /* Terminal Header - Retro */
+    .retro-header {
+      background: #0a0a0a;
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-  @keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-    50% { transform: translate(50px, -30px) scale(1.2); opacity: 0.5; }
-  }
+    .retro-dots {
+      display: flex;
+      gap: 8px;
+    }
 
-  /* Progress Bar - Ultra Premium */
-  .premium-progress {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    text-align: center;
-    z-index: 20;
-  }
+    .retro-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ff5f56;
+      opacity: 0.7;
+    }
 
-  .progress-bar-premium {
-    width: 100%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 12px;
-  }
+    .retro-dot:nth-child(2) { background: #ffbd2e; }
+    .retro-dot:nth-child(3) { background: #27c93f; }
 
-  .progress-fill-premium {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #0326fc, #ffffff, #0326fc);
-    transition: width 0.05s linear;
-    position: relative;
-  }
+    .retro-title {
+      color: #aaa;
+      font-size: 10px;
+      letter-spacing: 2px;
+      flex: 1;
+      text-align: center;
+      font-family: monospace;
+    }
 
-  .progress-fill-premium::after {
-    content: '';
-    position: absolute;
-    right: -4px;
-    top: -3px;
-    width: 8px;
-    height: 8px;
-    background: #0326fc;
-    border-radius: 50%;
-    filter: blur(2px);
-  }
+    /* Content Area */
+    .retro-content {
+      padding: 28px;
+      min-height: 420px;
+    }
 
-  .progress-label {
-    font-family: 'Space Grotesk', monospace;
-    color: #0326fc;
-    font-size: 12px;
-    letter-spacing: 2px;
-    margin-top: 12px;
-  }
+    .retro-line {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: #0a0;
+      text-shadow: 0 0 3px #0a0;
+      letter-spacing: 1px;
+      opacity: 0;
+      margin-bottom: 8px;
+    }
 
-  /* Stats Counter */
-  .stats-container {
-    position: absolute;
-    bottom: 80px;
-    right: 40px;
-    text-align: right;
-    z-index: 20;
-    opacity: 0;
-    animation: statsFade 0.6s ease-out 0.5s forwards;
-  }
+    @media (max-width: 768px) {
+      .retro-content { padding: 20px; min-height: 360px; }
+      .retro-line { font-size: 11px; line-height: 1.7; }
+    }
 
-  @keyframes statsFade {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
+    .retro-line.revealed {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
 
-  .stat-item {
-    font-family: monospace;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 5px 0;
-  }
+    .retro-line.cursor {
+      border-right: 2px solid #0a0;
+      animation: cursorBlink 1s step-end infinite;
+      display: inline-block;
+    }
 
-  .stat-number {
-    color: #0326fc;
-    font-weight: 600;
-    font-size: 14px;
-  }
+    @keyframes cursorBlink {
+      0%, 100% { border-color: #0a0; }
+      50% { border-color: transparent; }
+    }
 
-  /* Left Side - Years */
-  .left-stats {
-    position: absolute;
-    bottom: 80px;
-    left: 40px;
-    z-index: 20;
-    opacity: 0;
-    animation: statsFade 0.6s ease-out 0.5s forwards;
-  }
+    /* VHS Glitch Text */
+    .glitch-retro {
+      animation: vhsGlitch 0.2s infinite;
+    }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .name-title { font-size: 2rem; white-space: normal; padding: 0 20px; }
-    .role-title { font-size: 0.8rem; letter-spacing: 2px; }
-    .floating-geometry { width: 120px; height: 120px; }
-    .geo-face { width: 120px; height: 120px; }
-    .geo-front { transform: translateZ(60px); }
-    .geo-back { transform: translateZ(-60px) rotateY(180deg); }
-    .geo-right { transform: translateX(60px) rotateY(90deg); }
-    .geo-left { transform: translateX(-60px) rotateY(-90deg); }
-    .geo-top { transform: translateY(-60px) rotateX(90deg); }
-    .geo-bottom { transform: translateY(60px) rotateX(-90deg); }
-    .stats-container, .left-stats { display: none; }
-    .premium-progress { width: 250px; bottom: 40px; }
-  }
+    @keyframes vhsGlitch {
+      0% { text-shadow: -1px 0 rgba(255,0,0,0.5), 1px 0 rgba(0,255,0,0.5); transform: skew(0deg); }
+      100% { text-shadow: 1px 0 rgba(255,0,0,0.5), -1px 0 rgba(0,255,0,0.5); transform: skew(0.5deg); }
+    }
 
-  /* Grain Texture */
-  .grain-texture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.03"/%3E%3C/svg%3E');
-    pointer-events: none;
-    z-index: 100;
-  }
-</style>
+    /* Progress - Vintage */
+    .vintage-progress {
+      padding: 20px 28px 28px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
 
-<div class="masterpiece-preloader" id="masterpiecePreloader">
-  <div class="grain-texture"></div>
+    .progress-vintage {
+      width: 100%;
+      height: 2px;
+      background: rgba(0, 255, 0, 0.2);
+      position: relative;
+    }
+
+    .progress-fill-vintage {
+      width: 0%;
+      height: 100%;
+      background: #0a0;
+      transition: width 0.05s linear;
+      box-shadow: 0 0 8px #0a0;
+    }
+
+    .progress-text-vintage {
+      text-align: center;
+      color: #0a0;
+      font-size: 10px;
+      margin-top: 12px;
+      font-family: monospace;
+      letter-spacing: 2px;
+    }
+
+    /* ========== DISTORTION WAVES ========== */
+    .distortion-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: repeating-linear-gradient(90deg, 
+        rgba(0,255,0,0.1) 0px, 
+        rgba(0,255,0,0.1) 2px, 
+        transparent 2px, 
+        transparent 20px);
+      animation: waveMove 0.5s linear infinite;
+      pointer-events: none;
+      z-index: 12;
+    }
+
+    @keyframes waveMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-30px); }
+    }
+
+    /* ========== FLICKERING LIGHT ========== */
+    .flicker-light {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 8px;
+      height: 8px;
+      background: #0a0;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #0a0;
+      animation: lightFlicker 0.5s steps(2) infinite;
+      z-index: 30;
+    }
+
+    @keyframes lightFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ========== TAPE COUNTER ========== */
+    .tape-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      font-family: monospace;
+      font-size: 10px;
+      color: #0a0;
+      background: rgba(0,0,0,0.6);
+      padding: 4px 8px;
+      letter-spacing: 2px;
+      z-index: 30;
+    }
+
+    /* ========== FILM GRAIN OVERLAY ========== */
+    .film-grain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="grain"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23grain)" opacity="0.08"/%3E%3C/svg%3E');
+      pointer-events: none;
+      z-index: 25;
+      animation: grainShift 0.2s steps(2) infinite;
+    }
+
+    @keyframes grainShift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(1px, -1px); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="analog-preloader" id="analogPreloader">
+  <!-- VHS Layers -->
+  <div class="vhs-noise"></div>
+  <div class="tracking-lines"></div>
+  <div class="head-switch"></div>
+  <div class="crt-curve"></div>
+  <div class="haunt-scan"></div>
+  <div class="distortion-wave"></div>
+  <div class="tv-frame"></div>
+  <div class="film-grain"></div>
   
-  <div class="masterpiece-container">
-    <!-- Floating 3D Geometry -->
-    <div class="floating-geometry">
-      <div class="geo-face geo-front"></div>
-      <div class="geo-face geo-back"></div>
-      <div class="geo-face geo-right"></div>
-      <div class="geo-face geo-left"></div>
-      <div class="geo-face geo-top"></div>
-      <div class="geo-face geo-bottom"></div>
-      <div class="inner-glow"></div>
-    </div>
-
-    <!-- Title -->
-    <div class="masterpiece-title">
-      <div class="name-title">ABDUL HANNAN</div>
-      <div class="role-title">FRONTEND ARCHITECT · FULL STACK ENGINEER</div>
-    </div>
-
-    <!-- Sparkle System -->
-    <div class="sparkle-system" id="sparkleSystem"></div>
-
-    <!-- Light Orbs -->
-    <div class="light-orb" style="top: 10%; left: -5%;"></div>
-    <div class="light-orb" style="bottom: 10%; right: -5%; animation-delay: 2s;"></div>
-    <div class="light-orb" style="top: 50%; right: 20%; width: 200px; height: 200px; animation-delay: 4s;"></div>
-
-    <!-- Stats - Right Side -->
-    <div class="stats-container">
-      <div class="stat-item"><span class="stat-number">50+</span> Projects Delivered</div>
-      <div class="stat-item"><span class="stat-number">5000+</span> Users Scaled</div>
-      <div class="stat-item"><span class="stat-number">4+</span> Years Experience</div>
-    </div>
-
-    <!-- Stats - Left Side -->
-    <div class="left-stats">
-      <div class="stat-item"><span class="stat-number">98%</span> Client Satisfaction</div>
-      <div class="stat-item"><span class="stat-number">24/7</span> Support</div>
-      <div class="stat-item"><span class="stat-number">∞</span> Passion</div>
-    </div>
-
-    <!-- Premium Progress -->
-    <div class="premium-progress">
-      <div class="progress-bar-premium">
-        <div class="progress-fill-premium" id="progressFillPremium"></div>
+  <!-- CRT Display -->
+  <div class="crt-display">
+    <div class="retro-header">
+      <div class="retro-dots">
+        <div class="retro-dot"></div>
+        <div class="retro-dot"></div>
+        <div class="retro-dot"></div>
       </div>
-      <div class="progress-label" id="progressLabel">INITIALIZING PORTFOLIO</div>
+      <div class="retro-title">VHS_ARCHIVE_1984_ABDUL_HANNAN.avi</div>
+    </div>
+    
+    <div class="retro-content">
+      <div id="retroLines"></div>
+    </div>
+    
+    <div class="vintage-progress">
+      <div class="progress-vintage">
+        <div class="progress-fill-vintage" id="progressFill"></div>
+      </div>
+      <div class="progress-text-vintage" id="progressText">[ TAPE LOADING ]</div>
     </div>
   </div>
+  
+  <div class="tape-counter" id="tapeCounter">00:00:00</div>
+  <div class="flicker-light"></div>
 </div>
 
 <script>
   (function() {
-    const preloader = document.getElementById('masterpiecePreloader');
-    const progressFill = document.getElementById('progressFillPremium');
-    const progressLabel = document.getElementById('progressLabel');
-    const sparkleSystem = document.getElementById('sparkleSystem');
+    const preloader = document.getElementById('analogPreloader');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const tapeCounter = document.getElementById('tapeCounter');
+    const retroLines = document.getElementById('retroLines');
     
-    let progress = 0;
-    const duration = 7000; // 7 seconds
-    const startTime = Date.now();
+    // ============================================
+    // TAPE COUNTER ANIMATION
+    // ============================================
+    let seconds = 0;
+    const counterInterval = setInterval(() => {
+      if (!preloader.classList.contains('fade-out')) {
+        seconds++;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        tapeCounter.textContent = `T-${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}:00`;
+      }
+    }, 1000);
     
-    // Progress labels sequence
-    const labels = [
-      "INITIALIZING PORTFOLIO",
-      "LOADING EXPERIENCE",
-      "PREPARING SHOWCASE",
-      "ALMOST READY",
-      "READY TO LAUNCH"
+    // ============================================
+    // ANALOG HORROR TERMINAL SEQUENCE
+    // ============================================
+    const terminalSequence = [
+      { text: "[TAPE INSERTED] SONY VHS-C 1984", type: "normal", delay: 400 },
+      { text: "", type: "empty", delay: 200 },
+      { text: "> INITIALIZING HEAD DRUM...", type: "prompt", delay: 500 },
+      { text: "> TRACKING ADJUSTMENT...", type: "prompt", delay: 450 },
+      { text: "> SIGNAL DETECTED.", type: "success", delay: 400 },
+      { text: "", type: "empty", delay: 300 },
+      { text: "══════════════════════════════════════════", type: "normal", delay: 100 },
+      { text: "  LAST TRANSMISSION / ARCHIVE #H-1984", type: "glitch", delay: 600 },
+      { text: "══════════════════════════════════════════", type: "normal", delay: 100 },
+      { text: "", type: "empty", delay: 400 },
+      { text: "> DECODING VIDEO SIGNAL...", type: "prompt", delay: 500 },
+      { text: "> SUBJECT: ABDUL HANNAN", type: "warning", delay: 500 },
+      { text: "> DESIGNATION: FRONTEND ARCHITECT", type: "warning", delay: 450 },
+      { text: "> STATUS: FULL STACK ENGINEER", type: "warning", delay: 450 },
+      { text: "", type: "empty", delay: 300 },
+      { text: "> [FRAME_001] SKILL MATRIX", type: "prompt", delay: 400 },
+      { text: "  > HTML/CSS/Tailwind ......... 98%", type: "normal", delay: 200 },
+      { text: "  > PHP/MySQL ............... 98%", type: "normal", delay: 180 },
+      { text: "  > WordPress/Elementor ...... 90%", type: "normal", delay: 180 },
+      { text: "  > GSAP/Framer ............. 85%", type: "normal", delay: 180 },
+      { text: "  > JavaScript/TypeScript ... 82%", type: "normal", delay: 180 },
+      { text: "", type: "empty", delay: 300 },
+      { text: "> [FRAME_002] PROJECT ARCHIVE", type: "prompt", delay: 450 },
+      { text: "  > TALENT TREE JOB PORTAL", type: "normal", delay: 250 },
+      { text: "    └─ 5,000+ active users", type: "normal", delay: 300 },
+      { text: "  > VOICE TO-DO LIST", type: "normal", delay: 200 },
+      { text: "  > ATTENDANCE MANAGEMENT SYSTEM", type: "normal", delay: 220 },
+      { text: "  > DAILY EXPENSE MANAGER", type: "normal", delay: 200 },
+      { text: "  > AI RESUME ANALYZER", type: "normal", delay: 250 },
+      { text: "", type: "empty", delay: 350 },
+      { text: "> [FRAME_003] METRICS", type: "prompt", delay: 400 },
+      { text: "  > PROJECTS DELIVERED: 50+", type: "normal", delay: 250 },
+      { text: "  > USERS SCALED: 5,000+", type: "normal", delay: 250 },
+      { text: "  > YEARS ACTIVE: 4+", type: "normal", delay: 220 },
+      { text: "  > SATISFACTION RATE: 98%", type: "normal", delay: 250 },
+      { text: "", type: "empty", delay: 350 },
+      { text: "> [SIGNAL] STABILIZING...", type: "prompt", delay: 500 },
+      { text: "> [AUDIO] DETECTED", type: "success", delay: 400 },
+      { text: "> [VIDEO] SYNC COMPLETE", type: "success", delay: 400 },
+      { text: "", type: "empty", delay: 500 },
+      { text: "┌─────────────────────────────────────────┐", type: "glitch", delay: 100 },
+      { text: "│                                         │", type: "glitch", delay: 50 },
+      { text: "│     █████╗ ██████╗ ██╗   ██╗██╗         │", type: "glitch", delay: 200 },
+      { text: "│    ██╔══██╗██╔══██╗██║   ██║██║         │", type: "glitch", delay: 200 },
+      { text: "│    ███████║██████╔╝██║   ██║██║         │", type: "glitch", delay: 200 },
+      { text: "│    ██╔══██║██╔══██╗██║   ██║██║         │", type: "glitch", delay: 200 },
+      { text: "│    ██║  ██║██████╔╝╚██████╔╝███████╗    │", type: "glitch", delay: 200 },
+      { text: "│    ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝    │", type: "glitch", delay: 200 },
+      { text: "│                                         │", type: "glitch", delay: 50 },
+      { text: "└─────────────────────────────────────────┘", type: "glitch", delay: 100 },
+      { text: "", type: "empty", delay: 500 },
+      { text: "> [TRANSMISSION] ENDING.", type: "prompt", delay: 500 },
+      { text: "> EJECT TAPE TO CONTINUE.", type: "prompt", delay: 600 },
+      { text: "", type: "empty", delay: 400 },
+      { text: "> [TAPE EJECTED]", type: "success", delay: 500 },
+      { text: "> LOADING PRESENT...", type: "prompt", delay: 600 }
     ];
     
-    let labelIndex = 0;
+    let currentIndex = 0;
+    let currentCharPos = 0;
+    let isTyping = false;
+    let currentText = "";
+    let currentType = "";
+    let progressValue = 0;
+    const totalSteps = terminalSequence.length;
+    const startTime = Date.now();
+    const MAX_DURATION = 7000;
     
-    function updateLabel() {
-      if (labelIndex < labels.length) {
-        progressLabel.style.opacity = '0';
-        setTimeout(() => {
-          progressLabel.textContent = labels[labelIndex];
-          progressLabel.style.opacity = '1';
-        }, 150);
-        labelIndex++;
-      }
+    function addLine(text, type) {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'retro-line';
+      if (type === 'glitch') lineDiv.classList.add('glitch-retro');
+      lineDiv.textContent = text;
+      retroLines.appendChild(lineDiv);
+      setTimeout(() => lineDiv.classList.add('revealed'), 10);
+      retroLines.scrollTop = retroLines.scrollHeight;
+      return lineDiv;
     }
     
-    // Create sparkle effect
-    function createSparkle() {
-      const sparkle = document.createElement('div');
-      sparkle.className = 'sparkle';
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      sparkle.style.left = x + 'px';
-      sparkle.style.top = y + 'px';
-      sparkle.style.animation = `sparkleFade ${0.6 + Math.random() * 0.8}s ease-out forwards`;
-      sparkleSystem.appendChild(sparkle);
+    function typeLine(lineData) {
+      const { text, type, delay } = lineData;
+      currentText = text;
+      currentType = type;
+      currentCharPos = 0;
+      isTyping = true;
       
-      setTimeout(() => sparkle.remove(), 800);
-    }
-    
-    // Sparkle animation
-    const sparkleStyle = document.createElement('style');
-    sparkleStyle.textContent = `
-      @keyframes sparkleFade {
-        0% { opacity: 1; transform: scale(1); width: 3px; height: 3px; }
-        100% { opacity: 0; transform: scale(0); width: 0; height: 0; }
-      }
-    `;
-    document.head.appendChild(sparkleStyle);
-    
-    // Continuous sparkles
-    const sparkleInterval = setInterval(() => {
-      if (!preloader.classList.contains('fade-out')) {
-        for (let i = 0; i < 3; i++) {
-          setTimeout(() => createSparkle(), i * 50);
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'retro-line';
+      if (type === 'glitch') lineDiv.classList.add('glitch-retro');
+      lineDiv.textContent = "";
+      retroLines.appendChild(lineDiv);
+      
+      function typeNext() {
+        if (currentCharPos < currentText.length) {
+          lineDiv.textContent += currentText[currentCharPos];
+          currentCharPos++;
+          retroLines.scrollTop = retroLines.scrollHeight;
+          setTimeout(typeNext, 30 + Math.random() * 20);
+        } else {
+          lineDiv.classList.add('revealed');
+          isTyping = false;
+          currentIndex++;
+          
+          const elapsed = Date.now() - startTime;
+          const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+          const lineProgress = (currentIndex / totalSteps) * 100;
+          progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+          
+          progressFill.style.width = progressValue + '%';
+          progressText.textContent = `[ TAPE LOADING ${Math.floor(progressValue)}% ]`;
+          
+          setTimeout(processNext, delay);
         }
       }
-    }, 300);
-    
-    // Particle burst at milestones
-    function createSparkleBurst() {
-      for (let i = 0; i < 30; i++) {
-        setTimeout(() => {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const angle = Math.random() * Math.PI * 2;
-          const distance = 100 + Math.random() * 150;
-          const centerX = window.innerWidth / 2;
-          const centerY = window.innerHeight / 2;
-          sparkle.style.left = centerX + Math.cos(angle) * distance + 'px';
-          sparkle.style.top = centerY + Math.sin(angle) * distance + 'px';
-          sparkle.style.animation = `sparkleFade 0.8s ease-out forwards`;
-          sparkleSystem.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 800);
-        }, i * 15);
-      }
+      
+      typeNext();
     }
     
-    // Update Progress
-    function updateProgress() {
+    function processNext() {
       const elapsed = Date.now() - startTime;
-      progress = Math.min(100, (elapsed / duration) * 100);
-      
-      progressFill.style.width = progress + '%';
-      
-      // Update label based on progress
-      if (progress >= 20 && progress < 40 && labelIndex === 1) updateLabel();
-      else if (progress >= 40 && progress < 60 && labelIndex === 2) updateLabel();
-      else if (progress >= 60 && progress < 80 && labelIndex === 3) updateLabel();
-      else if (progress >= 80 && labelIndex === 4) updateLabel();
-      
-      // Milestone effects
-      if (progress >= 25 && progress < 26) {
-        createSparkleBurst();
-        const geometry = document.querySelector('.floating-geometry');
-        geometry.style.animation = 'floatGeometry 4s ease-in-out infinite';
-      }
-      if (progress >= 50 && progress < 51) {
-        createSparkleBurst();
-        const orbs = document.querySelectorAll('.light-orb');
-        orbs.forEach(orb => orb.style.animationDuration = '5s');
-      }
-      if (progress >= 75 && progress < 76) {
-        createSparkleBurst();
-        const title = document.querySelector('.name-title');
-        title.style.animation = 'none';
-        title.offsetHeight;
-        title.style.animation = 'textReveal 0.6s ease-out forwards';
-      }
-      
-      if (progress < 100) {
-        requestAnimationFrame(updateProgress);
-      } else {
+      if (elapsed >= MAX_DURATION || currentIndex >= totalSteps) {
         completePreloader();
+        return;
+      }
+      
+      const lineData = terminalSequence[currentIndex];
+      
+      if (lineData.text === "") {
+        addLine("", lineData.type);
+        currentIndex++;
+        const elapsed = Date.now() - startTime;
+        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+        const lineProgress = (currentIndex / totalSteps) * 100;
+        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressFill.style.width = progressValue + '%';
+        progressText.textContent = `[ TAPE LOADING ${Math.floor(progressValue)}% ]`;
+        setTimeout(processNext, lineData.delay);
+      } else if (lineData.type === "normal" || lineData.type === "success" || lineData.type === "warning" || lineData.type === "glitch") {
+        addLine(lineData.text, lineData.type);
+        currentIndex++;
+        const elapsed = Date.now() - startTime;
+        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
+        const lineProgress = (currentIndex / totalSteps) * 100;
+        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
+        progressFill.style.width = progressValue + '%';
+        progressText.textContent = `[ TAPE LOADING ${Math.floor(progressValue)}% ]`;
+        setTimeout(processNext, lineData.delay);
+      } else if (lineData.type === "prompt") {
+        typeLine(lineData);
       }
     }
     
-    // Start first label
-    setTimeout(() => updateLabel(), 200);
-    
-    // Start progress
-    requestAnimationFrame(updateProgress);
-    
-    // Complete Preloader
     function completePreloader() {
-      // Final sparkle explosion
-      for (let i = 0; i < 60; i++) {
-        setTimeout(() => {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const angle = Math.random() * Math.PI * 2;
-          const distance = 80 + Math.random() * 120;
-          const centerX = window.innerWidth / 2;
-          const centerY = window.innerHeight / 2;
-          sparkle.style.left = centerX + Math.cos(angle) * distance + 'px';
-          sparkle.style.top = centerY + Math.sin(angle) * distance + 'px';
-          sparkle.style.width = '4px';
-          sparkle.style.height = '4px';
-          sparkle.style.background = '#0326fc';
-          sparkle.style.animation = `sparkleFade 0.5s ease-out forwards`;
-          sparkleSystem.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 500);
-        }, i * 8);
-      }
+      progressFill.style.width = '100%';
+      progressText.textContent = '[ TAPE LOADING 100% ]';
       
-      // Final label
-      progressLabel.textContent = "WELCOME";
+      // Final glitch
+      const display = document.querySelector('.crt-display');
+      display.style.animation = 'vhsGlitch 0.05s infinite';
       
       setTimeout(() => {
         preloader.classList.add('fade-out');
         setTimeout(() => {
           preloader.style.display = 'none';
-          clearInterval(sparkleInterval);
-        }, 1200);
+          clearInterval(counterInterval);
+          document.body.style.overflow = '';
+        }, 1500);
       }, 400);
     }
     
-    // Lock body during preloader
+    setTimeout(processNext, 200);
+    
+    // Lock body
     document.body.style.overflow = 'hidden';
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.body.style.overflow = '';
-      }, 8000);
+      }, 8500);
     });
   })();
 </script>
-
   <!-- Cursor Glow -->
   <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
 
