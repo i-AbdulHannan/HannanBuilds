@@ -105,591 +105,179 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      user-select: none;
     }
 
-    body {
-      overflow: hidden;
-      background: #000;
-    }
-
-    /* MAIN PRELOADER */
-    .analog-preloader {
+    /* PRELOADER - CLEAN & POWERFUL */
+    .monolith {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #000000;
+      background: #0a0a0f;
       z-index: 99999;
-      transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1);
-      overflow: hidden;
-    }
-
-    .analog-preloader.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* ========== VHS TAPE NOISE ========== */
-    .vhs-noise {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.15"/%3E%3C/svg%3E');
-      pointer-events: none;
-      z-index: 2;
-      animation: noiseShift 0.15s steps(2) infinite;
-    }
-
-    @keyframes noiseShift {
-      0% { transform: translate(0, 0); opacity: 0.2; }
-      100% { transform: translate(2px, -1px); opacity: 0.3; }
-    }
-
-    /* ========== VHS TRACKING LINES ========== */
-    .tracking-lines {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(0deg, 
-        rgba(0,0,0,0.8) 0px, 
-        rgba(0,0,0,0.8) 2px, 
-        transparent 2px, 
-        transparent 8px);
-      pointer-events: none;
-      z-index: 3;
-      animation: trackingMove 0.3s linear infinite;
-    }
-
-    @keyframes trackingMove {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(4px); }
-    }
-
-    /* ========== VHS HEAD SWITCHING EFFECT ========== */
-    .head-switch {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 30%;
-      background: linear-gradient(to bottom, 
-        rgba(255,255,255,0.3) 0%, 
-        transparent 30%);
-      animation: headSwitch 0.2s steps(2) infinite;
-      pointer-events: none;
-      z-index: 4;
-    }
-
-    @keyframes headSwitch {
-      0% { transform: translateY(-100%); opacity: 0; }
-      50% { transform: translateY(0); opacity: 0.5; }
-      100% { transform: translateY(-100%); opacity: 0; }
-    }
-
-    /* ========== CRT CURVATURE ========== */
-    .crt-curve {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(ellipse at center, 
-        transparent 60%, 
-        rgba(0,0,0,0.6) 100%);
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    /* ========== SCANLINES - SLOW & HAUNTING ========== */
-    .haunt-scan {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: rgba(255,255,255,0.3);
-      filter: blur(2px);
-      animation: hauntScan 8s linear infinite;
-      pointer-events: none;
-      z-index: 11;
-    }
-
-    @keyframes hauntScan {
-      0% { transform: translateY(-100%); opacity: 0; }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% { transform: translateY(100vh); opacity: 0; }
-    }
-
-    /* ========== STATIC TV FRAME ========== */
-    .tv-frame {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 20px solid #1a1a1a;
-      box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
-      pointer-events: none;
-      z-index: 20;
-    }
-
-    @media (max-width: 768px) {
-      .tv-frame { border-width: 8px; }
-    }
-
-    /* ========== MAIN CRT DISPLAY ========== */
-    .crt-display {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 85%;
-      max-width: 750px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      border: 2px solid rgba(255,255,255,0.2);
-      z-index: 15;
-      font-family: 'Courier New', monospace;
-      overflow: hidden;
-    }
-
-    /* Terminal Header - Retro */
-    .retro-header {
-      background: #0a0a0a;
-      padding: 12px 18px;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 12px;
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .retro-dots {
-      display: flex;
-      gap: 8px;
-    }
-
-    .retro-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #ff5f56;
-      opacity: 0.7;
-    }
-
-    .retro-dot:nth-child(2) { background: #ffbd2e; }
-    .retro-dot:nth-child(3) { background: #27c93f; }
-
-    .retro-title {
-      color: #aaa;
-      font-size: 10px;
-      letter-spacing: 2px;
-      flex: 1;
-      text-align: center;
-      font-family: monospace;
-    }
-
-    /* Content Area */
-    .retro-content {
-      padding: 28px;
-      min-height: 420px;
-    }
-
-    .retro-line {
-      font-family: 'Courier New', monospace;
-      font-size: 13px;
-      line-height: 1.9;
-      color: #0a0;
-      text-shadow: 0 0 3px #0a0;
-      letter-spacing: 1px;
+    .monolith.fade-out {
       opacity: 0;
-      margin-bottom: 8px;
+      pointer-events: none;
     }
 
-    @media (max-width: 768px) {
-      .retro-content { padding: 20px; min-height: 360px; }
-      .retro-line { font-size: 11px; line-height: 1.7; }
-    }
-
-    .retro-line.revealed {
-      opacity: 1;
-      transition: opacity 0.3s ease;
-    }
-
-    .retro-line.cursor {
-      border-right: 2px solid #0a0;
-      animation: cursorBlink 1s step-end infinite;
-      display: inline-block;
-    }
-
-    @keyframes cursorBlink {
-      0%, 100% { border-color: #0a0; }
-      50% { border-color: transparent; }
-    }
-
-    /* VHS Glitch Text */
-    .glitch-retro {
-      animation: vhsGlitch 0.2s infinite;
-    }
-
-    @keyframes vhsGlitch {
-      0% { text-shadow: -1px 0 rgba(255,0,0,0.5), 1px 0 rgba(0,255,0,0.5); transform: skew(0deg); }
-      100% { text-shadow: 1px 0 rgba(255,0,0,0.5), -1px 0 rgba(0,255,0,0.5); transform: skew(0.5deg); }
-    }
-
-    /* Progress - Vintage */
-    .vintage-progress {
-      padding: 20px 28px 28px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .progress-vintage {
-      width: 100%;
+    /* THE LINE - Simple but Powerful */
+    .strike-line {
+      width: 0px;
       height: 2px;
-      background: rgba(0, 255, 0, 0.2);
-      position: relative;
+      background: #0326fc;
+      margin-bottom: 40px;
+      transition: width 0.1s linear;
     }
 
-    .progress-fill-vintage {
-      width: 0%;
-      height: 100%;
-      background: #0a0;
-      transition: width 0.05s linear;
-      box-shadow: 0 0 8px #0a0;
+    /* YOUR NAME - Bold */
+    .name-mono {
+      font-family: 'Space Grotesk', 'Inter', monospace;
+      font-size: 4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: revealUp 0.6s ease-out 0.2s forwards;
     }
 
-    .progress-text-vintage {
+    .name-mono span {
+      color: #0326fc;
+    }
+
+    /* TITLE */
+    .title-mono {
+      font-family: monospace;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      color: #666;
+      margin-bottom: 50px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: revealUp 0.6s ease-out 0.4s forwards;
+    }
+
+    /* STATS - Clean Numbers */
+    .stats-grid {
+      display: flex;
+      gap: 50px;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: revealUp 0.6s ease-out 0.6s forwards;
+    }
+
+    .stat-item {
       text-align: center;
-      color: #0a0;
-      font-size: 10px;
-      margin-top: 12px;
+    }
+
+    .stat-number {
       font-family: monospace;
-      letter-spacing: 2px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #0326fc;
     }
 
-    /* ========== DISTORTION WAVES ========== */
-    .distortion-wave {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background: repeating-linear-gradient(90deg, 
-        rgba(0,255,0,0.1) 0px, 
-        rgba(0,255,0,0.1) 2px, 
-        transparent 2px, 
-        transparent 20px);
-      animation: waveMove 0.5s linear infinite;
-      pointer-events: none;
-      z-index: 12;
-    }
-
-    @keyframes waveMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-30px); }
-    }
-
-    /* ========== FLICKERING LIGHT ========== */
-    .flicker-light {
-      position: absolute;
-      bottom: 20px;
-      right: 20px;
-      width: 8px;
-      height: 8px;
-      background: #0a0;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #0a0;
-      animation: lightFlicker 0.5s steps(2) infinite;
-      z-index: 30;
-    }
-
-    @keyframes lightFlicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* ========== TAPE COUNTER ========== */
-    .tape-counter {
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
+    .stat-label {
       font-family: monospace;
-      font-size: 10px;
-      color: #0a0;
-      background: rgba(0,0,0,0.6);
-      padding: 4px 8px;
+      font-size: 0.7rem;
+      color: #666;
+      letter-spacing: 1px;
+      margin-top: 5px;
+    }
+
+    /* PERCENTAGE */
+    .percentage {
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #0326fc;
       letter-spacing: 2px;
-      z-index: 30;
+      margin-top: 30px;
     }
 
-    /* ========== FILM GRAIN OVERLAY ========== */
-    .film-grain {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="grain"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23grain)" opacity="0.08"/%3E%3C/svg%3E');
-      pointer-events: none;
-      z-index: 25;
-      animation: grainShift 0.2s steps(2) infinite;
+    @keyframes revealUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @keyframes grainShift {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(1px, -1px); }
+    @media (max-width: 600px) {
+      .name-mono { font-size: 2rem; }
+      .stats-grid { gap: 25px; }
+      .stat-number { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="analog-preloader" id="analogPreloader">
-  <!-- VHS Layers -->
-  <div class="vhs-noise"></div>
-  <div class="tracking-lines"></div>
-  <div class="head-switch"></div>
-  <div class="crt-curve"></div>
-  <div class="haunt-scan"></div>
-  <div class="distortion-wave"></div>
-  <div class="tv-frame"></div>
-  <div class="film-grain"></div>
-  
-  <!-- CRT Display -->
-  <div class="crt-display">
-    <div class="retro-header">
-      <div class="retro-dots">
-        <div class="retro-dot"></div>
-        <div class="retro-dot"></div>
-        <div class="retro-dot"></div>
-      </div>
-      <div class="retro-title">VHS_ARCHIVE_1984_ABDUL_HANNAN.avi</div>
-    </div>
-    
-    <div class="retro-content">
-      <div id="retroLines"></div>
-    </div>
-    
-    <div class="vintage-progress">
-      <div class="progress-vintage">
-        <div class="progress-fill-vintage" id="progressFill"></div>
-      </div>
-      <div class="progress-text-vintage" id="progressText">[ TAPE LOADING ]</div>
-    </div>
+<div class="monolith" id="monolith">
+  <div class="strike-line" id="strikeLine"></div>
+  <div class="name-mono">ABDUL <span>HANNAN</span></div>
+  <div class="title-mono">FRONTEND ARCHITECT · FULL STACK ENGINEER</div>
+  <div class="stats-grid">
+    <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">PROJECTS</div></div>
+    <div class="stat-item"><div class="stat-number">5K+</div><div class="stat-label">USERS</div></div>
+    <div class="stat-item"><div class="stat-number">4+</div><div class="stat-label">YEARS</div></div>
+    <div class="stat-item"><div class="stat-number">98%</div><div class="stat-label">SATISFACTION</div></div>
   </div>
-  
-  <div class="tape-counter" id="tapeCounter">00:00:00</div>
-  <div class="flicker-light"></div>
+  <div class="percentage" id="percentage">0%</div>
 </div>
 
 <script>
   (function() {
-    const preloader = document.getElementById('analogPreloader');
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
-    const tapeCounter = document.getElementById('tapeCounter');
-    const retroLines = document.getElementById('retroLines');
+    const preloader = document.getElementById('monolith');
+    const strikeLine = document.getElementById('strikeLine');
+    const percentageEl = document.getElementById('percentage');
     
-    // ============================================
-    // TAPE COUNTER ANIMATION
-    // ============================================
-    let seconds = 0;
-    const counterInterval = setInterval(() => {
-      if (!preloader.classList.contains('fade-out')) {
-        seconds++;
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        tapeCounter.textContent = `T-${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}:00`;
-      }
-    }, 1000);
-    
-    // ============================================
-    // ANALOG HORROR TERMINAL SEQUENCE
-    // ============================================
-    const terminalSequence = [
-      { text: "[TAPE INSERTED] SONY VHS-C 1984", type: "normal", delay: 400 },
-      { text: "", type: "empty", delay: 200 },
-      { text: "> INITIALIZING HEAD DRUM...", type: "prompt", delay: 500 },
-      { text: "> TRACKING ADJUSTMENT...", type: "prompt", delay: 450 },
-      { text: "> SIGNAL DETECTED.", type: "success", delay: 400 },
-      { text: "", type: "empty", delay: 300 },
-      { text: "══════════════════════════════════════════", type: "normal", delay: 100 },
-      { text: "  LAST TRANSMISSION / ARCHIVE #H-1984", type: "glitch", delay: 600 },
-      { text: "══════════════════════════════════════════", type: "normal", delay: 100 },
-      { text: "", type: "empty", delay: 400 },
-      { text: "> DECODING VIDEO SIGNAL...", type: "prompt", delay: 500 },
-      { text: "> SUBJECT: ABDUL HANNAN", type: "warning", delay: 500 },
-      { text: "> DESIGNATION: FRONTEND ARCHITECT", type: "warning", delay: 450 },
-      { text: "> STATUS: FULL STACK ENGINEER", type: "warning", delay: 450 },
-      { text: "", type: "empty", delay: 300 },
-      { text: "> [FRAME_001] SKILL MATRIX", type: "prompt", delay: 400 },
-      { text: "  > HTML/CSS/Tailwind ......... 98%", type: "normal", delay: 200 },
-      { text: "  > PHP/MySQL ............... 98%", type: "normal", delay: 180 },
-      { text: "  > WordPress/Elementor ...... 90%", type: "normal", delay: 180 },
-      { text: "  > GSAP/Framer ............. 85%", type: "normal", delay: 180 },
-      { text: "  > JavaScript/TypeScript ... 82%", type: "normal", delay: 180 },
-      { text: "", type: "empty", delay: 300 },
-      { text: "> [FRAME_002] PROJECT ARCHIVE", type: "prompt", delay: 450 },
-      { text: "  > TALENT TREE JOB PORTAL", type: "normal", delay: 250 },
-      { text: "    └─ 5,000+ active users", type: "normal", delay: 300 },
-      { text: "  > VOICE TO-DO LIST", type: "normal", delay: 200 },
-      { text: "  > ATTENDANCE MANAGEMENT SYSTEM", type: "normal", delay: 220 },
-      { text: "  > DAILY EXPENSE MANAGER", type: "normal", delay: 200 },
-      { text: "  > AI RESUME ANALYZER", type: "normal", delay: 250 },
-      { text: "", type: "empty", delay: 350 },
-      { text: "> [FRAME_003] METRICS", type: "prompt", delay: 400 },
-      { text: "  > PROJECTS DELIVERED: 50+", type: "normal", delay: 250 },
-      { text: "  > USERS SCALED: 5,000+", type: "normal", delay: 250 },
-      { text: "  > YEARS ACTIVE: 4+", type: "normal", delay: 220 },
-      { text: "  > SATISFACTION RATE: 98%", type: "normal", delay: 250 },
-      { text: "", type: "empty", delay: 350 },
-      { text: "> [SIGNAL] STABILIZING...", type: "prompt", delay: 500 },
-      { text: "> [AUDIO] DETECTED", type: "success", delay: 400 },
-      { text: "> [VIDEO] SYNC COMPLETE", type: "success", delay: 400 },
-      { text: "", type: "empty", delay: 500 },
-      { text: "┌─────────────────────────────────────────┐", type: "glitch", delay: 100 },
-      { text: "│                                         │", type: "glitch", delay: 50 },
-      { text: "│     █████╗ ██████╗ ██╗   ██╗██╗         │", type: "glitch", delay: 200 },
-      { text: "│    ██╔══██╗██╔══██╗██║   ██║██║         │", type: "glitch", delay: 200 },
-      { text: "│    ███████║██████╔╝██║   ██║██║         │", type: "glitch", delay: 200 },
-      { text: "│    ██╔══██║██╔══██╗██║   ██║██║         │", type: "glitch", delay: 200 },
-      { text: "│    ██║  ██║██████╔╝╚██████╔╝███████╗    │", type: "glitch", delay: 200 },
-      { text: "│    ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝    │", type: "glitch", delay: 200 },
-      { text: "│                                         │", type: "glitch", delay: 50 },
-      { text: "└─────────────────────────────────────────┘", type: "glitch", delay: 100 },
-      { text: "", type: "empty", delay: 500 },
-      { text: "> [TRANSMISSION] ENDING.", type: "prompt", delay: 500 },
-      { text: "> EJECT TAPE TO CONTINUE.", type: "prompt", delay: 600 },
-      { text: "", type: "empty", delay: 400 },
-      { text: "> [TAPE EJECTED]", type: "success", delay: 500 },
-      { text: "> LOADING PRESENT...", type: "prompt", delay: 600 }
-    ];
-    
-    let currentIndex = 0;
-    let currentCharPos = 0;
-    let isTyping = false;
-    let currentText = "";
-    let currentType = "";
-    let progressValue = 0;
-    const totalSteps = terminalSequence.length;
+    let width = 0;
+    const duration = 7000; // 7 seconds
     const startTime = Date.now();
-    const MAX_DURATION = 7000;
     
-    function addLine(text, type) {
-      const lineDiv = document.createElement('div');
-      lineDiv.className = 'retro-line';
-      if (type === 'glitch') lineDiv.classList.add('glitch-retro');
-      lineDiv.textContent = text;
-      retroLines.appendChild(lineDiv);
-      setTimeout(() => lineDiv.classList.add('revealed'), 10);
-      retroLines.scrollTop = retroLines.scrollHeight;
-      return lineDiv;
-    }
-    
-    function typeLine(lineData) {
-      const { text, type, delay } = lineData;
-      currentText = text;
-      currentType = type;
-      currentCharPos = 0;
-      isTyping = true;
-      
-      const lineDiv = document.createElement('div');
-      lineDiv.className = 'retro-line';
-      if (type === 'glitch') lineDiv.classList.add('glitch-retro');
-      lineDiv.textContent = "";
-      retroLines.appendChild(lineDiv);
-      
-      function typeNext() {
-        if (currentCharPos < currentText.length) {
-          lineDiv.textContent += currentText[currentCharPos];
-          currentCharPos++;
-          retroLines.scrollTop = retroLines.scrollHeight;
-          setTimeout(typeNext, 30 + Math.random() * 20);
-        } else {
-          lineDiv.classList.add('revealed');
-          isTyping = false;
-          currentIndex++;
-          
-          const elapsed = Date.now() - startTime;
-          const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-          const lineProgress = (currentIndex / totalSteps) * 100;
-          progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
-          
-          progressFill.style.width = progressValue + '%';
-          progressText.textContent = `[ TAPE LOADING ${Math.floor(progressValue)}% ]`;
-          
-          setTimeout(processNext, delay);
-        }
-      }
-      
-      typeNext();
-    }
-    
-    function processNext() {
+    function updateProgress() {
       const elapsed = Date.now() - startTime;
-      if (elapsed >= MAX_DURATION || currentIndex >= totalSteps) {
-        completePreloader();
-        return;
-      }
+      const progress = Math.min(100, (elapsed / duration) * 100);
       
-      const lineData = terminalSequence[currentIndex];
+      // Line grows
+      strikeLine.style.width = (progress * 3) + 'px';
       
-      if (lineData.text === "") {
-        addLine("", lineData.type);
-        currentIndex++;
-        const elapsed = Date.now() - startTime;
-        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-        const lineProgress = (currentIndex / totalSteps) * 100;
-        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
-        progressFill.style.width = progressValue + '%';
-        progressText.textContent = `[ TAPE LOADING ${Math.floor(progressValue)}% ]`;
-        setTimeout(processNext, lineData.delay);
-      } else if (lineData.type === "normal" || lineData.type === "success" || lineData.type === "warning" || lineData.type === "glitch") {
-        addLine(lineData.text, lineData.type);
-        currentIndex++;
-        const elapsed = Date.now() - startTime;
-        const timeProgress = Math.min(100, (elapsed / MAX_DURATION) * 100);
-        const lineProgress = (currentIndex / totalSteps) * 100;
-        progressValue = Math.min(100, Math.max(timeProgress, lineProgress));
-        progressFill.style.width = progressValue + '%';
-        progressText.textContent = `[ TAPE LOADING ${Math.floor(progressValue)}% ]`;
-        setTimeout(processNext, lineData.delay);
-      } else if (lineData.type === "prompt") {
-        typeLine(lineData);
-      }
-    }
-    
-    function completePreloader() {
-      progressFill.style.width = '100%';
-      progressText.textContent = '[ TAPE LOADING 100% ]';
+      // Percentage updates
+      percentageEl.textContent = Math.floor(progress) + '%';
       
-      // Final glitch
-      const display = document.querySelector('.crt-display');
-      display.style.animation = 'vhsGlitch 0.05s infinite';
-      
-      setTimeout(() => {
-        preloader.classList.add('fade-out');
+      if (progress < 100) {
+        requestAnimationFrame(updateProgress);
+      } else {
+        // Complete
         setTimeout(() => {
-          preloader.style.display = 'none';
-          clearInterval(counterInterval);
-          document.body.style.overflow = '';
-        }, 1500);
-      }, 400);
+          preloader.classList.add('fade-out');
+          setTimeout(() => {
+            preloader.style.display = 'none';
+          }, 1200);
+        }, 200);
+      }
     }
     
-    setTimeout(processNext, 200);
+    requestAnimationFrame(updateProgress);
     
     // Lock body
     document.body.style.overflow = 'hidden';
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.body.style.overflow = '';
-      }, 8500);
+      }, 8000);
     });
   })();
 </script>
