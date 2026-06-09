@@ -2,1551 +2,395 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Abdul Hannan</title>
-  <!-- Tailwind -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>Abdul Hannan | AI-Integrated Product Engineer</title>
+  <meta name="description" content="Abdul Hannan is an AI-Integrated Product Engineer, Web Application Developer, and Co-Founder of VBuild. He builds software products, MVPs, SaaS platforms, and AI-assisted solutions from concept to launch.">
+  <meta name="keywords" content="Abdul Hannan, Product Engineer, Web Application Developer, AI Engineer, VBuild, Full Stack Developer, Startup Builder">
+  <meta property="og:title" content="Abdul Hannan | AI-Integrated Product Engineer">
+  <meta property="og:description" content="Building software products with a founder's mindset. From concept to launch.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://abdulhannan.dev/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abdul Hannan | AI-Integrated Product Engineer">
+  <meta name="twitter:description" content="Building software products with a founder's mindset.">
+  <meta name="twitter:image" content="https://abdulhannan.dev/og-image.jpg">
+  <link rel="canonical" href="https://abdulhannan.dev">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Space Grotesk -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      background: #000000; 
-      font-family: 'Space Grotesk', sans-serif; 
-      color: #ffffff; 
-      overflow-x: hidden;
-    }
-    
-    .cursor-glow {
-      position: fixed;
-      width: 480px;
-      height: 480px;
-      background: radial-gradient(circle at center, rgba(3, 38, 252, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-    }
-    
-    .terminal-panel {
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(3, 38, 252, 0.3);
-    }
-    
-    .cmd-prompt::before {
-      content: '$ ';
-      color: #0326fc;
-      font-weight: 600;
-      display: inline-block;
-    }
-    
-    .shape-3d {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle at 30% 30%, #0326fc, transparent 80%);
-      filter: blur(70px);
-      opacity: 0.2;
-      border-radius: 50%;
-      z-index: 0;
-      pointer-events: none;
-    }
-    
-    .typing-cursor::after {
-      content: '█';
-      color: #0326fc;
-      margin-left: 4px;
-      animation: blink 1s step-end infinite;
-    }
-    
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: #0326fc; }
-    
-    .animate-ready {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    /* Mobile Menu Styles - FIXED */
-    #mobileMenu {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 999;
-      overflow-y: auto;
-      transition: all 0.3s ease;
-    }
-    
-    #mobileMenu.hidden {
-      display: none;
-    }
-    
-    #mobileMenu:not(.hidden) {
-      display: block;
-      animation: slideDown 0.3s ease;
-    }
-    
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Ensure mobile menu links are visible */
-    .mobile-link {
-      color: #ffffff !important;
-      opacity: 0.9;
-      transition: all 0.2s ease;
-    }
-    
-    .mobile-link:hover {
-      color: #0326fc !important;
-      opacity: 1;
-      background: rgba(3, 38, 252, 0.1);
-    }
-  </style>
-</head>
-<body>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  .masterpiece-preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #0a0a0f;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-    overflow: hidden;
-  }
-
-  .masterpiece-preloader.fade-out {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* 3D Perspective Container */
-  .masterpiece-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1200px;
-  }
-
-  /* Main Floating Geometric Shape */
-  .floating-geometry {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    transform-style: preserve-3d;
-    animation: floatGeometry 6s ease-in-out infinite;
-  }
-
-  @keyframes floatGeometry {
-    0%, 100% { transform: rotateX(20deg) rotateY(25deg) translateY(0); }
-    50% { transform: rotateX(25deg) rotateY(30deg) translateY(-15px); }
-  }
-
-  .geo-face {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: rgba(3, 38, 252, 0.08);
-    border: 1px solid rgba(3, 38, 252, 0.3);
-    backdrop-filter: blur(2px);
-  }
-
-  .geo-front { transform: translateZ(100px); }
-  .geo-back { transform: translateZ(-100px) rotateY(180deg); }
-  .geo-right { transform: translateX(100px) rotateY(90deg); }
-  .geo-left { transform: translateX(-100px) rotateY(-90deg); }
-  .geo-top { transform: translateY(-100px) rotateX(90deg); }
-  .geo-bottom { transform: translateY(100px) rotateX(-90deg); }
-
-  /* Inner Glow */
-  .inner-glow {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, #0326fc 0%, transparent 70%);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(20px);
-    animation: glowPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes glowPulse {
-    0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
-    50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
-  }
-
-  /* Main Title - Cinematic Typography */
-  .masterpiece-title {
-    position: absolute;
-    text-align: center;
-    z-index: 10;
-    top: 60%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-  }
-
-  .name-title {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 4.5rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    background: linear-gradient(135deg, #ffffff 0%, #0326fc 60%, #ffffff 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    opacity: 0;
-    animation: textReveal 0.8s ease-out forwards;
-    white-space: nowrap;
-  }
-
-  .role-title {
-    font-family: 'Space Grotesk', monospace;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.6);
-    letter-spacing: 4px;
-    margin-top: 15px;
-    opacity: 0;
-    animation: textReveal 0.8s ease-out 0.2s forwards;
-  }
-
-  @keyframes textReveal {
-    0% { opacity: 0; transform: translateY(30px); letter-spacing: 15px; filter: blur(8px); }
-    100% { opacity: 1; transform: translateY(0); letter-spacing: 2px; filter: blur(0); }
-  }
-
-  /* Particle System - Premium Sparkles */
-  .sparkle-system {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  .sparkle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: #0326fc;
-    border-radius: 50%;
-    opacity: 0;
-    box-shadow: 0 0 6px #0326fc;
-  }
-
-  /* Light Orbs */
-  .light-orb {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(3, 38, 252, 0.15) 0%, transparent 70%);
-    animation: orbFloat 8s ease-in-out infinite;
-    pointer-events: none;
-  }
-
-  @keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-    50% { transform: translate(50px, -30px) scale(1.2); opacity: 0.5; }
-  }
-
-  /* Progress Bar - Ultra Premium */
-  .premium-progress {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
-    text-align: center;
-    z-index: 20;
-  }
-
-  .progress-bar-premium {
-    width: 100%;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 12px;
-  }
-
-  .progress-fill-premium {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, #0326fc, #ffffff, #0326fc);
-    transition: width 0.05s linear;
-    position: relative;
-  }
-
-  .progress-fill-premium::after {
-    content: '';
-    position: absolute;
-    right: -4px;
-    top: -3px;
-    width: 8px;
-    height: 8px;
-    background: #0326fc;
-    border-radius: 50%;
-    filter: blur(2px);
-  }
-
-  .progress-label {
-    font-family: 'Space Grotesk', monospace;
-    color: #0326fc;
-    font-size: 12px;
-    letter-spacing: 2px;
-    margin-top: 12px;
-  }
-
-  /* Stats Counter */
-  .stats-container {
-    position: absolute;
-    bottom: 80px;
-    right: 40px;
-    text-align: right;
-    z-index: 20;
-    opacity: 0;
-    animation: statsFade 0.6s ease-out 0.5s forwards;
-  }
-
-  @keyframes statsFade {
-    from { opacity: 0; transform: translateX(20px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .stat-item {
-    font-family: monospace;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 5px 0;
-  }
-
-  .stat-number {
-    color: #0326fc;
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  /* Left Side - Years */
-  .left-stats {
-    position: absolute;
-    bottom: 80px;
-    left: 40px;
-    z-index: 20;
-    opacity: 0;
-    animation: statsFade 0.6s ease-out 0.5s forwards;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .name-title { font-size: 2rem; white-space: normal; padding: 0 20px; }
-    .role-title { font-size: 0.8rem; letter-spacing: 2px; }
-    .floating-geometry { width: 120px; height: 120px; }
-    .geo-face { width: 120px; height: 120px; }
-    .geo-front { transform: translateZ(60px); }
-    .geo-back { transform: translateZ(-60px) rotateY(180deg); }
-    .geo-right { transform: translateX(60px) rotateY(90deg); }
-    .geo-left { transform: translateX(-60px) rotateY(-90deg); }
-    .geo-top { transform: translateY(-60px) rotateX(90deg); }
-    .geo-bottom { transform: translateY(60px) rotateX(-90deg); }
-    .stats-container, .left-stats { display: none; }
-    .premium-progress { width: 250px; bottom: 40px; }
-  }
-
-  /* Grain Texture */
-  .grain-texture {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noise"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noise)" opacity="0.03"/%3E%3C/svg%3E');
-    pointer-events: none;
-    z-index: 100;
-  }
-</style>
-
-<div class="masterpiece-preloader" id="masterpiecePreloader">
-  <div class="grain-texture"></div>
-  
-  <div class="masterpiece-container">
-    <!-- Floating 3D Geometry -->
-    <div class="floating-geometry">
-      <div class="geo-face geo-front"></div>
-      <div class="geo-face geo-back"></div>
-      <div class="geo-face geo-right"></div>
-      <div class="geo-face geo-left"></div>
-      <div class="geo-face geo-top"></div>
-      <div class="geo-face geo-bottom"></div>
-      <div class="inner-glow"></div>
-    </div>
-
-    <!-- Title -->
-    <div class="masterpiece-title">
-      <div class="name-title">ABDUL HANNAN</div>
-      <div class="role-title">5x hackathon winner · FULL STACK ENGINEER</div>
-    </div>
-
-    <!-- Sparkle System -->
-    <div class="sparkle-system" id="sparkleSystem"></div>
-
-    <!-- Light Orbs -->
-    <div class="light-orb" style="top: 10%; left: -5%;"></div>
-    <div class="light-orb" style="bottom: 10%; right: -5%; animation-delay: 2s;"></div>
-    <div class="light-orb" style="top: 50%; right: 20%; width: 200px; height: 200px; animation-delay: 4s;"></div>
-
-    <!-- Stats - Right Side -->
-    <div class="stats-container">
-      <div class="stat-item"><span class="stat-number">50+</span> Projects Delivered</div>
-      <div class="stat-item"><span class="stat-number">5000+</span> Users Scaled</div>
-      <div class="stat-item"><span class="stat-number">4+</span> Years Experience</div>
-    </div>
-
-    <!-- Stats - Left Side -->
-    <div class="left-stats">
-      <div class="stat-item"><span class="stat-number">98%</span> Client Satisfaction</div>
-      <div class="stat-item"><span class="stat-number">24/7</span> Support</div>
-      <div class="stat-item"><span class="stat-number">∞</span> Passion</div>
-    </div>
-
-    <!-- Premium Progress -->
-    <div class="premium-progress">
-      <div class="progress-bar-premium">
-        <div class="progress-fill-premium" id="progressFillPremium"></div>
-      </div>
-      <div class="progress-label" id="progressLabel">INITIALIZING PORTFOLIO</div>
-    </div>
-  </div>
-</div>
-
-<script>
-  (function() {
-    const preloader = document.getElementById('masterpiecePreloader');
-    const progressFill = document.getElementById('progressFillPremium');
-    const progressLabel = document.getElementById('progressLabel');
-    const sparkleSystem = document.getElementById('sparkleSystem');
-    
-    let progress = 0;
-    const duration = 7000; // 7 seconds
-    const startTime = Date.now();
-    
-    // Progress labels sequence
-    const labels = [
-      "INITIALIZING PORTFOLIO",
-      "LOADING EXPERIENCE",
-      "PREPARING SHOWCASE",
-      "ALMOST READY",
-      "READY TO LAUNCH"
-    ];
-    
-    let labelIndex = 0;
-    
-    function updateLabel() {
-      if (labelIndex < labels.length) {
-        progressLabel.style.opacity = '0';
-        setTimeout(() => {
-          progressLabel.textContent = labels[labelIndex];
-          progressLabel.style.opacity = '1';
-        }, 150);
-        labelIndex++;
-      }
-    }
-    
-    // Create sparkle effect
-    function createSparkle() {
-      const sparkle = document.createElement('div');
-      sparkle.className = 'sparkle';
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      sparkle.style.left = x + 'px';
-      sparkle.style.top = y + 'px';
-      sparkle.style.animation = `sparkleFade ${0.6 + Math.random() * 0.8}s ease-out forwards`;
-      sparkleSystem.appendChild(sparkle);
-      
-      setTimeout(() => sparkle.remove(), 800);
-    }
-    
-    // Sparkle animation
-    const sparkleStyle = document.createElement('style');
-    sparkleStyle.textContent = `
-      @keyframes sparkleFade {
-        0% { opacity: 1; transform: scale(1); width: 3px; height: 3px; }
-        100% { opacity: 0; transform: scale(0); width: 0; height: 0; }
-      }
-    `;
-    document.head.appendChild(sparkleStyle);
-    
-    // Continuous sparkles
-    const sparkleInterval = setInterval(() => {
-      if (!preloader.classList.contains('fade-out')) {
-        for (let i = 0; i < 3; i++) {
-          setTimeout(() => createSparkle(), i * 50);
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { electric: '#0326FC', dark: '#000000' },
+          fontFamily: { satoshi: ['Satoshi', 'sans-serif'], inter: ['Inter', 'sans-serif'] }
         }
       }
-    }, 300);
-    
-    // Particle burst at milestones
-    function createSparkleBurst() {
-      for (let i = 0; i < 30; i++) {
-        setTimeout(() => {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const angle = Math.random() * Math.PI * 2;
-          const distance = 100 + Math.random() * 150;
-          const centerX = window.innerWidth / 2;
-          const centerY = window.innerHeight / 2;
-          sparkle.style.left = centerX + Math.cos(angle) * distance + 'px';
-          sparkle.style.top = centerY + Math.sin(angle) * distance + 'px';
-          sparkle.style.animation = `sparkleFade 0.8s ease-out forwards`;
-          sparkleSystem.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 800);
-        }, i * 15);
-      }
     }
-    
-    // Update Progress
-    function updateProgress() {
-      const elapsed = Date.now() - startTime;
-      progress = Math.min(100, (elapsed / duration) * 100);
-      
-      progressFill.style.width = progress + '%';
-      
-      // Update label based on progress
-      if (progress >= 20 && progress < 40 && labelIndex === 1) updateLabel();
-      else if (progress >= 40 && progress < 60 && labelIndex === 2) updateLabel();
-      else if (progress >= 60 && progress < 80 && labelIndex === 3) updateLabel();
-      else if (progress >= 80 && labelIndex === 4) updateLabel();
-      
-      // Milestone effects
-      if (progress >= 25 && progress < 26) {
-        createSparkleBurst();
-        const geometry = document.querySelector('.floating-geometry');
-        geometry.style.animation = 'floatGeometry 4s ease-in-out infinite';
-      }
-      if (progress >= 50 && progress < 51) {
-        createSparkleBurst();
-        const orbs = document.querySelectorAll('.light-orb');
-        orbs.forEach(orb => orb.style.animationDuration = '5s');
-      }
-      if (progress >= 75 && progress < 76) {
-        createSparkleBurst();
-        const title = document.querySelector('.name-title');
-        title.style.animation = 'none';
-        title.offsetHeight;
-        title.style.animation = 'textReveal 0.6s ease-out forwards';
-      }
-      
-      if (progress < 100) {
-        requestAnimationFrame(updateProgress);
-      } else {
-        completePreloader();
-      }
-    }
-    
-    // Start first label
-    setTimeout(() => updateLabel(), 200);
-    
-    // Start progress
-    requestAnimationFrame(updateProgress);
-    
-    // Complete Preloader
-    function completePreloader() {
-      // Final sparkle explosion
-      for (let i = 0; i < 60; i++) {
-        setTimeout(() => {
-          const sparkle = document.createElement('div');
-          sparkle.className = 'sparkle';
-          const angle = Math.random() * Math.PI * 2;
-          const distance = 80 + Math.random() * 120;
-          const centerX = window.innerWidth / 2;
-          const centerY = window.innerHeight / 2;
-          sparkle.style.left = centerX + Math.cos(angle) * distance + 'px';
-          sparkle.style.top = centerY + Math.sin(angle) * distance + 'px';
-          sparkle.style.width = '4px';
-          sparkle.style.height = '4px';
-          sparkle.style.background = '#0326fc';
-          sparkle.style.animation = `sparkleFade 0.5s ease-out forwards`;
-          sparkleSystem.appendChild(sparkle);
-          setTimeout(() => sparkle.remove(), 500);
-        }, i * 8);
-      }
-      
-      // Final label
-      progressLabel.textContent = "WELCOME";
-      
-      setTimeout(() => {
-        preloader.classList.add('fade-out');
-        setTimeout(() => {
-          preloader.style.display = 'none';
-          clearInterval(sparkleInterval);
-        }, 1200);
-      }, 400);
-    }
-    
-    // Lock body during preloader
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.body.style.overflow = '';
-      }, 8000);
-    });
-  })();
-</script>
+  </script>
 
-<!-- NAVBAR - FIXED -->
-<nav class="fixed top-0 left-0 w-full z-[60] terminal-panel border-t-0 border-l-0 border-r-0 border-b border-[#0326fc]/40">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-      
-      <!-- Logo -->
-      <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tighter text-white relative group z-[70]">
-        <span class="text-[#0326fc]">{`</span> Abdul Hannan`}
-        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#0326fc] transition-all duration-300 group-hover:w-full"></span>
-      </a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium">
-        <a href="index.html" class="nav-link text-white hover:text-[#0326fc] transition-colors px-2 py-1">[ ~ ] home</a>
-        <a href="about.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">about</a>
-        <a href="skills.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">skills</a>
-        <a href="projects.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">projects</a>
-        <a href="experience.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">experience</a>
-        <a href="contact.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">contact</a>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="loading-screen" aria-hidden="true">
+    <canvas class="loading-matrix" aria-hidden="true"></canvas>
+    <div class="loading-scanner" aria-hidden="true"></div>
+    <div class="loading-inner">
+      <div class="terminal-header">
+        <span class="terminal-logo">AH</span><span class="terminal-accent">.</span><span class="terminal-path">@system:~$</span>
       </div>
+      <div class="terminal-body">
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Initializing kernel..."></span><span class="status"></span></div>
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Loading AI modules..."></span><span class="status"></span></div>
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Establishing secure tunnel..."></span><span class="status"></span></div>
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Decrypting payload..."></span><span class="status"></span></div>
+        <div class="terminal-line access-line" style="display:none"><span class="prompt">❯</span> <span class="access-text"></span></div>
+      </div>
+      <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+      <div class="loading-percent">0%</div>
+    </div>
+  </div>
 
-      <!-- Mobile Menu Button -->
-      <button id="mobileMenuBtn" class="md:hidden text-white text-2xl focus:outline-none z-[70] w-10 h-10 flex items-center justify-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all rounded">
-        <span id="menuIcon">⎔</span>
-        <span id="closeIcon" class="hidden">✕</span>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="scroll-progress" role="progressbar" aria-label="Scroll progress"></div>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Abdul Hannan Home">AH<span aria-hidden="true">.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
+  </nav>
+
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
   </div>
-</nav>
 
-<!-- Mobile Menu Dropdown -->
-<div id="mobileMenu" class="hidden">
-  <div class="flex flex-col items-center justify-start pt-8 px-6 space-y-4">
-    <a href="index.html" class="mobile-link text-2xl text-[#0326fc] font-bold w-full text-center py-4 border-b border-[#0326fc]/30">[ ~ ] home</a>
-    <a href="about.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">about</a>
-    <a href="skills.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">skills</a>
-    <a href="projects.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">projects</a>
-    <a href="experience.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">experience</a>
-    <a href="contact.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">contact</a>
-  </div>
-</div>
+  <main id="main-content">
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="grid-bg grid-bg-dark" aria-hidden="true"></div>
+      <div class="hero-gradient" aria-hidden="true"></div>
+      <div class="hero-gradient-2" aria-hidden="true"></div>
+      <div class="hero-particles" aria-hidden="true"></div>
 
-<!-- Spacer for fixed navbar -->
-<div class="h-16"></div>
-
-<!-- Background Shapes -->
-<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-  <div class="shape-3d top-20 left-1/4"></div>
-  <div class="shape-3d bottom-40 right-20 w-96 h-96 bg-[#0326fc] opacity-20 blur-[90px]"></div>
-</div>
-
-<main class="relative z-10">
-
-  <!-- HERO SECTION -->
-  <section class="min-h-[90vh] flex items-center justify-center px-4 pt-12 pb-20 border-b border-[#0326fc]/20">
-    <div class="max-w-5xl w-full">
-      <!-- Typing intro -->
-      <div class="font-mono text-[#0326fc] text-sm md:text-base tracking-widest mb-3 cmd-prompt animate-ready" id="heroPrompt">whoami</div>
-      
-      <h1 class="text-4xl md:text-7xl font-bold leading-[1.1] tracking-tight mb-6">
-        <span class="block text-white animate-ready" id="heroLine1">I'm <span class="text-[#0326fc]">//</span> Abdul Hannan</span>
-        <span class="block text-white/90 text-3xl md:text-6xl mt-2 flex flex-wrap items-baseline gap-4 animate-ready" id="heroLine2">
-          <span class="cmd-prompt text-2xl md:text-3xl text-[#0326fc]"></span>
-          <span id="typedLine" class="text-white"></span>
-        </span>
-      </h1>
-      
-      <!-- Intro text -->
-      <div class="mt-8 max-w-2xl text-gray-300 text-lg md:text-xl space-y-4 border-l-4 border-[#0326fc] pl-6 animate-ready" id="heroIntro">
-        <p class="cmd-prompt text-base text-[#0326fc]"> Intro.txt</p>
-        <p>frontend designer · full-stack engineer · digital problem solver, since 2022</p>
-        <p>engineering award-level interfaces for startups, brands, and SaaS.</p>
-      </div>
-      
-      <!-- Skills preview + CTA -->
-      <div class="flex flex-wrap items-center gap-6 mt-12 animate-ready" id="heroCta">
-        <div class="flex flex-wrap gap-2 sm:gap-4 text-sm font-mono">
-          <span class="border border-[#0326fc]/40 px-3 sm:px-4 py-2 text-white/80 hover:border-[#0326fc] transition">WordPress</span>
-          <span class="border border-[#0326fc]/40 px-3 sm:px-4 py-2 text-white/80 hover:border-[#0326fc] transition">Elementor</span>
-          <span class="border border-[#0326fc]/40 px-3 sm:px-4 py-2 text-white/80 hover:border-[#0326fc] transition">MySQL</span>
-          <span class="border border-[#0326fc]/40 px-3 sm:px-4 py-2 text-white/80 hover:border-[#0326fc] transition">PHP</span>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          Available for Product Building
         </div>
-        <a href="projects.html" class="group ml-auto flex items-center gap-2 bg-[#0326fc] hover:bg-[#0326fc]/90 text-white px-6 sm:px-8 py-3 sm:py-4 font-medium tracking-wide transition-all duration-300 shadow-[0_0_20px_#0326fc] hover:shadow-[0_0_35px_#0326fc]">
-          <span>view projects</span>
-          <span class="text-xl group-hover:translate-x-1 transition-transform">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <!-- WHY ME SECTION -->
-  <section class="py-24 sm:py-32 px-4 border-b border-[#0326fc]/20">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-        <div class="animate-ready" id="whyLeft">
-          <span class="text-[#0326fc] font-mono text-sm tracking-widest">// value proposition</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-4 leading-tight">engineer at the edge of <span class="text-[#0326fc]">complexity</span></h2>
-          <div class="h-1 w-20 bg-[#0326fc] my-8"></div>
+        <h1 class="hero-title">Abdul Hannan</h1>
+
+        <p class="hero-subtitle">AI-Integrated Product Engineer &middot; Web Application Developer &middot; Co-Founder @ VBuild</p>
+
+        <p class="hero-subtitle hero-subtitle-sm">
+          <span class="hero-rotating">An Engineer Who Turns Chaos Into Products</span>
+        </p>
+
+        <div class="hero-cta">
+          <a href="https://www.instagram.com/hannanbuilds/" target="_blank" rel="noopener" class="btn btn-primary" aria-label="Let's Build Together on Instagram">
+            Let's Build Together
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="projects.html" class="btn btn-secondary">View Projects</a>
         </div>
-        <div class="space-y-6 text-gray-300 text-base sm:text-lg animate-ready" id="whyRight">
-          <p class="cmd-prompt text-[#0326fc]">echo "why_me"</p>
-          <p>I don't just write components — I design systems that scale, feel alive, and stay buttery-smooth. My workflow merges hacker mindset with apple-like minimalism.</p>
-          <p>Every line is a decision: accessibility, performance, and visual hierarchy. I build for the next decade, not the next framework.</p>
-          <div class="flex gap-6 pt-4">
-            <div><span class="text-2xl sm:text-3xl font-bold text-[#0326fc]">4+</span> <span class="block text-xs sm:text-sm">years elite dev</span></div>
-            <div><span class="text-2xl sm:text-3xl font-bold text-[#0326fc]">100+</span> <span class="block text-xs sm:text-sm">problems solved</span></div>
+
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="hero-stat-number">100+</div><div class="hero-stat-label">Websites Built</div></div>
+          <div class="hero-stat"><div class="hero-stat-number">30+</div><div class="hero-stat-label">Clients Served</div></div>
+          <div class="hero-stat"><div class="hero-stat-number">3</div><div class="hero-stat-label">SaaS Products Built</div></div>
+          <div class="hero-stat"><div class="hero-stat-number">7+</div><div class="hero-stat-label">International Clients</div></div>
+          <div class="hero-stat"><div class="hero-stat-number">$600+</div><div class="hero-stat-label">Revenue Generated</div></div>
+        </div>
+      </div>
+
+      <div class="hero-portrait-area">
+        <div class="hero-portrait-frame">
+          <img src="images/p-1.jpg" alt="Abdul Hannan Portrait" class="hero-portrait-img" loading="lazy">
+          <div class="portrait-glow" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <div class="hero-floating-elements" aria-hidden="true">
+        <span class="floating-el" style="top:20%;left:10%">Product</span>
+        <span class="floating-el" style="top:60%;left:5%">SaaS</span>
+        <span class="floating-el" style="top:30%;right:15%">AI</span>
+        <span class="floating-el" style="bottom:30%;right:8%">Build</span>
+        <span class="floating-el" style="top:70%;left:20%">Ship</span>
+        <span class="floating-el" style="bottom:20%;left:40%">Scale</span>
+      </div>
+    </section>
+
+    <section class="section section-dark p-6" aria-label="Philosophy">
+      <div class="section-inner">
+        <div class="philosophy-grid">
+          <div class="philosophy-statement reveal"><span class="num">01</span>Build before perfect.</div>
+          <div class="philosophy-statement reveal"><span class="num">02</span>Ship before overthinking.</div>
+          <div class="philosophy-statement reveal"><span class="num">03</span>Products solve problems.</div>
+          <div class="philosophy-statement reveal"><span class="num">04</span>Learning compounds.</div>
+          <div class="philosophy-statement reveal philosophy-full"><span class="num">05</span>Execution beats ideas.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" aria-label="Services">
+      <div class="section-inner">
+        <div class="mb-section">
+          <span class="section-label">What I Do</span>
+          <h2 class="section-title">Services</h2>
+          <p class="section-subtitle">From idea to launch — I build products that solve real business problems.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0326FC" stroke-width="2" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h3 class="service-card-title">SaaS Product Development</h3>
+            <p class="service-card-desc">Full-cycle SaaS development from architecture to deployment. Scalable, secure, and built for growth.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0326FC" stroke-width="2" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <h3 class="service-card-title">MVP Development</h3>
+            <p class="service-card-desc">Rapid prototyping and MVP building. Validate your idea with a working product, not a pitch deck.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0326FC" stroke-width="2" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <h3 class="service-card-title">Full Stack Development</h3>
+            <p class="service-card-desc">End-to-end web development. Frontend, backend, deployment — everything needed to launch.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0326FC" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <h3 class="service-card-title">Product Planning</h3>
+            <p class="service-card-desc">Strategic product planning, user flows, and requirement documentation. Clarity before code.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0326FC" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <h3 class="service-card-title">Product Validation</h3>
+            <p class="service-card-desc">Validate your product idea before building. Market research, competitor analysis, and feasibility studies.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="service-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0326FC" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+            <h3 class="service-card-title">Startup Prototyping</h3>
+            <p class="service-card-desc">Interactive prototypes that look and feel like real products. Test with users before investing in development.</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-3">
+          <a href="services.html" class="btn btn-outline">View All Services</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-gray" aria-label="Featured Projects">
+      <div class="section-inner">
+        <div class="mb-section">
+          <span class="section-label">Featured Work</span>
+          <h2 class="section-title">Projects</h2>
+          <p class="section-subtitle">Real products built for real businesses. Each one tells a story.</p>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-image" style="background:linear-gradient(135deg,#0a0a1a,#1a1a3e)">
+            <div class="project-image-glow" aria-hidden="true"></div>
+            <div class="project-mockup">WorkStation</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-card-tags">
+              <span class="project-tag project-tag-orange">SaaS</span>
+              <span class="project-tag">Team Productivity</span>
+              <span class="project-tag">All-in-One</span>
+            </div>
+            <h3 class="project-card-title">WorkStation</h3>
+            <p class="project-card-desc">An all-in-one team workspace that replaces WhatsApp, Email, and Spreadsheets. Built by a founder for founders.</p>
+            <div class="project-card-details">
+              <div class="project-detail-item"><div class="project-detail-label">Problem</div><div class="project-detail-value">Scattered team communication</div></div>
+              <div class="project-detail-item"><div class="project-detail-label">Solution</div><div class="project-detail-value">Unified workspace</div></div>
+              <div class="project-detail-item"><div class="project-detail-label">Features</div><div class="project-detail-value">Tasks, Leads, Voice Notes</div></div>
+              <div class="project-detail-item"><div class="project-detail-label">Impact</div><div class="project-detail-value">Streamlined team operations</div></div>
+            </div>
+            <a href="projects.html" class="btn btn-outline btn-sm">View Case Study</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-image" style="background:linear-gradient(135deg,#0a1628,#0326FC22)">
+            <div class="project-image-glow" aria-hidden="true"></div>
+            <div class="project-mockup">Talent Tree JP</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-card-tags">
+              <span class="project-tag">Web Platform</span>
+              <span class="project-tag">International</span>
+              <span class="project-tag">Japan</span>
+            </div>
+            <h3 class="project-card-title">Talent Tree JP</h3>
+            <p class="project-card-desc">A talent acquisition and management platform built for the Japanese market. Connecting companies with top talent.</p>
+            <div class="project-card-details">
+              <div class="project-detail-item"><div class="project-detail-label">Client</div><div class="project-detail-value">International (Japan)</div></div>
+              <div class="project-detail-item"><div class="project-detail-label">Type</div><div class="project-detail-value">Full Stack Platform</div></div>
+            </div>
+            <a href="projects.html" class="btn btn-outline btn-sm">View Case Study</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-image" style="background:linear-gradient(135deg,#0a1a0a,#0326FC22)">
+            <div class="project-image-glow" aria-hidden="true"></div>
+            <div class="project-mockup">ClinicFlowPro</div>
+          </div>
+          <div class="project-card-body">
+            <div class="project-card-tags">
+              <span class="project-tag">SaaS</span>
+              <span class="project-tag">Healthcare</span>
+              <span class="project-tag">Management</span>
+            </div>
+            <h3 class="project-card-title">ClinicFlowPro</h3>
+            <p class="project-card-desc">A clinic management platform that streamlines patient scheduling, records, and billing for healthcare providers.</p>
+            <div class="project-card-details">
+              <div class="project-detail-item"><div class="project-detail-label">Problem</div><div class="project-detail-value">Manual clinic operations</div></div>
+              <div class="project-detail-item"><div class="project-detail-label">Solution</div><div class="project-detail-value">Digital clinic management</div></div>
+            </div>
+            <a href="projects.html" class="btn btn-outline btn-sm">View Case Study</a>
+          </div>
+        </div>
+
+        <div class="text-center mt-2">
+          <a href="projects.html" class="btn btn-outline">View All Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" aria-label="AI Integration">
+      <div class="section-inner">
+        <div class="ai-statement">
+          <span class="section-label" style="text-align:center;display:block">AI Integration</span>
+          <div class="quote reveal">"AI accelerates my workflow. It does not replace my thinking."</div>
+          <p class="text-muted-light mx-auto max-w-600" style="line-height:1.7">
+            I use AI strategically — for research, planning, architecture discussions, documentation, and workflow automation. The product decisions, architecture, and quality standards are mine.
+          </p>
+          <div class="ai-uses">
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x1F50D;</span><span class="label">Research</span></div>
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x1F4CB;</span><span class="label">Planning</span></div>
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x1F4AC;</span><span class="label">Architecture</span></div>
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x1F4DD;</span><span class="label">Documentation</span></div>
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x2699;&#xFE0F;</span><span class="label">Automation</span></div>
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x1F9E0;</span><span class="label">Problem Solving</span></div>
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x1F916;</span><span class="label">Multi-Agent Systems</span></div>
+            <div class="ai-use-item reveal"><span class="emoji" aria-hidden="true">&#x1F4E6;</span><span class="label">Product Development</span></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- SKILLS PREVIEW -->
-  <section class="py-20 sm:py-24 px-4">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-12 sm:mb-16 animate-ready" id="skillsHeader">
-        <span class="text-[#0326fc] font-mono text-sm tracking-widest">$ stack --list</span>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-2">core <span class="text-[#0326fc]">toolset</span></h2>
-      </div>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6" id="skillsGrid">
-        <div class="terminal-panel p-4 sm:p-6 text-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
-          <div class="text-3xl sm:text-4xl mb-2 text-[#0326fc]">&lt;/&gt;</div>
-          <div class="font-bold text-base sm:text-lg">Html & Bootstrap</div>
-          <div class="text-xs text-gray-400">compositional pattern</div>
+    <section class="section section-light" aria-label="Testimonials">
+      <div class="section-inner">
+        <div class="mb-section">
+          <span class="section-label">Testimonials</span>
+          <h2 class="section-title">What People Say</h2>
+          <p class="section-subtitle">Feedback from clients and collaborators.</p>
         </div>
-        <div class="terminal-panel p-4 sm:p-6 text-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
-          <div class="text-3xl sm:text-4xl mb-2 text-[#0326fc]">{ }</div>
-          <div class="font-bold text-base sm:text-lg">MySQL & PHP</div>
-          <div class="text-xs text-gray-400">logic & apis</div>
-        </div>
-        <div class="terminal-panel p-4 sm:p-6 text-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
-          <div class="text-3xl sm:text-4xl mb-2 text-[#0326fc]">◉</div>
-          <div class="font-bold text-base sm:text-lg">GSAP · Framer</div>
-          <div class="text-xs text-gray-400">butter motion</div>
-        </div>
-        <div class="terminal-panel p-4 sm:p-6 text-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
-          <div class="text-3xl sm:text-4xl mb-2 text-[#0326fc]">⎔</div>
-          <div class="font-bold text-base sm:text-lg">Tailwind / CSS</div>
-          <div class="text-xs text-gray-400">pixel perfect</div>
-        </div>
-      </div>
-      
-      <div class="text-center mt-10 sm:mt-14 animate-ready" id="skillsCta">
-        <a href="skills.html" class="inline-flex items-center gap-2 text-white border border-[#0326fc] px-6 sm:px-8 py-3 sm:py-4 hover:bg-[#0326fc]/10 transition-all"> explore full arsenal →</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="terminal-panel border-b-0 border-l-0 border-r-0 border-t border-[#0326fc]/30 py-8 sm:py-12 px-4">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400">
-      <div class="font-mono"> <span class="text-[#0326fc]">{`Abdul Hannan`}</span> © 2025 </div>
-      <div class="flex gap-4 sm:gap-6">
-        <a href="#" class="hover:text-[#0326fc] transition">github</a>
-        <a href="https://www.linkedin.com/in/abdulhannan-projects/" class="hover:text-[#0326fc] transition">linkedin</a>
-        <a href="#" class="hover:text-[#0326fc] transition">x</a>
+        <div class="testimonials-grid">
+          <div class="testimonial-card reveal">
+            <div class="testimonial-text">"Abdul doesn't just build what you ask for — he thinks about whether what you're asking for actually solves the problem. That product mindset is rare."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">AK</div>
+              <div><div class="testimonial-name">Ahmad Khan</div><div class="testimonial-role">Founder, TechStart</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-text">"Working with Abdul felt like having a co-founder who could execute. He understood the vision immediately and delivered beyond expectations."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">SM</div>
+              <div><div class="testimonial-name">Sarah Mitchell</div><div class="testimonial-role">CEO, HealthFlow</div></div>
+            </div>
+          </div>
+          <div class="testimonial-card reveal">
+            <div class="testimonial-text">"The speed at which Abdul moves from concept to working prototype is impressive. He thinks like a product person, not just a developer."</div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar" aria-hidden="true">RJ</div>
+              <div><div class="testimonial-name">Ryo Tanaka</div><div class="testimonial-role">CTO, Talent Tree JP</div></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="text-xs">$ echo "Thanks for visiting!"</div>
+    </section>
+
+    <section class="section section-dark" aria-label="Future Vision">
+      <div class="section-inner">
+        <div class="vision-content">
+          <span class="section-label">Future Vision</span>
+          <h2>Building Toward<br>AI Product Engineering</h2>
+          <p>My mission is to grow VBuild into a respected product company and build an ecosystem of AI-powered SaaS businesses that solve real problems.</p>
+          <div class="vision-tags">
+            <span class="vision-tag">AI SaaS</span>
+            <span class="vision-tag">Workflow Automation</span>
+            <span class="vision-tag">Multi-Agent Systems</span>
+            <span class="vision-tag">Product Ecosystems</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light p-6" aria-label="Call to Action">
+      <div class="section-inner text-center">
+        <h2 class="section-title mx-auto max-w-600 mb-1">Have an idea? Let's build something useful.</h2>
+        <p class="text-muted mx-auto max-w-500" style="line-height:1.7;margin-bottom:2rem">
+          Whether it's a SaaS product, an MVP, or a full platform — I can take your idea from concept to launch.
+        </p>
+        <a href="https://www.instagram.com/hannanbuilds/" target="_blank" rel="noopener" class="btn btn-primary">
+          Start Building
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-text">&copy; 2026 Abdul Hannan. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/abdulhannan-projects/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+        <a href="https://www.instagram.com/hannanbuilds/" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+        <a href="mailto:projects.abdulhannan@gmail.com" class="footer-link">Email</a>
+      </div>
     </div>
   </footer>
-</main>
 
-<!-- Mobile Menu JavaScript -->
-<script>
-  (function() {
-    // Mobile Menu Toggle
-    const menuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuIcon = document.getElementById('menuIcon');
-    const closeIcon = document.getElementById('closeIcon');
-    
-    if (menuBtn && mobileMenu) {
-      menuBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const isHidden = mobileMenu.classList.contains('hidden');
-        
-        if (isHidden) {
-          mobileMenu.classList.remove('hidden');
-          menuIcon.classList.add('hidden');
-          closeIcon.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
-        } else {
-          mobileMenu.classList.add('hidden');
-          menuIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      });
-
-      document.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', function() {
-          mobileMenu.classList.add('hidden');
-          menuIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
-          document.body.style.overflow = '';
-        });
-      });
-
-      window.addEventListener('resize', function() {
-        if (window.innerWidth >= 768) {
-          mobileMenu.classList.add('hidden');
-          menuIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      });
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-          mobileMenu.classList.add('hidden');
-          menuIcon.classList.remove('hidden');
-          closeIcon.classList.add('hidden');
-          document.body.style.overflow = '';
-        }
-      });
-    }
-
-    // Cursor Glow
-    const cursor = document.getElementById('cursorGlow');
-    if (cursor) {
-      setTimeout(() => { cursor.style.opacity = '1'; }, 100);
-      window.addEventListener('mousemove', (e) => {
-        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.8, ease: 'power2.out' });
-      });
-    }
-
-    // Typing animation
-    const typedSpan = document.getElementById('typedLine');
-    if (typedSpan) {
-      const texts = ['WordPress developer,', 'Full stack engineer,', '5x Hackathon winner,', 'Creative Technologist,', 'Ownership Mindset,', 'Problem solver.'];
-      let idx = 0, charIdx = 0, isDeleting = false;
-      typedSpan.classList.add('typing-cursor');
-      
-      function typeEffect() {
-        const fullText = texts[idx];
-        typedSpan.textContent = isDeleting ? fullText.substring(0, charIdx - 1) : fullText.substring(0, charIdx + 1);
-        if (!isDeleting && charIdx++ === fullText.length) {
-          isDeleting = true;
-          setTimeout(typeEffect, 1500);
-        } else if (isDeleting && charIdx-- === 0) {
-          isDeleting = false;
-          idx = (idx + 1) % texts.length;
-          setTimeout(typeEffect, 200);
-        } else {
-          setTimeout(typeEffect, isDeleting ? 40 : 70);
-        }
-      }
-      setTimeout(typeEffect, 1000);
-    }
-
-    // GSAP Animations
-    gsap.registerPlugin(ScrollTrigger);
-    const animateElements = document.querySelectorAll('.animate-ready');
-    gsap.set(animateElements, { opacity: 0, y: 20 });
-
-    setTimeout(() => {
-      const tl = gsap.timeline();
-      tl.to('#heroPrompt', { opacity: 1, y: 0, duration: 0.8 })
-        .to('#heroLine1', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
-        .to('#heroLine2', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
-        .to('#heroIntro', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
-        .to('#heroCta', { opacity: 1, y: 0, duration: 0.8 }, '-=0.2');
-
-      ScrollTrigger.create({
-        trigger: '#skillsGrid',
-        start: 'top 80%',
-        onEnter: () => gsap.to('#skillsGrid .animate-ready', { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 })
-      });
-
-      gsap.utils.toArray(['#whyLeft', '#whyRight', '#skillsHeader', '#skillsCta']).forEach(el => {
-        ScrollTrigger.create({ trigger: el, start: 'top 85%', onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.8 }) });
-      });
-    }, 100);
-
-    // Hover effects
-    document.querySelectorAll('a, button, .border').forEach(el => {
-      el.addEventListener('mouseenter', () => gsap.to(el, { scale: 1.02, duration: 0.2 }));
-      el.addEventListener('mouseleave', () => gsap.to(el, { scale: 1, duration: 0.2 }));
-    });
-  })();
-</script>
-<!-- SMART AI CHATBOT - Psychology-Aware Assistant -->
-<style>
-  /* Chatbot Styles */
-  .chatbot-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 9998;
-    font-family: 'Space Grotesk', monospace;
-  }
-  
-  .chatbot-toggle {
-    width: 60px;
-    height: 60px;
-    background: #0326fc;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(3, 38, 252, 0.5);
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255,255,255,0.2);
-  }
-  
-  .chatbot-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(3, 38, 252, 0.8);
-  }
-  
-  .chatbot-window {
-    position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 380px;
-    height: 550px;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid #0326fc;
-    border-radius: 12px;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    animation: slideUp 0.3s ease;
-  }
-  
-  .chatbot-window.open {
-    display: flex;
-  }
-  
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .chatbot-header {
-    background: #0326fc;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-  }
-  
-  .chatbot-header h3 {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .chatbot-header .close-btn {
-    cursor: pointer;
-    font-size: 20px;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.2s;
-  }
-  
-  .chatbot-header .close-btn:hover {
-    background: rgba(255,255,255,0.2);
-  }
-  
-  .chatbot-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .message {
-    max-width: 85%;
-    padding: 10px 14px;
-    border-radius: 12px;
-    font-size: 13px;
-    line-height: 1.5;
-    word-wrap: break-word;
-  }
-  
-  .message.user {
-    background: #0326fc;
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-  }
-  
-  .message.bot {
-    background: rgba(3, 38, 252, 0.2);
-    border: 1px solid rgba(3, 38, 252, 0.3);
-    color: #fff;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-  }
-  
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    padding: 10px 14px;
-    background: rgba(3, 38, 252, 0.2);
-    border: 1px solid rgba(3, 38, 252, 0.3);
-    border-radius: 12px;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-  }
-  
-  .typing-indicator span {
-    width: 6px;
-    height: 6px;
-    background: #0326fc;
-    border-radius: 50%;
-    animation: typing 1.4s infinite;
-  }
-  
-  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-  
-  @keyframes typing {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-    30% { transform: translateY(-10px); opacity: 1; }
-  }
-  
-  .chatbot-input {
-    padding: 15px;
-    border-top: 1px solid rgba(3, 38, 252, 0.3);
-    display: flex;
-    gap: 10px;
-  }
-  
-  .chatbot-input input {
-    flex: 1;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(3, 38, 252, 0.3);
-    padding: 10px 12px;
-    border-radius: 8px;
-    color: white;
-    font-family: 'Space Grotesk', monospace;
-    font-size: 13px;
-    outline: none;
-  }
-  
-  .chatbot-input input:focus {
-    border-color: #0326fc;
-  }
-  
-  .chatbot-input button {
-    background: #0326fc;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s;
-  }
-  
-  .chatbot-input button:hover {
-    transform: scale(1.05);
-  }
-  
-  @media (max-width: 480px) {
-    .chatbot-window {
-      width: calc(100vw - 40px);
-      right: 20px;
-      height: 500px;
-    }
-  }
-  
-  /* Quick suggestions */
-  .quick-suggestions {
-    padding: 10px 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    border-top: 1px solid rgba(3, 38, 252, 0.2);
-  }
-  
-  .suggestion-chip {
-    background: rgba(3, 38, 252, 0.15);
-    border: 1px solid rgba(3, 38, 252, 0.3);
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  .suggestion-chip:hover {
-    background: #0326fc;
-    color: black;
-  }
-</style>
-
-<div class="chatbot-container">
-  <div class="chatbot-toggle" id="chatbotToggle">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      <path d="M8 10h.01M12 10h.01M16 10h.01" stroke="white" stroke-width="2"/>
-    </svg>
-  </div>
-  
-  <div class="chatbot-window" id="chatbotWindow">
-    <div class="chatbot-header">
-      <h3>
-        <span style="font-size: 18px;">$</span> AI ASSISTANT
-      </h3>
-      <div class="close-btn" id="chatbotClose">✕</div>
-    </div>
-    <div class="chatbot-messages" id="chatbotMessages">
-      <div class="message bot">
-        Hey 👋 I'm the AI assistant for <span style="color: #0326fc;">Abdul Hannan</span>. Ask me anything about his skills, experience, projects, or how we can work together!
-      </div>
-    </div>
-    <div class="quick-suggestions" id="quickSuggestions">
-      <span class="suggestion-chip" data-question="What skills does Abdul Hannan have?">💻 Skills</span>
-      <span class="suggestion-chip" data-question="What projects has he built?">🚀 Projects</span>
-      <span class="suggestion-chip" data-question="What's his work experience?">💼 Experience</span>
-      <span class="suggestion-chip" data-question="How can I hire him?">🤝 Hire me</span>
-      <span class="suggestion-chip" data-question="What's his contact info?">📧 Contact</span>
-    </div>
-    <div class="chatbot-input">
-      <input type="text" id="chatbotInput" placeholder="Ask me anything..." />
-      <button id="chatbotSend">→</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  (function() {
-    // ============================================================
-    // COMPLETE KNOWLEDGE BASE - Based on Abdul Hannan's Portfolio
-    // ============================================================
-    
-    const profile = {
-      // Basic Info
-      name: "Abdul Hannan",
-      fullName: "Abdul Hannan",
-      title: "Frontend designer & Full-Stack Engineer",
-      brand: "hannanbuilds",
-      since: 2022,
-      yearsOfExperience: 4,
-      tagline: "frontend designer · full-stack engineer · digital problem solver",
-      
-      // Philosophy
-      philosophy: [
-        "Clarity over complexity — the best code is code you don't have to debug",
-        "Motion with meaning — every animation guides attention, no gratuitous movement",
-        "Future-proof — build for tomorrow's standards, today",
-        "Radical clarity — readable systems beat clever hacks",
-        "User-first by default — if users notice the tech, it failed",
-        "Never finished — always connect, imagine, launch"
-      ],
-      
-      // Skills
-      skills: {
-        frontend: ["HTML", "CSS", "Tailwind CSS", "Bootstrap", "JavaScript", "GSAP", "Framer Motion"],
-        backend: ["PHP", "MySQL"],
-        cms: ["WordPress", "Elementor", "WooCommerce"],
-        tools: ["Webpack", "Storybook", "Vercel", "Netlify", "Git", "GitHub", "VS Code", "LeetCode"],
-        design: ["Canva"]
-      },
-      
-      skillLevels: {
-        "HTML/CSS/Tailwind": 98,
-        "WordPress/Elementor": 90,
-        "MySQL": 98,
-        "PHP": 98,
-        "Canva": 95
-      },
-      
-      // Experience
-      experience: [
-        {
-          role: "Founder / Full-Stack Engineer",
-          company: "TALENT TREE JP",
-          period: "2025 — PRESENT",
-          achievements: [
-            "Built scalable PHP & MySQL backend systems using WordPress",
-            "Developed responsive frontend with Elementor/WordPress",
-            "Scaled platform to 5000+ active users"
-          ]
-        },
-        {
-          role: "Full-Stack Engineer",
-          company: "Client Projects · Agency Work",
-          period: "2023 — 2025",
-          achievements: [
-            "Delivered 50+ responsive websites & SaaS dashboards",
-            "Built high-performance UI using GSAP animations",
-            "Optimized frontend performance & UX clarity"
-          ]
-        },
-        {
-          role: "Self-Taught Developer",
-          company: "Independent Builder",
-          period: "2022 — 2023",
-          achievements: [
-            "Mastered HTML, CSS, JavaScript fundamentals",
-            "Built 30+ practice & experimental projects",
-            "Focused on performance, clean UI & scalability"
-          ]
-        }
-      ],
-      
-      // Projects
-      projects: [
-        {
-          name: "Talent Tree Job Portal",
-          description: "Full-stack job portal with WordPress backend, PHP, MySQL, serving 5000+ active users",
-          technologies: ["WordPress", "PHP", "MySQL", "Elementor"],
-          year: 2025,
-          category: "WordPress"
-        },
-        {
-          name: "codeinl∞p Portfolio",
-          description: "Elite terminal-inspired portfolio with GSAP animations and 3D effects",
-          technologies: ["HTML", "CSS", "GSAP", "Tailwind"],
-          year: 2024,
-          category: "Web"
-        },
-        {
-          name: "Voice To-Do List",
-          description: "Voice-enabled task management application",
-          technologies: ["JavaScript", "Web Speech API"],
-          year: 2024,
-          category: "Web App"
-        },
-        {
-          name: "Attendance Management System",
-          description: "Complete attendance tracking system for organizations",
-          technologies: ["PHP", "MySQL", "Bootstrap"],
-          year: 2025,
-          category: "SaaS"
-        },
-        {
-          name: "Daily Expense Manager",
-          description: "Personal finance tracking application",
-          technologies: ["PHP", "MySQL", "Tailwind"],
-          year: 2024,
-          category: "SaaS"
-        },
-        {
-          name: "AI Resume Analyzer",
-          description: "AI-powered resume analysis tool",
-          technologies: ["Python", "AI/ML", "JavaScript"],
-          year: 2026,
-          category: "SaaS"
-        }
-      ],
-      
-      // Metrics
-      metrics: {
-        projectsDelivered: "50+",
-        usersScaled: "5000+",
-        yearsExp: 4,
-        problemsSolved: "100+",
-        mentored: "15+"
-      },
-      
-      // Contact
-      contact: {
-        email: "projects.abdulhannan@gmail.com",
-        status: "ACCEPTING NEW PROJECTS",
-        responseTime: "within 24 hours"
-      },
-      
-      // Availability
-      availability: "Available for freelance projects, full-time opportunities, and collaborations",
-      
-      // Work style
-      workStyle: "Frontend-focused full-stack engineer building production-ready systems and scalable digital products"
-    };
-    
-    // ============================================================
-    // SMART INTENT RECOGNITION - Understands user psychology
-    // ============================================================
-    
-    function detectIntent(message) {
-      const msg = message.toLowerCase().trim();
-      
-      // Intent categories with weighted keywords and psychological triggers
-      const intents = {
-        identity: {
-          keywords: ['who are you', 'tell me about yourself', 'introduce yourself', 'about you', 'your name', 'hannan', 'who is', 'what do you do', 'background', 'bio'],
-          score: 0
-        },
-        skills: {
-          keywords: ['skills', 'technologies', 'tech stack', 'what can you do', 'expertise', 'know', 'proficient', 'languages', 'frameworks', 'tools', 'can you build', 'capable', 'good at'],
-          score: 0
-        },
-        experience: {
-          keywords: ['experience', 'work', 'career', 'job', 'company', 'worked', 'employed', 'past', 'background', 'history', 'where did you work', 'professional', 'roles'],
-          score: 0
-        },
-        projects: {
-          keywords: ['projects', 'portfolio', 'built', 'created', 'made', 'work', 'developed', 'applications', 'websites', 'show me', 'what have you', 'examples', 'case studies', 'work samples'],
-          score: 0
-        },
-        hire: {
-          keywords: ['hire', 'work with', 'collaborate', 'available', 'freelance', 'contract', 'rate', 'cost', 'price', 'pricing', 'charge', 'how much', 'budget', 'interested', 'opportunity', 'open to work', 'looking for'],
-          score: 0
-        },
-        contact: {
-          keywords: ['contact', 'email', 'reach', 'connect', 'message', 'call', 'phone', 'get in touch', 'how to contact', 'social media', 'discord', 'linkedin', 'twitter'],
-          score: 0
-        },
-        philosophy: {
-          keywords: ['philosophy', 'approach', 'methodology', 'work style', 'how do you work', 'process', 'mindset', 'principles', 'values', 'ethics', 'believe', 'why you', 'different'],
-          score: 0
-        },
-        talentTree: {
-          keywords: ['talent tree', 'talenttree', 'job portal', '5000 users'],
-          score: 0
-        },
-        wordpress: {
-          keywords: ['wordpress', 'elementor', 'woocommerce', 'cms', 'wp'],
-          score: 0
-        },
-        animations: {
-          keywords: ['animation', 'gsap', 'motion', 'framer', 'interaction', 'smooth', 'butter', 'effects'],
-          score: 0
-        },
-        greeting: {
-          keywords: ['hi', 'hello', 'hey', 'namaste', 'hola', 'good morning', 'good evening', 'greetings', 'what\'s up', 'howdy'],
-          score: 0
-        },
-        thanks: {
-          keywords: ['thank', 'thanks', 'appreciate', 'helpful', 'great', 'awesome', 'cool'],
-          score: 0
-        }
-      };
-      
-      for (const [intent, data] of Object.entries(intents)) {
-        let score = 0;
-        for (const keyword of data.keywords) {
-          if (msg.includes(keyword)) {
-            score += keyword.length;
-          }
-        }
-        intents[intent].score = score;
-      }
-      
-      let topIntent = 'general';
-      let topScore = 0;
-      
-      for (const [intent, data] of Object.entries(intents)) {
-        if (data.score > topScore) {
-          topScore = data.score;
-          topIntent = intent;
-        }
-      }
-      
-      return { intent: topIntent, confidence: topScore };
-    }
-    
-    function generateResponse(message, intentResult) {
-      const { intent } = intentResult;
-      
-      if (intent === 'greeting') {
-        return "Hey there! 👋 Great to connect with you. I'm Abdul Hannan's AI assistant. Ask me anything about his work — skills, projects, experience, or how to collaborate. What would you like to know?";
-      }
-      
-      if (intent === 'thanks') {
-        return "You're welcome! 🙌 If you have more questions about Abdul's work or want to collaborate, feel free to ask. Always happy to help!";
-      }
-      
-      if (intent === 'identity') {
-        return `Abdul Hannan is a ${profile.title} with ${profile.yearsOfExperience}+ years of experience. He started his journey in ${profile.since} and has since delivered ${profile.metrics.projectsDelivered} projects, scaled platforms to ${profile.metrics.usersScaled}+ users, and helped ${profile.metrics.mentored}+ developers grow. His philosophy: "${profile.philosophy[0]}"`;
-      }
-      
-      if (intent === 'skills') {
-        return `Abdul's core skills:\n\n🎨 Frontend: ${profile.skills.frontend.join(', ')}\n\n⚙️ Backend: ${profile.skills.backend.join(', ')}\n\n📦 CMS: ${profile.skills.cms.join(', ')}\n\n🛠️ Tools: ${profile.skills.tools.slice(0,6).join(', ')}\n\nHe's particularly strong in PHP (98%), MySQL (98%), HTML/CSS/Tailwind (98%), and WordPress (90%). Always pushing boundaries with GSAP animations!`;
-      }
-      
-      if (intent === 'experience') {
-        let expText = `Abdul has ${profile.yearsOfExperience}+ years of professional experience:\n\n`;
-        profile.experience.forEach(exp => {
-          expText += `➤ ${exp.role} at ${exp.company} (${exp.period})\n`;
-          exp.achievements.forEach(ach => {
-            expText += `   → ${ach}\n`;
-          });
-          expText += `\n`;
-        });
-        return expText + `Total impact: ${profile.metrics.projectsDelivered} projects delivered, ${profile.metrics.usersScaled}+ users served.`;
-      }
-      
-      if (intent === 'projects') {
-        let projectText = `Here are Abdul's featured projects:\n\n`;
-        profile.projects.forEach(proj => {
-          projectText += `➤ ${proj.name} (${proj.year})\n   → ${proj.description}\n   → Tech: ${proj.technologies.join(', ')}\n\n`;
-        });
-        return projectText + `All projects demonstrate his full-stack capabilities and attention to performance. Want details about any specific project?`;
-      }
-      
-      if (intent === 'hire') {
-        return `Yes! Abdul is currently ${profile.availability}. He's built 50+ production-ready projects and scaled platforms to 5000+ users. For collaboration inquiries:\n\n📧 Email: ${profile.contact.email}\n💼 Status: ${profile.contact.status}\n⏱️ Response: ${profile.contact.responseTime}\n\nHe's open to freelance, full-time, and consultation work. Let's build something great together!`;
-      }
-      
-      if (intent === 'contact') {
-        return `You can reach Abdul Hannan at:\n\n📧 Email: ${profile.contact.email}\n🌐 Portfolio: hannanbuilds.vercel.app\n💼 Status: ${profile.contact.status}\n\nHe typically responds within ${profile.contact.responseTime}. Ready to discuss your project!`;
-      }
-      
-      if (intent === 'philosophy') {
-        return `Abdul's development philosophy:\n\n${profile.philosophy.map(p => `➤ ${p}`).join('\n\n')}\n\nHis work style: ${profile.workStyle}. He believes great products aren't built faster — they're built clearer.`;
-      }
-      
-      if (intent === 'talentTree') {
-        return `Talent Tree Job Portal is one of Abdul's flagship projects! 🚀 He built it as Founder/Full-Stack Engineer, scaling it to 5000+ active users. Tech stack: WordPress, PHP, MySQL, Elementor. It's a full-featured job portal with custom backend logic and responsive frontend. Want to know more about how it works?`;
-      }
-      
-      if (intent === 'wordpress') {
-        return `Abdul is highly skilled in WordPress development! He's mastered WordPress, Elementor, and WooCommerce (90% proficiency). He built the Talent Tree Job Portal serving 5000+ users using WordPress + PHP + MySQL. He can handle custom themes, plugins, and complex backend integrations.`;
-      }
-      
-      if (intent === 'animations') {
-        return `Abdul is passionate about motion design! He uses GSAP and Framer Motion to create buttery-smooth, meaningful animations. His philosophy: "Motion with meaning — every animation guides attention, no gratuitous movement." Check out his portfolio (codeinl∞p) for examples of his animation work!`;
-      }
-      
-      return `I'm here to help you learn about Abdul Hannan! 💡\n\nYou can ask me about:\n• His skills and tech stack\n• His experience and career journey\n• His projects and portfolio\n• How to hire or collaborate\n• His work philosophy\n\nWhat would you like to know?`;
-    }
-    
-    // ============================================================
-    // CHATBOT UI CONTROLLER
-    // ============================================================
-    
-    const toggle = document.getElementById('chatbotToggle');
-    const windowEl = document.getElementById('chatbotWindow');
-    const closeBtn = document.getElementById('chatbotClose');
-    const sendBtn = document.getElementById('chatbotSend');
-    const input = document.getElementById('chatbotInput');
-    const messagesContainer = document.getElementById('chatbotMessages');
-    const suggestionChips = document.querySelectorAll('.suggestion-chip');
-    
-    let isTyping = false;
-    
-    function addMessage(text, isUser) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-      messageDiv.innerHTML = text.replace(/\n/g, '<br>');
-      messagesContainer.appendChild(messageDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-    
-    function showTyping() {
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'typing-indicator';
-      typingDiv.id = 'typingIndicator';
-      typingDiv.innerHTML = '<span></span><span></span><span></span>';
-      messagesContainer.appendChild(typingDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-    
-    function hideTyping() {
-      const typing = document.getElementById('typingIndicator');
-      if (typing) typing.remove();
-    }
-    
-    function sendMessage(messageText = null) {
-      const message = messageText || input.value.trim();
-      if (!message || isTyping) return;
-      
-      addMessage(message, true);
-      if (!messageText) input.value = '';
-      showTyping();
-      isTyping = true;
-      
-      const intent = detectIntent(message);
-      const thinkingTime = Math.min(800, 300 + (intent.confidence / 10));
-      
-      setTimeout(() => {
-        const response = generateResponse(message, intent);
-        hideTyping();
-        addMessage(response, false);
-        isTyping = false;
-      }, thinkingTime);
-    }
-    
-    toggle.addEventListener('click', () => {
-      windowEl.classList.toggle('open');
-    });
-    
-    closeBtn.addEventListener('click', () => {
-      windowEl.classList.remove('open');
-    });
-    
-    sendBtn.addEventListener('click', () => sendMessage());
-    
-    input.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') sendMessage();
-    });
-    
-    suggestionChips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        const question = chip.getAttribute('data-question');
-        if (question) sendMessage(question);
-      });
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && windowEl.classList.contains('open')) {
-        windowEl.classList.remove('open');
-      }
-    });
-  })();
-</script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>

@@ -2,239 +2,121 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>about · Abdul Hannan</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #000000; font-family: 'Space Grotesk', sans-serif; color: #ffffff; overflow-x: hidden; }
-    .cursor-glow { position: fixed; width: 480px; height: 480px; background: radial-gradient(circle at center, rgba(3, 38, 252, 0.08) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); opacity: 0; }
-    .terminal-panel { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(3, 38, 252, 0.3); }
-    .cmd-prompt::before { content: '$ '; color: #0326fc; font-weight: 600; display: inline-block; }
-    .timeline-dot { width: 16px; height: 16px; background: #0326fc; position: absolute; left: -9px; top: 8px; box-shadow: 0 0 20px #0326fc; }
-    .shape-3d { position: absolute; width: 300px; height: 300px; background: radial-gradient(circle at 30% 30%, #0326fc, transparent 80%); filter: blur(70px); opacity: 0.2; border-radius: 50%; z-index: 0; pointer-events: none; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0a0a0a; }
-    ::-webkit-scrollbar-thumb { background: #0326fc; }
-    .animate-ready { opacity: 0; transform: translateY(20px); }
-    
-    /* Mobile Menu Styles - FIXED */
-    #mobileMenu {
-      position: fixed;
-      top: 64px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 999;
-      overflow-y: auto;
-      transition: all 0.3s ease;
-    }
-    
-    #mobileMenu.hidden {
-      display: none;
-    }
-    
-    #mobileMenu:not(.hidden) {
-      display: block;
-      animation: slideDown 0.3s ease;
-    }
-    
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>About | Abdul Hannan — AI-Integrated Product Engineer</title>
+  <meta name="description" content="Learn about Abdul Hannan's journey from self-taught developer to AI-Integrated Product Engineer and Co-Founder of VBuild.">
+  <meta property="og:title" content="About | Abdul Hannan">
+  <meta property="og:description" content="The journey of a self-taught developer turned AI-Integrated Product Engineer.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://abdulhannan.dev/about">
 
-    .mobile-link {
-      color: #ffffff !important;
-      opacity: 0.9;
-      transition: all 0.2s ease;
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { electric: '#0326FC', dark: '#000000' },
+          fontFamily: { satoshi: ['Satoshi', 'sans-serif'], inter: ['Inter', 'sans-serif'] }
+        }
+      }
     }
-    
-    .mobile-link:hover {
-      color: #0326fc !important;
-      opacity: 1;
-      background: rgba(3, 38, 252, 0.1);
-    }
-  </style>
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- NAVBAR - FIXED -->
-  <nav class="fixed top-0 left-0 w-full z-[60] terminal-panel border-t-0 border-l-0 border-r-0 border-b border-[#0326fc]/40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="text-xl sm:text-2xl font-bold tracking-tighter text-white relative group z-[70]">
-          <span class="text-[#0326fc]">{`</span> Abdul Hannan`}
-          <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#0326fc] transition-all duration-300 group-hover:w-full"></span>
-        </a>
-        <div class="hidden md:flex items-center space-x-6 lg:space-x-8 text-sm font-medium">
-          <a href="index.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">home</a>
-          <a href="about.html" class="nav-link text-white hover:text-[#0326fc] transition-colors px-2 py-1">[ ~ ] about</a>
-          <a href="skills.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">skills</a>
-          <a href="projects.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">projects</a>
-          <a href="experience.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">experience</a>
-          <a href="contact.html" class="nav-link text-white/70 hover:text-white transition-colors px-2 py-1">contact</a>
-        </div>
-        <button id="mobileMenuBtn" class="md:hidden text-white text-2xl focus:outline-none z-[70] w-10 h-10 flex items-center justify-center border border-[#0326fc]/30 hover:border-[#0326fc] transition-all rounded">
-          <span id="menuIcon">⎔</span>
-          <span id="closeIcon" class="hidden">✕</span>
-        </button>
+  <div class="loading-screen" aria-hidden="true">
+    <canvas class="loading-matrix" aria-hidden="true"></canvas>
+    <div class="loading-scanner" aria-hidden="true"></div>
+    <div class="loading-inner">
+      <div class="terminal-header">
+        <span class="terminal-logo">AH</span><span class="terminal-accent">.</span><span class="terminal-path">@system:~$</span>
       </div>
+      <div class="terminal-body">
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Initializing kernel..."></span><span class="status"></span></div>
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Loading AI modules..."></span><span class="status"></span></div>
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Establishing secure tunnel..."></span><span class="status"></span></div>
+        <div class="terminal-line"><span class="prompt">❯</span> <span class="typed" data-text="Decrypting payload..."></span><span class="status"></span></div>
+        <div class="terminal-line access-line" style="display:none"><span class="prompt">❯</span> <span class="access-text"></span></div>
+      </div>
+      <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+      <div class="loading-percent">0%</div>
+    </div>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="scroll-progress" role="progressbar" aria-label="Scroll progress"></div>
+
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">AH<span aria-hidden="true">.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link active" aria-current="page">About</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- Mobile Menu Dropdown -->
-  <div id="mobileMenu" class="hidden">
-    <div class="flex flex-col items-center justify-start pt-8 px-6 space-y-4">
-      <a href="index.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">home</a>
-      <a href="about.html" class="mobile-link text-2xl text-[#0326fc] font-bold w-full text-center py-4 border-b border-[#0326fc]/30">[ ~ ] about</a>
-      <a href="skills.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">skills</a>
-      <a href="projects.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">projects</a>
-      <a href="experience.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">experience</a>
-      <a href="contact.html" class="mobile-link text-2xl text-white font-medium w-full text-center py-4 border-b border-white/10">contact</a>
-    </div>
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
   </div>
 
-  <div class="h-16"></div>
-
-  <!-- Background shapes -->
-  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-    <div class="shape-3d top-20 right-20"></div>
-    <div class="shape-3d bottom-40 left-20 w-96 h-96 bg-[#0326fc] opacity-20 blur-[90px]"></div>
-  </div>
-
-  <main class="relative z-10">
-    <section class="min-h-[60vh] flex items-center px-4 pt-12 pb-20 border-b border-[#0326fc]/20">
-      <div class="max-w-5xl mx-auto">
-        <div class="font-mono text-[#0326fc] text-sm md:text-base tracking-widest mb-3 cmd-prompt animate-ready" id="heroPrompt">cat about.md</div>
-        <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8 animate-ready" id="heroTitle">
-          <span class="text-white">ARCHITECT OF</span>
-          <span class="text-[#0326fc] block">DIGITAL REALITIES</span>
-        </h1>
-        <div class="grid md:grid-cols-2 gap-8 md:gap-12 mt-8 md:mt-12 animate-ready" id="heroText">
-          <p class="text-gray-300 text-base sm:text-lg leading-relaxed border-l-4 border-[#0326fc] pl-4 sm:pl-6">
-            I don't design pages — I engineer digital systems where speed, clarity, and motion coexist in perfect balance.
-          </p>
-          <p class="text-gray-400 text-sm sm:text-base">
-            <span class="text-[#0326fc] block mb-2">// origin</span>
-            Self-taught since my early teens, obsessed with breaking, rebuilding, and perfecting the web — now crafting production-grade platforms that scale.
-          </p>
-        </div>
+  <main id="main-content">
+    <header class="page-header">
+      <div class="grid-bg grid-bg-dark" aria-hidden="true"></div>
+      <div class="header-glow" aria-hidden="true"></div>
+      <div class="page-header-content">
+        <span class="section-label" style="margin-bottom:1rem">About</span>
+        <h1>Co-Founder @ VBuild</h1>
+        <p>AI-Integrated Product Engineer building products from idea to launch.</p>
       </div>
-    </section>
+    </header>
 
-    <section class="py-20 sm:py-24 px-4 border-b border-[#0326fc]/20">
-      <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-16 animate-ready" id="philosophyHeader">
-          <span class="text-[#0326fc] font-mono text-sm">$ echo $PHILOSOPHY</span>
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mt-4">THE <span class="text-[#0326fc]">ZERO-COMPROMISE</span> MINDSET</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6 sm:gap-8" id="philosophyGrid">
-          <div class="terminal-panel p-6 sm:p-8 border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
-            <div class="text-2xl sm:text-3xl text-[#0326fc] mb-4">01</div>
-            <h3 class="text-lg sm:text-xl font-bold mb-3">CLARITY > COMPLEXITY</h3>
-            <p class="text-gray-400 text-sm sm:text-base">The best code is the code you don't have to debug.</p>
+    <section class="section section-light">
+      <div class="section-inner">
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <span class="section-label">The Story</span>
+            <h2 class="section-title mb-2">I didn't take the traditional path.</h2>
+            <p class="text-body mb-2">I started building websites without a Computer Science degree. No bootcamp. No formal training. Just curiosity, relentless practice, and a drive to create things that work.</p>
+            <p class="text-body mb-2">Over time, I served 30+ clients, worked with 7+ international clients across different time zones, and generated $600+ in revenue through projects. Each project taught me something new — not just about code, but about what makes a product actually useful.</p>
+            <p class="text-body mb-2">I completed a Full Stack Development Internship at Internee.pk, worked through freelance roles at BrightCraft Digital Ltd, NovaLynx Tech Solutions Inc, and SkyNest Innovations Pty Ltd — and eventually co-founded <strong>VBuild</strong>, a product-focused software agency.</p>
+            <p class="text-body">Today, as <strong>Co-Founder of VBuild</strong>, I build SaaS products, work with AI-assisted workflows, and help founders turn ideas into launch-ready products. I think in systems, not just features.</p>
           </div>
-          <div class="terminal-panel p-6 sm:p-8 border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
-            <div class="text-2xl sm:text-3xl text-[#0326fc] mb-4">02</div>
-            <h3 class="text-lg sm:text-xl font-bold mb-3">MOTION WITH MEANING</h3>
-            <p class="text-gray-400 text-sm sm:text-base">Every animation guides attention. No gratuitous movement.</p>
-          </div>
-          <div class="terminal-panel p-6 sm:p-8 border border-[#0326fc]/30 hover:border-[#0326fc] transition-all duration-300 animate-ready">
-            <div class="text-2xl sm:text-3xl text-[#0326fc] mb-4">03</div>
-            <h3 class="text-lg sm:text-xl font-bold mb-3">FUTURE-PROOF</h3>
-            <p class="text-gray-400 text-sm sm:text-base">Build for tomorrow's standards, today.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20 sm:py-24 px-4 border-b border-[#0326fc]/20">
-      <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-12 sm:mb-16 animate-ready" id="timelineHeader">
-          <span class="text-[#0326fc] font-mono text-sm">$ history --timeline</span>
-          <h2 class="text-3xl sm:text-4xl font-bold mt-2">DEV <span class="text-[#0326fc]">JOURNEY</span></h2>
-        </div>
-        <div class="relative pl-8 border-l-2 border-[#0326fc]/30 space-y-12 sm:space-y-16" id="timelineItems">
-          <div class="relative animate-ready">
-            <div class="timeline-dot"></div>
-            <div class="ml-8">
-              <span class="text-[#0326fc] font-mono text-sm">2021-2023</span>
-              <h3 class="text-xl sm:text-2xl font-bold mt-1">DISCOVERY MODE</h3>
-              <p class="text-gray-400 text-sm sm:text-base mt-2">Self-taught by building relentlessly. Learned the web by breaking it and rebuilding it better.</p>
-            </div>
-          </div>
-          <div class="relative animate-ready">
-            <div class="timeline-dot"></div>
-            <div class="ml-8">
-              <span class="text-[#0326fc] font-mono text-sm">2023-2025</span>
-              <h3 class="text-xl sm:text-2xl font-bold mt-1">REAL-WORLD PRODUCTION</h3>
-              <p class="text-gray-400 text-sm sm:text-base mt-2">Shipped production apps, worked with real clients, learned performance, UX, and scalability the hard way.</p>
-            </div>
-          </div>
-          <div class="relative animate-ready">
-            <div class="timeline-dot"></div>
-            <div class="ml-8">
-              <span class="text-[#0326fc] font-mono text-sm">2022-2025</span>
-              <h3 class="text-xl sm:text-2xl font-bold mt-1">ARCHITECT & BUILDER</h3>
-              <p class="text-gray-400 text-sm sm:text-base mt-2">Developed Talent Tree JP & scaled 5000+ users, delivered 50+ client projects, designing scalable systems and leading frontend decisions.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20 sm:py-24 px-4">
-      <div class="max-w-6xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <div class="animate-ready" id="principlesLeft">
-            <span class="text-[#0326fc] font-mono text-sm">$ Principles.md</span>
-            <h2 class="text-3xl sm:text-4xl font-bold mt-4 mb-6 sm:mb-8">CODE IS <span class="text-[#0326fc]">CRAFT</span></h2>
-            <div class="space-y-4 sm:space-y-6">
-              <div class="flex gap-3 sm:gap-4">
-                <span class="text-[#0326fc] text-xl sm:text-2xl">⎔</span>
-                <div>
-                  <h4 class="font-bold text-base sm:text-lg">Radical clarity</h4>
-                  <p class="text-gray-400 text-sm sm:text-base">Readable systems beat clever hacks.</p>
-                </div>
-              </div>
-              <div class="flex gap-3 sm:gap-4">
-                <span class="text-[#0326fc] text-xl sm:text-2xl">◉</span>
-                <div>
-                  <h4 class="font-bold text-base sm:text-lg">User-first by default</h4>
-                  <p class="text-gray-400 text-sm sm:text-base">If users notice the tech, it failed.</p>
-                </div>
-              </div>
-              <div class="flex gap-3 sm:gap-4">
-                <span class="text-[#0326fc] text-xl sm:text-2xl">∞</span>
-                <div>
-                  <h4 class="font-bold text-base sm:text-lg">Never finished</h4>
-                  <p class="text-gray-400 text-sm sm:text-base">Connect. Imagine. Launch.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="terminal-panel p-6 sm:p-10 border border-[#0326fc]/40 animate-ready" id="principlesRight">
-            <p class="text-xl sm:text-2xl font-light italic text-white/90 leading-relaxed">"Great products aren't built faster, they're built clearer."</p>
-            <div class="mt-4 sm:mt-6 flex items-center gap-3">
-              <div class="w-8 h-8 sm:w-10 sm:h-10 bg-[#0326fc] flex items-center justify-center text-black font-bold">$</div>
-              <div>
-                <p class="font-bold text-base sm:text-lg">Abdul Hannan</p>
-                <p class="text-xs sm:text-sm text-gray-400">frontend architect · full-stack engineer</p>
+          <div>
+            <div class="glass-dark" style="border-radius:20px;padding:2rem;border:1px solid rgba(0,0,0,0.06)">
+              <span class="section-label">Key Metrics</span>
+              <div class="grid grid-cols-2 gap-4" style="margin-top:1.5rem">
+                <div><div class="metric-value">100+</div><div class="metric-label">Websites Built</div></div>
+                <div><div class="metric-value">30+</div><div class="metric-label">Clients Served</div></div>
+                <div><div class="metric-value">3</div><div class="metric-label">SaaS Products Built</div></div>
+                <div><div class="metric-value">7+</div><div class="metric-label">International Clients</div></div>
+                <div><div class="metric-value">$600+</div><div class="metric-label">Revenue Generated</div></div>
               </div>
             </div>
           </div>
@@ -242,614 +124,209 @@
       </div>
     </section>
 
-    <footer class="terminal-panel border-b-0 border-l-0 border-r-0 border-t border-[#0326fc]/30 py-8 sm:py-12 px-4">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400">
-        <div class="font-mono"> <span class="text-[#0326fc]">{`Abdul Hannan`}</span> © 2025 </div>
-        <div class="flex gap-4 sm:gap-6">
-          <a href="#" class="hover:text-[#0326fc] transition">github</a>
-          <a href="https://www.linkedin.com/in/abdulhannan-projects/" class="hover:text-[#0326fc] transition">linkedin</a>
-          <a href="#" class="hover:text-[#0326fc] transition">x</a>
+    <section class="section section-light" aria-label="Experience">
+      <div class="section-inner">
+        <div class="mb-section">
+          <span class="section-label">Experience</span>
+          <h2 class="section-title">Where I've Worked</h2>
+          <p class="section-subtitle">From agency roles to founding my own company — each role shaped how I build products.</p>
         </div>
-        <div class="text-xs">$ echo "Thanks for visiting!"</div>
+
+        <div class="exp-section-grid">
+          <div class="exp-card exp-card-featured reveal">
+            <div class="exp-card-accent"></div>
+            <div class="exp-card-body">
+              <div class="exp-card-role">Co-Founder</div>
+              <div class="exp-card-company">VBuild — Software Agency</div>
+              <div class="exp-card-duration">Present</div>
+              <div class="exp-card-desc">Building a product-focused software agency helping founders turn ideas into launch-ready SaaS products. Leading end-to-end product development from architecture to deployment.</div>
+            </div>
+          </div>
+
+          <div class="exp-card reveal">
+            <div class="exp-card-accent"></div>
+            <div class="exp-card-body">
+              <div class="exp-card-role">WordPress Developer</div>
+              <div class="exp-card-company">BrightCraft Digital Ltd</div>
+              <div class="exp-card-duration">Apr 2025 – Aug 2025</div>
+              <div class="exp-card-desc">Developed custom WordPress themes and plugins based on client needs. Collaborated with UK-based designers and project managers. Handled WooCommerce customizations and troubleshooting for eCommerce clients.</div>
+            </div>
+          </div>
+
+          <div class="exp-card reveal">
+            <div class="exp-card-accent"></div>
+            <div class="exp-card-body">
+              <div class="exp-card-role">Full Stack Developer</div>
+              <div class="exp-card-company">SkyNest Innovations Pty Ltd</div>
+              <div class="exp-card-duration">Nov 2025 – Feb 2026</div>
+              <div class="exp-card-desc">Developed dynamic web modules using PHP for internal business tools and client dashboards. Designed responsive UI with WordPress and mobile-first optimization. Built secure authentication systems with role-based permissions.</div>
+            </div>
+          </div>
+
+          <div class="exp-card reveal">
+            <div class="exp-card-accent"></div>
+            <div class="exp-card-body">
+              <div class="exp-card-role">Full Stack Developer</div>
+              <div class="exp-card-company">NovaLynx Tech Solutions Inc</div>
+              <div class="exp-card-duration">Nov 2022 – Feb 2024</div>
+              <div class="exp-card-desc">Built and deployed scalable web applications using PHP, MySQL, JavaScript (ES6+), and modern frameworks. Developed RESTful APIs with secure token-based authentication. Implemented user authentication and role management for multiple SaaS projects.</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <section class="section section-dark" aria-label="Education">
+      <div class="section-inner">
+        <div class="mb-section">
+          <span class="section-label">Education</span>
+          <h2 class="section-title">Background</h2>
+          <p class="section-subtitle">Formal education that complemented my self-taught foundation.</p>
+        </div>
+
+        <div class="edu-grid">
+          <div class="edu-card reveal">
+            <div class="edu-card-degree">Diploma of Associate Engineering</div>
+            <div class="edu-card-school">Aligarh Institute of Technology</div>
+            <div class="edu-card-year">Sep 2024 – Oct 2026</div>
+          </div>
+
+          <div class="edu-card reveal">
+            <div class="edu-card-degree">ADSE in Software Engineering</div>
+            <div class="edu-card-school">Aptech</div>
+            <div class="edu-card-year">Aug 2022 – Aug 2023</div>
+          </div>
+
+          <div class="edu-card reveal">
+            <div class="edu-card-degree">Intermediate</div>
+            <div class="edu-card-school">2021 – 2023</div>
+          </div>
+
+          <div class="edu-card reveal">
+            <div class="edu-card-degree">Matriculation</div>
+            <div class="edu-card-school">2018 – 2020</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-gray">
+      <div class="section-inner">
+        <div class="mb-section">
+          <span class="section-label">Timeline</span>
+          <h2 class="section-title">The Path</h2>
+          <p class="section-subtitle">Every stage of the journey, from curiosity to product engineering.</p>
+        </div>
+
+        <div class="mx-auto max-w-2xl">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">The Beginning</div>
+              <div class="timeline-title">Started Learning</div>
+              <div class="timeline-desc">Began teaching myself software development. No CS degree, no formal education — just determination and late nights.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">Building Phase</div>
+              <div class="timeline-title">Client Work</div>
+              <div class="timeline-desc">Built websites relentlessly for clients. Learned how to translate business needs into working software. Served 30+ clients.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">Growth</div>
+              <div class="timeline-title">Agency & International Work</div>
+              <div class="timeline-desc">Started working with 7+ international clients. Learned cross-cultural communication, remote collaboration, and professional project management.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">Internship</div>
+              <div class="timeline-title">Full Stack Intern at Internee.pk</div>
+              <div class="timeline-desc">Completed a Full Stack Development Internship. Strengthened backend skills and learned production deployment workflows.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">Product Thinking</div>
+              <div class="timeline-title">Shift to Products</div>
+              <div class="timeline-desc">Transitioned from building websites to building products. Started thinking about problems, not just features. Product mindset began to form.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">Entrepreneurship</div>
+              <div class="timeline-title">Co-Founded VBuild</div>
+              <div class="timeline-desc">Co-founded VBuild — a product-focused development company. Started building SaaS products with a founder's approach.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-date">Present</div>
+              <div class="timeline-title">AI Product Engineering</div>
+              <div class="timeline-desc">Evolving toward AI-powered product development, workflow automation, and multi-agent systems. Building the future of SaaS.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" aria-label="Philosophy">
+      <div class="section-inner">
+        <div class="mb-section">
+          <span class="section-label">How I Think</span>
+          <h2 class="section-title">Personal Philosophy</h2>
+        </div>
+        <div class="philosophy-grid">
+          <div class="philosophy-statement reveal"><span class="num">01</span>Build before perfect.</div>
+          <div class="philosophy-statement reveal"><span class="num">02</span>Ship before overthinking.</div>
+          <div class="philosophy-statement reveal"><span class="num">03</span>Products solve problems.</div>
+          <div class="philosophy-statement reveal"><span class="num">04</span>Learning compounds.</div>
+          <div class="philosophy-statement reveal philosophy-full"><span class="num">05</span>Execution beats ideas.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light" aria-label="Future Vision">
+      <div class="section-inner">
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+          <div>
+            <span class="section-label">What's Next</span>
+            <h2 class="section-title">Building Toward AI Product Engineering</h2>
+            <p class="text-body">I'm focused on the intersection of product building and AI. My goal is to build AI-powered SaaS products that automate workflows, solve complex problems, and create real business value.</p>
+            <div class="vision-tags mt-2">
+              <span class="vision-tag" style="border-color:#0326FC;color:#0326FC">AI SaaS</span>
+              <span class="vision-tag" style="border-color:#0326FC;color:#0326FC">Workflow Automation</span>
+              <span class="vision-tag" style="border-color:#0326FC;color:#0326FC">Multi-Agent Systems</span>
+              <span class="vision-tag" style="border-color:#0326FC;color:#0326FC">Product Ecosystems</span>
+            </div>
+          </div>
+          <div>
+            <div class="card-dark">
+              <div style="font-family:'Satoshi',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:1rem">Mission</div>
+              <p class="text-muted-light-6" style="line-height:1.7">Grow VBuild into a respected product company and build an ecosystem of AI-powered SaaS businesses that solve real problems for real people.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-light p-6" aria-label="Call to Action">
+      <div class="section-inner text-center">
+        <h2 class="section-title mx-auto max-w-500 mb-1">Want to work together?</h2>
+        <p class="text-muted mx-auto max-w-500" style="line-height:1.7;margin-bottom:2rem">I'm always open to building products with founders who care about solving real problems.</p>
+        <a href="contact.html" class="btn btn-primary">Get in Touch</a>
+      </div>
+    </section>
   </main>
 
-  <script>
-    (function() {
-      // Mobile Menu
-      const menuBtn = document.getElementById('mobileMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuIcon = document.getElementById('menuIcon');
-      const closeIcon = document.getElementById('closeIcon');
-      
-      if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          const isHidden = mobileMenu.classList.contains('hidden');
-          if (isHidden) {
-            mobileMenu.classList.remove('hidden');
-            menuIcon.classList.add('hidden');
-            closeIcon.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-          } else {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-        
-        document.querySelectorAll('.mobile-link').forEach(link => {
-          link.addEventListener('click', function() {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-            document.body.style.overflow = '';
-          });
-        });
-        
-        window.addEventListener('resize', function() {
-          if (window.innerWidth >= 768) {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-      }
-
-      // Cursor
-      const cursor = document.getElementById('cursorGlow');
-      if (cursor) {
-        setTimeout(() => { cursor.style.opacity = '1'; }, 100);
-        window.addEventListener('mousemove', (e) => { gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.8 }); });
-      }
-
-      // GSAP
-      gsap.registerPlugin(ScrollTrigger);
-      const animateElements = document.querySelectorAll('.animate-ready');
-      gsap.set(animateElements, { opacity: 0, y: 20 });
-
-      setTimeout(() => {
-        const tl = gsap.timeline();
-        tl.to('#heroPrompt', { opacity: 1, y: 0, duration: 0.8 })
-          .to('#heroTitle', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
-          .to('#heroText', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4');
-
-        ScrollTrigger.create({ trigger: '#philosophyGrid', start: 'top 80%', onEnter: () => gsap.to('#philosophyGrid .animate-ready', { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }) });
-        ScrollTrigger.create({ trigger: '#timelineItems', start: 'top 80%', onEnter: () => gsap.to('#timelineItems .animate-ready', { opacity: 1, y: 0, duration: 0.8, stagger: 0.3 }) });
-        gsap.utils.toArray(['#philosophyHeader', '#timelineHeader', '#principlesLeft', '#principlesRight']).forEach(el => {
-          ScrollTrigger.create({ trigger: el, start: 'top 85%', onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: 0.8 }) });
-        });
-      }, 100);
-
-      // Hover effects
-      document.querySelectorAll('a, button, .terminal-panel').forEach(el => {
-        el.addEventListener('mouseenter', () => gsap.to(el, { scale: 1.01, duration: 0.2 }));
-        el.addEventListener('mouseleave', () => gsap.to(el, { scale: 1, duration: 0.2 }));
-      });
-    })();
-  </script>
-
-  <!-- SMART AI CHATBOT -->
-  <style>
-    .chatbot-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9998;
-      font-family: 'Space Grotesk', monospace;
-    }
-    
-    .chatbot-toggle {
-      width: 60px;
-      height: 60px;
-      background: #0326fc;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(3, 38, 252, 0.5);
-      transition: all 0.3s ease;
-      border: 2px solid rgba(255,255,255,0.2);
-    }
-    
-    .chatbot-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 30px rgba(3, 38, 252, 0.8);
-    }
-    
-    .chatbot-window {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 380px;
-      height: 550px;
-      background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(20px);
-      border: 1px solid #0326fc;
-      border-radius: 12px;
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      animation: slideUp 0.3s ease;
-    }
-    
-    .chatbot-window.open {
-      display: flex;
-    }
-    
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .chatbot-header {
-      background: #0326fc;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
-    }
-    
-    .chatbot-header h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .chatbot-header .close-btn {
-      cursor: pointer;
-      font-size: 20px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: all 0.2s;
-    }
-    
-    .chatbot-header .close-btn:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    
-    .chatbot-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .message {
-      max-width: 85%;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      line-height: 1.5;
-      word-wrap: break-word;
-    }
-    
-    .message.user {
-      background: #0326fc;
-      color: white;
-      align-self: flex-end;
-      border-bottom-right-radius: 4px;
-    }
-    
-    .message.bot {
-      background: rgba(3, 38, 252, 0.2);
-      border: 1px solid rgba(3, 38, 252, 0.3);
-      color: #fff;
-      align-self: flex-start;
-      border-bottom-left-radius: 4px;
-    }
-    
-    .typing-indicator {
-      display: flex;
-      gap: 4px;
-      padding: 10px 14px;
-      background: rgba(3, 38, 252, 0.2);
-      border: 1px solid rgba(3, 38, 252, 0.3);
-      border-radius: 12px;
-      align-self: flex-start;
-      border-bottom-left-radius: 4px;
-    }
-    
-    .typing-indicator span {
-      width: 6px;
-      height: 6px;
-      background: #0326fc;
-      border-radius: 50%;
-      animation: typing 1.4s infinite;
-    }
-    
-    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-    
-    @keyframes typing {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-10px); opacity: 1; }
-    }
-    
-    .chatbot-input {
-      padding: 15px;
-      border-top: 1px solid rgba(3, 38, 252, 0.3);
-      display: flex;
-      gap: 10px;
-    }
-    
-    .chatbot-input input {
-      flex: 1;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(3, 38, 252, 0.3);
-      padding: 10px 12px;
-      border-radius: 8px;
-      color: white;
-      font-family: 'Space Grotesk', monospace;
-      font-size: 13px;
-      outline: none;
-    }
-    
-    .chatbot-input input:focus {
-      border-color: #0326fc;
-    }
-    
-    .chatbot-input button {
-      background: #0326fc;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-    
-    .chatbot-input button:hover {
-      transform: scale(1.05);
-    }
-    
-    @media (max-width: 480px) {
-      .chatbot-window {
-        width: calc(100vw - 40px);
-        right: 20px;
-        height: 500px;
-      }
-    }
-    
-    .quick-suggestions {
-      padding: 10px 15px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      border-top: 1px solid rgba(3, 38, 252, 0.2);
-    }
-    
-    .suggestion-chip {
-      background: rgba(3, 38, 252, 0.15);
-      border: 1px solid rgba(3, 38, 252, 0.3);
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .suggestion-chip:hover {
-      background: #0326fc;
-      color: black;
-    }
-  </style>
-
-  <div class="chatbot-container">
-    <div class="chatbot-toggle" id="chatbotToggle">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-        <path d="M8 10h.01M12 10h.01M16 10h.01" stroke="white" stroke-width="2"/>
-      </svg>
-    </div>
-    
-    <div class="chatbot-window" id="chatbotWindow">
-      <div class="chatbot-header">
-        <h3>
-          <span style="font-size: 18px;">$</span> AI ASSISTANT
-        </h3>
-        <div class="close-btn" id="chatbotClose">✕</div>
-      </div>
-      <div class="chatbot-messages" id="chatbotMessages">
-        <div class="message bot">
-          Hey 👋 I'm the AI assistant for <span style="color: #0326fc;">Abdul Hannan</span>. Ask me anything about his skills, experience, projects, or how we can work together!
-        </div>
-      </div>
-      <div class="quick-suggestions" id="quickSuggestions">
-        <span class="suggestion-chip" data-question="What skills does Abdul Hannan have?">💻 Skills</span>
-        <span class="suggestion-chip" data-question="What projects has he built?">🚀 Projects</span>
-        <span class="suggestion-chip" data-question="What's his work experience?">💼 Experience</span>
-        <span class="suggestion-chip" data-question="How can I hire him?">🤝 Hire me</span>
-        <span class="suggestion-chip" data-question="What's his contact info?">📧 Contact</span>
-      </div>
-      <div class="chatbot-input">
-        <input type="text" id="chatbotInput" placeholder="Ask me anything..." />
-        <button id="chatbotSend">→</button>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-text">&copy; 2026 Abdul Hannan. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/abdulhannan-projects/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+        <a href="https://www.instagram.com/hannanbuilds/" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+        <a href="mailto:projects.abdulhannan@gmail.com" class="footer-link">Email</a>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <script>
-    (function() {
-      const profile = {
-        name: "Abdul Hannan",
-        fullName: "Abdul Hannan",
-        title: "Frontend Architect & Full-Stack Engineer",
-        brand: "hannanbuilds",
-        since: 2022,
-        yearsOfExperience: 4,
-        tagline: "frontend architect · full-stack engineer · digital problem solver",
-        philosophy: [
-          "Clarity over complexity — the best code is code you don't have to debug",
-          "Motion with meaning — every animation guides attention, no gratuitous movement",
-          "Future-proof — build for tomorrow's standards, today",
-          "Radical clarity — readable systems beat clever hacks",
-          "User-first by default — if users notice the tech, it failed",
-          "Never finished — always connect, imagine, launch"
-        ],
-        skills: {
-          frontend: ["HTML", "CSS", "Tailwind CSS", "Bootstrap", "JavaScript", "GSAP", "Framer Motion"],
-          backend: ["PHP", "MySQL"],
-          cms: ["WordPress", "Elementor", "WooCommerce"],
-          tools: ["Webpack", "Storybook", "Vercel", "Netlify", "Git", "GitHub", "VS Code", "LeetCode"],
-          design: ["Canva"]
-        },
-        skillLevels: {
-          "HTML/CSS/Tailwind": 98,
-          "WordPress/Elementor": 90,
-          "MySQL": 98,
-          "PHP": 98,
-          "Canva": 95
-        },
-        experience: [
-          {
-            role: "Founder / Full-Stack Engineer",
-            company: "TALENT TREE JP",
-            period: "2025 — PRESENT",
-            achievements: [
-              "Built scalable PHP & MySQL backend systems using WordPress",
-              "Developed responsive frontend with Elementor/WordPress",
-              "Scaled platform to 5000+ active users"
-            ]
-          },
-          {
-            role: "Full-Stack Engineer",
-            company: "Client Projects · Agency Work",
-            period: "2023 — 2025",
-            achievements: [
-              "Delivered 50+ responsive websites & SaaS dashboards",
-              "Built high-performance UI using GSAP animations",
-              "Optimized frontend performance & UX clarity"
-            ]
-          },
-          {
-            role: "Self-Taught Developer",
-            company: "Independent Builder",
-            period: "2022 — 2023",
-            achievements: [
-              "Mastered HTML, CSS, JavaScript fundamentals",
-              "Built 30+ practice & experimental projects",
-              "Focused on performance, clean UI & scalability"
-            ]
-          }
-        ],
-        projects: [
-          {
-            name: "Talent Tree Job Portal",
-            description: "Full-stack job portal with WordPress backend, PHP, MySQL, serving 5000+ active users",
-            technologies: ["WordPress", "PHP", "MySQL", "Elementor"],
-            year: 2025,
-            category: "WordPress"
-          },
-          {
-            name: "codeinl∞p Portfolio",
-            description: "Elite terminal-inspired portfolio with GSAP animations and 3D effects",
-            technologies: ["HTML", "CSS", "GSAP", "Tailwind"],
-            year: 2024,
-            category: "Web"
-          },
-          {
-            name: "Voice To-Do List",
-            description: "Voice-enabled task management application",
-            technologies: ["JavaScript", "Web Speech API"],
-            year: 2024,
-            category: "Web App"
-          },
-          {
-            name: "Attendance Management System",
-            description: "Complete attendance tracking system for organizations",
-            technologies: ["PHP", "MySQL", "Bootstrap"],
-            year: 2025,
-            category: "SaaS"
-          },
-          {
-            name: "Daily Expense Manager",
-            description: "Personal finance tracking application",
-            technologies: ["PHP", "MySQL", "Tailwind"],
-            year: 2024,
-            category: "SaaS"
-          },
-          {
-            name: "AI Resume Analyzer",
-            description: "AI-powered resume analysis tool",
-            technologies: ["Python", "AI/ML", "JavaScript"],
-            year: 2026,
-            category: "SaaS"
-          }
-        ],
-        metrics: {
-          projectsDelivered: "50+",
-          usersScaled: "5000+",
-          yearsExp: 4,
-          problemsSolved: "100+",
-          mentored: "15+"
-        },
-        contact: {
-          email: "projects.abdulhannan@gmail.com",
-          status: "ACCEPTING NEW PROJECTS",
-          responseTime: "within 24 hours"
-        },
-        availability: "Available for freelance projects, full-time opportunities, and collaborations",
-        workStyle: "Frontend-focused full-stack engineer building production-ready systems and scalable digital products"
-      };
-      
-      function detectIntent(message) {
-        const msg = message.toLowerCase().trim();
-        const intents = {
-          identity: { keywords: ['who are you', 'tell me about yourself', 'introduce yourself', 'about you', 'your name', 'hannan', 'who is', 'what do you do', 'background', 'bio'], score: 0 },
-          skills: { keywords: ['skills', 'technologies', 'tech stack', 'what can you do', 'expertise', 'know', 'proficient', 'languages', 'frameworks', 'tools', 'can you build', 'capable', 'good at'], score: 0 },
-          experience: { keywords: ['experience', 'work', 'career', 'job', 'company', 'worked', 'employed', 'past', 'background', 'history', 'where did you work', 'professional', 'roles'], score: 0 },
-          projects: { keywords: ['projects', 'portfolio', 'built', 'created', 'made', 'work', 'developed', 'applications', 'websites', 'show me', 'what have you', 'examples', 'case studies', 'work samples'], score: 0 },
-          hire: { keywords: ['hire', 'work with', 'collaborate', 'available', 'freelance', 'contract', 'rate', 'cost', 'price', 'pricing', 'charge', 'how much', 'budget', 'interested', 'opportunity', 'open to work', 'looking for'], score: 0 },
-          contact: { keywords: ['contact', 'email', 'reach', 'connect', 'message', 'call', 'phone', 'get in touch', 'how to contact', 'social media', 'discord', 'linkedin', 'twitter'], score: 0 },
-          philosophy: { keywords: ['philosophy', 'approach', 'methodology', 'work style', 'how do you work', 'process', 'mindset', 'principles', 'values', 'ethics', 'believe', 'why you', 'different'], score: 0 },
-          talentTree: { keywords: ['talent tree', 'talenttree', 'job portal', '5000 users'], score: 0 },
-          wordpress: { keywords: ['wordpress', 'elementor', 'woocommerce', 'cms', 'wp'], score: 0 },
-          animations: { keywords: ['animation', 'gsap', 'motion', 'framer', 'interaction', 'smooth', 'butter', 'effects'], score: 0 },
-          greeting: { keywords: ['hi', 'hello', 'hey', 'namaste', 'hola', 'good morning', 'good evening', 'greetings', 'what\'s up', 'howdy'], score: 0 },
-          thanks: { keywords: ['thank', 'thanks', 'appreciate', 'helpful', 'great', 'awesome', 'cool'], score: 0 }
-        };
-        
-        for (const [intent, data] of Object.entries(intents)) {
-          let score = 0;
-          for (const keyword of data.keywords) {
-            if (msg.includes(keyword)) score += keyword.length;
-          }
-          intents[intent].score = score;
-        }
-        
-        let topIntent = 'general';
-        let topScore = 0;
-        for (const [intent, data] of Object.entries(intents)) {
-          if (data.score > topScore) {
-            topScore = data.score;
-            topIntent = intent;
-          }
-        }
-        return { intent: topIntent, confidence: topScore };
-      }
-      
-      function generateResponse(message, intentResult) {
-        const { intent } = intentResult;
-        if (intent === 'greeting') return "Hey there! 👋 Great to connect with you. I'm Abdul Hannan's AI assistant. Ask me anything about his work — skills, projects, experience, or how to collaborate. What would you like to know?";
-        if (intent === 'thanks') return "You're welcome! 🙌 If you have more questions about Abdul's work or want to collaborate, feel free to ask. Always happy to help!";
-        if (intent === 'identity') return `Abdul Hannan is a ${profile.title} with ${profile.yearsOfExperience}+ years of experience. He started his journey in ${profile.since} and has since delivered ${profile.metrics.projectsDelivered} projects, scaled platforms to ${profile.metrics.usersScaled}+ users, and helped ${profile.metrics.mentored}+ developers grow. His philosophy: "${profile.philosophy[0]}"`;
-        if (intent === 'skills') return `Abdul's core skills:\n\n🎨 Frontend: ${profile.skills.frontend.join(', ')}\n\n⚙️ Backend: ${profile.skills.backend.join(', ')}\n\n📦 CMS: ${profile.skills.cms.join(', ')}\n\n🛠️ Tools: ${profile.skills.tools.slice(0,6).join(', ')}\n\nHe's particularly strong in PHP (98%), MySQL (98%), HTML/CSS/Tailwind (98%), and WordPress (90%). Always pushing boundaries with GSAP animations!`;
-        if (intent === 'experience') {
-          let expText = `Abdul has ${profile.yearsOfExperience}+ years of professional experience:\n\n`;
-          profile.experience.forEach(exp => {
-            expText += `➤ ${exp.role} at ${exp.company} (${exp.period})\n`;
-            exp.achievements.forEach(ach => { expText += `   → ${ach}\n`; });
-            expText += `\n`;
-          });
-          return expText + `Total impact: ${profile.metrics.projectsDelivered} projects delivered, ${profile.metrics.usersScaled}+ users served.`;
-        }
-        if (intent === 'projects') {
-          let projectText = `Here are Abdul's featured projects:\n\n`;
-          profile.projects.forEach(proj => {
-            projectText += `➤ ${proj.name} (${proj.year})\n   → ${proj.description}\n   → Tech: ${proj.technologies.join(', ')}\n\n`;
-          });
-          return projectText + `All projects demonstrate his full-stack capabilities and attention to performance. Want details about any specific project?`;
-        }
-        if (intent === 'hire') return `Yes! Abdul is currently ${profile.availability}. He's built 50+ production-ready projects and scaled platforms to 5000+ users. For collaboration inquiries:\n\n📧 Email: ${profile.contact.email}\n💼 Status: ${profile.contact.status}\n⏱️ Response: ${profile.contact.responseTime}\n\nHe's open to freelance, full-time, and consultation work. Let's build something great together!`;
-        if (intent === 'contact') return `You can reach Abdul Hannan at:\n\n📧 Email: ${profile.contact.email}\n🌐 Portfolio: hannanbuilds.vercel.app\n💼 Status: ${profile.contact.status}\n\nHe typically responds within ${profile.contact.responseTime}. Ready to discuss your project!`;
-        if (intent === 'philosophy') return `Abdul's development philosophy:\n\n${profile.philosophy.map(p => `➤ ${p}`).join('\n\n')}\n\nHis work style: ${profile.workStyle}. He believes great products aren't built faster — they're built clearer.`;
-        if (intent === 'talentTree') return `Talent Tree Job Portal is one of Abdul's flagship projects! 🚀 He built it as Founder/Full-Stack Engineer, scaling it to 5000+ active users. Tech stack: WordPress, PHP, MySQL, Elementor. It's a full-featured job portal with custom backend logic and responsive frontend. Want to know more about how it works?`;
-        if (intent === 'wordpress') return `Abdul is highly skilled in WordPress development! He's mastered WordPress, Elementor, and WooCommerce (90% proficiency). He built the Talent Tree Job Portal serving 5000+ users using WordPress + PHP + MySQL. He can handle custom themes, plugins, and complex backend integrations.`;
-        if (intent === 'animations') return `Abdul is passionate about motion design! He uses GSAP and Framer Motion to create buttery-smooth, meaningful animations. His philosophy: "Motion with meaning — every animation guides attention, no gratuitous movement." Check out his portfolio (codeinl∞p) for examples of his animation work!`;
-        return `I'm here to help you learn about Abdul Hannan! 💡\n\nYou can ask me about:\n• His skills and tech stack\n• His experience and career journey\n• His projects and portfolio\n• How to hire or collaborate\n• His work philosophy\n\nWhat would you like to know?`;
-      }
-      
-      const toggle = document.getElementById('chatbotToggle');
-      const windowEl = document.getElementById('chatbotWindow');
-      const closeBtn = document.getElementById('chatbotClose');
-      const sendBtn = document.getElementById('chatbotSend');
-      const input = document.getElementById('chatbotInput');
-      const messagesContainer = document.getElementById('chatbotMessages');
-      const suggestionChips = document.querySelectorAll('.suggestion-chip');
-      
-      let isTyping = false;
-      
-      function addMessage(text, isUser) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-        messageDiv.innerHTML = text.replace(/\n/g, '<br>');
-        messagesContainer.appendChild(messageDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-      
-      function showTyping() {
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'typing-indicator';
-        typingDiv.id = 'typingIndicator';
-        typingDiv.innerHTML = '<span></span><span></span><span></span>';
-        messagesContainer.appendChild(typingDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-      
-      function hideTyping() {
-        const typing = document.getElementById('typingIndicator');
-        if (typing) typing.remove();
-      }
-      
-      function sendMessage(messageText = null) {
-        const message = messageText || input.value.trim();
-        if (!message || isTyping) return;
-        addMessage(message, true);
-        if (!messageText) input.value = '';
-        showTyping();
-        isTyping = true;
-        const intent = detectIntent(message);
-        const thinkingTime = Math.min(800, 300 + (intent.confidence / 10));
-        setTimeout(() => {
-          const response = generateResponse(message, intent);
-          hideTyping();
-          addMessage(response, false);
-          isTyping = false;
-        }, thinkingTime);
-      }
-      
-      toggle.addEventListener('click', () => { windowEl.classList.toggle('open'); });
-      closeBtn.addEventListener('click', () => { windowEl.classList.remove('open'); });
-      sendBtn.addEventListener('click', () => sendMessage());
-      input.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
-      suggestionChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-          const question = chip.getAttribute('data-question');
-          if (question) sendMessage(question);
-        });
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && windowEl.classList.contains('open')) {
-          windowEl.classList.remove('open');
-        }
-      });
-    })();
-  </script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
