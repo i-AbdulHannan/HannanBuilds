@@ -119,16 +119,53 @@
           </div>
 
           <div class="contact-cta-box reveal">
-            <h3>Have an idea?</h3>
-            <p class="contact-mb-2">Let's talk about your product. Whether it's a SaaS idea, an MVP, or a full platform — I can help you take it from concept to launch.</p>
-            <p class="contact-mb-2">The best products start with a conversation. Reach out and let's build something that matters.</p>
-            <div style="display:flex;flex-direction:column;gap:1rem">
-              <a href="https://www.instagram.com/hannanbuilds/" target="_blank" rel="noopener" class="btn btn-primary btn-block">
-                Message on Instagram
+            <h3>Tell Me About Your Project</h3>
+            <p class="contact-mb-2">Fill in the details below and I'll respond on WhatsApp within 24 hours.</p>
+            <form id="project-form" class="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="form-name" class="form-label">Your Name</label>
+                  <input type="text" id="form-name" name="name" placeholder="John Doe" required class="form-input">
+                </div>
+                <div class="form-group">
+                  <label for="form-email" class="form-label">Email</label>
+                  <input type="email" id="form-email" name="email" placeholder="john@example.com" required class="form-input">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="form-type" class="form-label">Project Type</label>
+                    <select id="form-type" name="type" class="form-input form-select">
+                      <option value="SaaS Product">SaaS Product</option>
+                      <option value="MVP">MVP</option>
+                      <option value="Web Application">Web Application</option>
+                      <option value="Website">Website</option>
+                      <option value="Landing Page">Landing Page</option>
+                      <option value="Mobile App">Mobile App</option>
+                      <option value="AI/ML Solution">AI / ML Solution</option>
+                      <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label for="form-budget" class="form-label">Budget Range</label>
+                    <select id="form-budget" name="budget" class="form-input form-select">
+                      <option value="Under Rs. 50,000">Under Rs. 50,000</option>
+                      <option value="Rs. 50,000 - Rs. 2.5 Lac">Rs. 50,000 - Rs. 2.5 Lac</option>
+                      <option value="Rs. 2.5 Lac - Rs. 7.5 Lac">Rs. 2.5 Lac - Rs. 7.5 Lac</option>
+                      <option value="Rs. 7.5 Lac+">Rs. 7.5 Lac+</option>
+                      <option value="Not Sure">Not Sure</option>
+                    </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="form-desc" class="form-label">Project Description</label>
+                <textarea id="form-desc" name="description" placeholder="Tell me about your idea, goals, timeline, and any specific requirements..." required class="form-input form-textarea" rows="4"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">
+                Send via WhatsApp
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-              <a href="mailto:projects.abdulhannan@gmail.com" class="btn btn-secondary btn-block" style="border-color:rgba(255,255,255,0.2)">Send an Email</a>
-            </div>
+              </button>
+            </form>
           </div>
         </div>
       </div>
