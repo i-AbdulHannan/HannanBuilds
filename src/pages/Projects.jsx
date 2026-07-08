@@ -9,75 +9,90 @@ const projects = [
     desc: 'An all-in-one team workspace that replaces WhatsApp, Email, and Spreadsheets. Built by a founder for founders.',
     problem: 'Scattered team communication', solution: 'Unified workspace',
     features: 'Tasks, Leads, Voice Notes', impact: 'Streamlined team operations',
-    color: 'from-blue-600/20 to-blue-800/5',
+    gradient: 'from-[#0367FC]/20 via-[#0367FC]/5 to-transparent',
+    accent: '#0367FC',
   },
   {
     title: 'Talent Tree JP', tag: 'PaaS', subtitle: 'International Pakistan',
     desc: 'A talent acquisition and management platform built for the Pakistan market. Connecting companies with top talent.',
     client: 'International (Pakistan)', type: 'Full Stack Platform',
-    color: 'from-indigo-600/20 to-indigo-800/5',
+    gradient: 'from-[#D2F801]/20 via-[#D2F801]/5 to-transparent',
+    accent: '#D2F801',
   },
   {
     title: 'ClinicFlowPro', tag: 'SaaS', subtitle: 'Healthcare Management',
     desc: 'A comprehensive clinic management platform that streamlines patient scheduling, medical records, billing, and administrative workflows.',
     problem: 'Manual clinic operations', solution: 'Digital clinic management',
     features: 'Scheduling, Records, Billing', impact: 'Operational efficiency',
-    color: 'from-violet-600/20 to-violet-800/5',
+    gradient: 'from-[#0367FC]/20 via-[#D2F801]/5 to-transparent',
+    accent: '#0367FC',
   },
 ]
 
+function DecorativeBlob({ className, color }) {
+  return (
+    <div className={`absolute rounded-full mix-blend-multiply dark:mix-blend-screen opacity-20 dark:opacity-10 blur-3xl ${className}`}
+      style={{ background: color }}
+    />
+  )
+}
+
 function ProjectCard({ project, index, isInView }) {
   return (
-    <motion.div initial={{ opacity: 0, y: 40 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: index*0.15 }}
-      className="glass rounded-3xl overflow-hidden glass-hover transition-all duration-500">
-      <div className="p-8 lg:p-10 relative overflow-hidden">
-        <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
-        <div className="relative z-10">
-          <div className="flex items-center justify-between mb-6">
-            <span className="text-xs font-medium text-brand tracking-widest uppercase bg-brand/10 px-3 py-1.5 rounded-full">{project.tag}</span>
-            <span className="font-display text-4xl font-bold text-dim">{String(index+1).padStart(2,'0')}</span>
-          </div>
-          <h3 className="font-display text-2xl lg:text-3xl font-bold text-body mb-2">{project.title}</h3>
-          <p className="text-muted text-sm mb-6">{project.subtitle}</p>
-          <p className="text-secondary text-sm leading-relaxed mb-8">{project.desc}</p>
-          <div className="grid grid-cols-2 gap-4 mb-8">
-            {project.problem && (
-              <div className="glass rounded-xl p-4">
-                <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Problem</p>
-                <p className="text-sm text-secondary">{project.problem}</p>
-              </div>
-            )}
-            {project.solution && (
-              <div className="glass rounded-xl p-4">
-                <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Solution</p>
-                <p className="text-sm text-secondary">{project.solution}</p>
-              </div>
-            )}
-            {project.features && (
-              <div className="glass rounded-xl p-4">
-                <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Features</p>
-                <p className="text-sm text-secondary">{project.features}</p>
-              </div>
-            )}
-            {project.impact && (
-              <div className="glass rounded-xl p-4">
-                <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Impact</p>
-                <p className="text-sm text-secondary">{project.impact}</p>
-              </div>
-            )}
-            {project.client && (
-              <div className="glass rounded-xl p-4">
-                <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Client</p>
-                <p className="text-sm text-secondary">{project.client}</p>
-              </div>
-            )}
-            {project.type && (
-              <div className="glass rounded-xl p-4">
-                <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Type</p>
-                <p className="text-sm text-secondary">{project.type}</p>
-              </div>
-            )}
-          </div>
+    <motion.div initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: index*0.15 }}
+      className="glass rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2 group relative">
+      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+      <div className="p-8 lg:p-10 relative z-10">
+        <div className="flex items-center justify-between mb-6">
+          <span className="text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full"
+            style={{ background: `${project.accent}15`, color: project.accent }}>
+            {project.tag}
+          </span>
+          <span className="font-display text-5xl font-bold text-dim opacity-30 group-hover:opacity-60 transition-opacity duration-500"
+            style={{ color: project.accent }}>
+            {String(index+1).padStart(2,'0')}
+          </span>
+        </div>
+        <h3 className="font-display text-2xl lg:text-3xl font-bold text-body mb-2">{project.title}</h3>
+        <p className="text-muted text-sm mb-6">{project.subtitle}</p>
+        <p className="text-secondary text-sm leading-relaxed mb-8">{project.desc}</p>
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {project.problem && (
+            <div className="glass rounded-xl p-4 transition-all duration-300 group-hover:border-[#D2F801]/20">
+              <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Problem</p>
+              <p className="text-sm text-secondary">{project.problem}</p>
+            </div>
+          )}
+          {project.solution && (
+            <div className="glass rounded-xl p-4 transition-all duration-300 group-hover:border-[#D2F801]/20">
+              <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Solution</p>
+              <p className="text-sm text-secondary">{project.solution}</p>
+            </div>
+          )}
+          {project.features && (
+            <div className="glass rounded-xl p-4 transition-all duration-300 group-hover:border-[#D2F801]/20">
+              <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Features</p>
+              <p className="text-sm text-secondary" style={{ color: project.accent }}>{project.features}</p>
+            </div>
+          )}
+          {project.impact && (
+            <div className="glass rounded-xl p-4 transition-all duration-300 group-hover:border-[#D2F801]/20">
+              <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Impact</p>
+              <p className="text-sm text-secondary">{project.impact}</p>
+            </div>
+          )}
+          {project.client && (
+            <div className="glass rounded-xl p-4 transition-all duration-300 group-hover:border-[#D2F801]/20">
+              <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Client</p>
+              <p className="text-sm text-secondary">{project.client}</p>
+            </div>
+          )}
+          {project.type && (
+            <div className="glass rounded-xl p-4 transition-all duration-300 group-hover:border-[#D2F801]/20">
+              <p className="text-[10px] text-dim uppercase tracking-wider mb-1">Type</p>
+              <p className="text-sm text-secondary" style={{ color: project.accent }}>{project.type}</p>
+            </div>
+          )}
         </div>
       </div>
     </motion.div>
@@ -100,6 +115,7 @@ export default function Projects() {
   return (
     <>
       <section ref={headerRef} className="relative min-h-[50vh] flex items-center pt-32 pb-16 overflow-hidden">
+        <DecorativeBlob color="#0367FC" className="w-80 h-80 -bottom-40 -left-40" />
         <EngineeringScene variant="minimal" mouse={mouse} />
         <div className="absolute inset-0 bg-gradient-to-b from-brand/5 via-transparent to-[var(--bg-page)] pointer-events-none z-[1]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -117,7 +133,8 @@ export default function Projects() {
         </div>
       </section>
 
-      <section ref={projectsRef} className="section-padding pt-0">
+      <section ref={projectsRef} className="section-padding pt-0 relative overflow-hidden">
+        <DecorativeBlob color="#D2F801" className="w-60 h-60 -right-30 top-1/3" />
         <div className="max-w-5xl mx-auto px-6 lg:px-8 space-y-8">
           {projects.map((p, i) => <ProjectCard key={p.title} project={p} index={i} isInView={projectsInView} />)}
         </div>
@@ -126,11 +143,13 @@ export default function Projects() {
       <section className="section-padding pt-0">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <div className="glass rounded-3xl p-10 lg:p-16 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-transparent" />
+            <DecorativeBlob color="#0367FC" className="w-48 h-48 -top-24 -left-24" />
+            <DecorativeBlob color="#D2F801" className="w-48 h-48 -bottom-24 -right-24" />
             <div className="relative z-10">
               <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4 text-body">Want to be the next <span className="text-gradient">case study?</span></h2>
               <p className="text-secondary text-sm max-w-md mx-auto mb-8">Let's build something remarkable together. Your project could be here next.</p>
-              <Link to="/contact" className="inline-block px-10 py-4 bg-brand text-[var(--text-on-brand)] rounded-full font-medium text-sm hover:shadow-[0_0_30px_rgba(3,38,252,0.4)] transition-all duration-300">
+              <Link to="/contact"
+                className="inline-block px-10 py-4 bg-[#0367FC] text-white rounded-full font-medium text-sm hover:shadow-[0_0_30px_rgba(3,103,252,0.5)] hover:shadow-[0_0_60px_rgba(210,248,1,0.15)] transition-all duration-300 hover:scale-105 active:scale-95">
                 Start Your Project
               </Link>
             </div>

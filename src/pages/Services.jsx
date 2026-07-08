@@ -7,31 +7,37 @@ const services = [
   {
     title: 'SaaS Product Development', desc: 'Full-cycle SaaS development from architecture to deployment. I build scalable, secure platforms designed for growth from day one.',
     details: ['Cloud-native architecture', 'Scalable infrastructure', 'CI/CD pipelines', 'Monitoring & analytics'],
+    color: '#0367FC',
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>,
   },
   {
     title: 'MVP Development', desc: 'From idea to working prototype in weeks. I help validate your concept with a real product — not a pitch deck or wireframes.',
     details: ['Rapid prototyping', 'Lean methodology', 'User testing ready', 'Iterative development'],
+    color: '#D2F801',
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
   },
   {
     title: 'Full Stack Development', desc: 'End-to-end web application development. From beautiful frontends to robust backends — everything needed to launch and scale.',
     details: ['React / Next.js / Node.js', 'RESTful & GraphQL APIs', 'Database design', 'DevOps & deployment'],
+    color: '#0367FC',
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>,
   },
   {
     title: 'Product Planning', desc: 'Strategic clarity before code. User flows, requirement docs, architecture planning — so you know exactly what you\'re building and why.',
     details: ['User flow mapping', 'Technical specifications', 'Architecture design', 'Milestone planning'],
+    color: '#D2F801',
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>,
   },
   {
     title: 'Product Validation', desc: 'Before investing months of development, let\'s validate your idea with market research, competitor analysis, and feasibility studies.',
     details: ['Market research', 'Competitor analysis', 'Feasibility studies', 'Risk assessment'],
+    color: '#0367FC',
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
   },
   {
     title: 'Startup Prototyping', desc: 'Interactive, high-fidelity prototypes that look and feel like the real product. Perfect for user testing and investor demos.',
     details: ['High-fidelity mockups', 'Interactive flows', 'User testing ready', 'Investor pitch ready'],
+    color: '#D2F801',
     icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
   },
 ]
@@ -43,6 +49,14 @@ const process = [
   { step: '04', title: 'Launch', desc: 'Deployment, testing, and going live.' },
   { step: '05', title: 'Scale', desc: 'Optimize, iterate, and grow your product.' },
 ]
+
+function DecorativeBlob({ className, color }) {
+  return (
+    <div className={`absolute rounded-full mix-blend-multiply dark:mix-blend-screen opacity-20 dark:opacity-10 blur-3xl ${className}`}
+      style={{ background: color }}
+    />
+  )
+}
 
 export default function Services() {
   const headerRef = useRef(null)
@@ -62,6 +76,7 @@ export default function Services() {
   return (
     <>
       <section ref={headerRef} className="relative min-h-[50vh] flex items-center pt-32 pb-16 overflow-hidden">
+        <DecorativeBlob color="#0367FC" className="w-72 h-72 -top-32 -right-32" />
         <EngineeringScene variant="simple" mouse={mouse} />
         <div className="absolute inset-0 bg-gradient-to-b from-brand/5 via-transparent to-[var(--bg-page)] pointer-events-none z-[1]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -79,19 +94,31 @@ export default function Services() {
         </div>
       </section>
 
-      <section ref={servicesRef} className="section-padding pt-0">
+      <section ref={servicesRef} className="section-padding pt-0 relative overflow-hidden">
+        <DecorativeBlob color="#D2F801" className="w-80 h-80 -left-40 bottom-0" />
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s, i) => (
-              <motion.div key={s.title} initial={{ opacity: 0, y: 40 }} animate={servicesInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i*0.1 }}
-                className="glass rounded-2xl p-6 lg:p-8 glass-hover transition-all duration-500">
-                <div className="w-14 h-14 rounded-xl bg-brand/10 flex items-center justify-center text-brand mb-5 transition-all duration-500">{s.icon}</div>
-                <h3 className="font-display text-xl font-semibold text-body mb-3">{s.title}</h3>
-                <p className="text-secondary text-sm leading-relaxed mb-5">{s.desc}</p>
-                <div className="space-y-2">
-                  {s.details.map((d) => (
-                    <div key={d} className="flex items-center gap-2 text-xs text-dim"><span className="w-1 h-1 rounded-full bg-brand/50" />{d}</div>
-                  ))}
+              <motion.div key={s.title} initial={{ opacity: 0, y: 50 }} animate={servicesInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i*0.1 }}
+                className="glass rounded-2xl p-6 lg:p-8 transition-all duration-500 hover:-translate-y-2 group relative overflow-hidden"
+                style={{ borderColor: `${s.color}15`, '--hover-color': s.color }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[var(--hover-color)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10">
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-500 group-hover:scale-110"
+                    style={{ background: `${s.color}15`, color: s.color }}>
+                    {s.icon}
+                  </div>
+                  <h3 className="font-display text-xl font-semibold text-body mb-3">{s.title}</h3>
+                  <p className="text-secondary text-sm leading-relaxed mb-5">{s.desc}</p>
+                  <div className="space-y-2">
+                    {s.details.map((d) => (
+                      <div key={d} className="flex items-center gap-2 text-xs text-dim">
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.color }} />
+                        {d}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -110,12 +137,12 @@ export default function Services() {
             <h2 className="font-display text-3xl sm:text-4xl font-bold text-body">The <span className="text-gradient">Process</span></h2>
           </motion.div>
           <div className="relative">
-            <div className="absolute left-0 right-0 top-8 h-px bg-gradient-to-r from-transparent via-brand/20 to-transparent hidden md:block" />
+            <div className="absolute left-0 right-0 top-8 h-px bg-gradient-to-r from-transparent via-[#0367FC]/30 to-transparent hidden md:block" />
             <div className="grid md:grid-cols-5 gap-6">
               {process.map((item, i) => (
-                <motion.div key={item.step} initial={{ opacity: 0, y: 20 }} animate={processInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i*0.15 }} className="text-center">
-                  <div className="w-16 h-16 rounded-full glass flex items-center justify-center mx-auto mb-4 relative z-10">
-                    <span className="font-display font-bold text-brand">{item.step}</span>
+                <motion.div key={item.step} initial={{ opacity: 0, y: 30 }} animate={processInView ? { opacity: 1, y: 0 } : {}} transition={{ delay: i*0.15 }} className="text-center">
+                  <div className="w-16 h-16 rounded-full glass flex items-center justify-center mx-auto mb-4 relative z-10 border border-[#D2F801]/20">
+                    <span className="font-display font-bold text-[#0367FC]">{item.step}</span>
                   </div>
                   <h3 className="font-display text-sm font-semibold text-body mb-2">{item.title}</h3>
                   <p className="text-secondary text-xs leading-relaxed">{item.desc}</p>
@@ -124,7 +151,8 @@ export default function Services() {
             </div>
           </div>
           <motion.div initial={{ opacity: 0 }} animate={processInView ? { opacity: 1 } : {}} transition={{ delay: 0.8 }} className="text-center mt-12">
-            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-3.5 bg-brand text-[var(--text-on-brand)] rounded-full font-medium text-sm hover:shadow-[0_0_30px_rgba(3,38,252,0.4)] transition-all duration-300">
+            <Link to="/contact"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#0367FC] text-white rounded-full font-medium text-sm hover:shadow-[0_0_30px_rgba(3,103,252,0.5)] hover:shadow-[0_0_60px_rgba(210,248,1,0.15)] transition-all duration-300 hover:scale-105 active:scale-95">
               Start Your Project
             </Link>
           </motion.div>

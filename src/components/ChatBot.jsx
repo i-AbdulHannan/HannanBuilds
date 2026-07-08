@@ -100,7 +100,7 @@ export default function ChatBot() {
   return (
     <>
       <button onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-brand text-white shadow-lg hover:shadow-[0_0_30px_rgba(3,38,252,0.4)] transition-all duration-300 flex items-center justify-center">
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-brand text-white shadow-lg hover:shadow-[0_0_30px_rgba(9,8,195,0.35)] transition-all duration-300 flex items-center justify-center">
         {open ? (
           <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
         ) : (
@@ -159,7 +159,7 @@ export default function ChatBot() {
                 placeholder="Ask about Abdul's work..."
                 className="flex-1 bg-[var(--glass-bg)] border border-light rounded-xl px-4 py-2.5 text-sm text-body placeholder:text-dim outline-none focus:border-brand/50 transition-all" />
               <button type="submit" disabled={!input.trim()}
-                className="px-4 py-2.5 bg-brand text-white rounded-xl text-sm font-medium disabled:opacity-40 transition-all hover:shadow-[0_0_20px_rgba(3,38,252,0.3)]">
+                className="px-4 py-2.5 bg-brand text-white rounded-xl text-sm font-medium disabled:opacity-40 transition-all hover:shadow-[0_0_20px_rgba(9,8,195,0.25)]">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
               </button>
             </form>

@@ -29,7 +29,7 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path
 
   const navBg = scrolled
-    ? 'bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-light'
+    ? 'bg-[var(--bg-page)]/80 backdrop-blur-xl border-b border-light'
     : 'bg-transparent'
 
   return (
@@ -37,11 +37,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-full border-2 border-brand flex items-center justify-center font-display font-bold text-sm text-brand transition-all duration-300">
-              AH
+            <div className="w-10 h-10 rounded-xl border-2 border-brand flex items-center justify-center font-display font-bold text-sm text-brand transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(3,103,252,0.3)]">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
             </div>
             <span className="font-display text-lg text-body hidden sm:block">
-              Abdul <span className="text-brand">Hannan</span>
+              <span className="text-muted">Abdul</span> <span className="text-brand">Hannan</span>
             </span>
           </Link>
 
@@ -78,7 +80,7 @@ export default function Navbar() {
             </button>
 
             <Link to="/contact"
-              className="px-5 py-2.5 text-sm font-medium text-white bg-brand rounded-full hover:shadow-[0_0_20px_rgba(3,38,252,0.3)] transition-all duration-300">
+               className="px-5 py-2.5 text-sm font-medium text-white bg-brand rounded-full hover:shadow-[0_0_20px_rgba(3,103,252,0.35)] hover:shadow-[0_0_20px_rgba(210,248,1,0.15)] transition-all duration-300">
               Let&apos;s Build
             </Link>
           </div>

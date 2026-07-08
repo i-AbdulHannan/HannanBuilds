@@ -3,27 +3,92 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, PerspectiveCamera } from '@react-three/drei'
 import * as THREE from 'three'
 
-function Gear({ position, radius = 0.8, tubeRadius = 0.25, segments = 8, color = '#0326FC', speed = 1, mouse }) {
+function NeuralNode({ position, color = '#0367FC', size = 0.15, speed = 1 }) {
   const mesh = useRef()
   useFrame((state) => {
     if (mesh.current) {
-      mesh.current.rotation.x += 0.005 * speed
-      mesh.current.rotation.z += 0.008 * speed
-      if (mouse?.current) {
-        const tx = (mouse.current.x * Math.PI) / 10
-        const ty = (mouse.current.y * Math.PI) / 10
-        mesh.current.rotation.x += (tx - mesh.current.rotation.x) * 0.01
-        mesh.current.rotation.z += (ty - mesh.current.rotation.z) * 0.01
-      }
+      mesh.current.rotation.x += 0.01 * speed
+      mesh.current.rotation.y += 0.015 * speed
     }
   })
   return (
     <Float speed={1} rotationIntensity={0.1} floatIntensity={0.3}>
       <mesh ref={mesh} position={position}>
-        <torusGeometry args={[radius, tubeRadius, segments, 24]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.08} wireframe transparent opacity={0.3} />
+        <icosahedronGeometry args={[size, 1]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.15} wireframe transparent opacity={0.4} />
       </mesh>
     </Float>
+  )
+}
+
+function DataOrbit({ position, color = '#0367FC', radius = 0.8, speed = 0.5 }) {
+  const ring = useRef()
+  const dots = useRef()
+  const dotPositions = useMemo(() => {
+    const pts = []
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2
+      pts.push([Math.cos(angle) * radius, Math.sin(angle) * radius, 0])
+    }
+    return pts
+  }, [radius])
+
+  useFrame((state) => {
+    if (ring.current) ring.current.rotation.z += 0.005 * speed
+    if (dots.current) dots.current.rotation.z += 0.005 * speed
+  })
+
+  return (
+    <group position={position}>
+      <mesh ref={ring} rotation={[0.3, 0, 0]}>
+        <ringGeometry args={[radius - 0.03, radius + 0.03, 48]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.05} transparent opacity={0.15} side={THREE.DoubleSide} />
+      </mesh>
+      <group ref={dots} rotation={[0.3, 0, 0]}>
+        {dotPositions.map((pos, i) => (
+          <mesh key={i} position={pos}>
+            <sphereGeometry args={[0.03, 6, 6]} />
+            <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.3} transparent opacity={0.6} />
+          </mesh>
+        ))}
+      </group>
+    </group>
+  )
+}
+
+function Shield({ position, color = '#D2F801', speed = 0.3 }) {
+  const mesh = useRef()
+  useFrame(() => {
+    if (mesh.current) mesh.current.rotation.y += 0.008 * speed
+  })
+  return (
+    <Float speed={0.5} rotationIntensity={0.1} floatIntensity={0.4}>
+      <mesh ref={mesh} position={position}>
+        <octahedronGeometry args={[0.5, 0]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.08} wireframe transparent opacity={0.25} />
+      </mesh>
+    </Float>
+  )
+}
+
+function CyberRing({ position, color = '#D2F801', speed = 0.4 }) {
+  const mesh1 = useRef()
+  const mesh2 = useRef()
+  useFrame(() => {
+    if (mesh1.current) { mesh1.current.rotation.x += 0.006 * speed; mesh1.current.rotation.y += 0.004 * speed }
+    if (mesh2.current) { mesh2.current.rotation.x -= 0.004 * speed; mesh2.current.rotation.z += 0.006 * speed }
+  })
+  return (
+    <group position={position}>
+      <mesh ref={mesh1}>
+        <torusGeometry args={[0.6, 0.02, 16, 48]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.1} transparent opacity={0.3} />
+      </mesh>
+      <mesh ref={mesh2} rotation={[0.5, 0, 0]}>
+        <torusGeometry args={[0.5, 0.015, 16, 48]} />
+        <meshStandardMaterial color="#0367FC" emissive="#0367FC" emissiveIntensity={0.08} transparent opacity={0.25} />
+      </mesh>
+    </group>
   )
 }
 
@@ -44,55 +109,49 @@ function Particles({ count = 200 }) {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.025} color="#0326FC" transparent opacity={0.4} sizeAttenuation />
+      <pointsMaterial size={0.025} color="#0367FC" transparent opacity={0.4} sizeAttenuation />
     </points>
   )
 }
 
-function Sphere({ position, mouse }) {
+function AICore({ position, color = '#0367FC' }) {
   const mesh = useRef()
+  const glowMesh = useRef()
   useFrame((state) => {
-    if (mesh.current) {
-      mesh.current.rotation.y += 0.003
-      mesh.current.rotation.x += 0.002
-    }
+    if (mesh.current) { mesh.current.rotation.y += 0.008; mesh.current.rotation.x += 0.005 }
+    if (glowMesh.current) { glowMesh.current.rotation.y -= 0.003; glowMesh.current.scale.setScalar(1 + Math.sin(state.clock.elapsedTime * 1.5) * 0.05) }
   })
   return (
-    <Float speed={0.5} rotationIntensity={0.2} floatIntensity={0.5}>
-      <mesh ref={mesh} position={position}>
-        <sphereGeometry args={[0.6, 12, 12]} />
-        <meshStandardMaterial color="#ffffff" emissive="#0326FC" emissiveIntensity={0.04} wireframe transparent opacity={0.12} />
+    <group position={position}>
+      <mesh ref={mesh}>
+        <dodecahedronGeometry args={[0.4, 0]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.2} wireframe transparent opacity={0.35} />
       </mesh>
-    </Float>
-  )
-}
-
-function Ring({ position, mouse }) {
-  const mesh = useRef()
-  useFrame(() => {
-    if (mesh.current) mesh.current.rotation.x += 0.004
-  })
-  return (
-    <mesh ref={mesh} position={position} rotation={[0.5, 0, 0]}>
-      <ringGeometry args={[0.5, 0.7, 32]} />
-      <meshStandardMaterial color="#0326FC" emissive="#0326FC" emissiveIntensity={0.05} wireframe transparent opacity={0.15} side={THREE.DoubleSide} />
-    </mesh>
+      <mesh ref={glowMesh}>
+        <dodecahedronGeometry args={[0.5, 0]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.05} transparent opacity={0.08} />
+      </mesh>
+    </group>
   )
 }
 
 function FullScene({ mouse }) {
   return (
     <>
-      <ambientLight intensity={0.8} />
-      <pointLight position={[10,10,10]} intensity={0.5} color="#0326FC" />
-      <pointLight position={[-10,-10,-10]} intensity={0.2} color="#fff" />
-      <Gear position={[0,0,0]} radius={1} tubeRadius={0.25} segments={8} mouse={mouse} />
-      <Gear position={[-3,1.2,-3]} radius={0.5} tubeRadius={0.15} segments={6} color="#fff" speed={1.5} mouse={mouse} />
-      <Gear position={[3.2,-0.5,-4]} radius={0.6} tubeRadius={0.18} segments={10} speed={0.7} mouse={mouse} />
-      <Gear position={[-2,-1.5,-5]} radius={0.4} tubeRadius={0.12} segments={6} color="#fff" speed={1.2} mouse={mouse} />
-      <Gear position={[2.5,1.8,-6]} radius={0.45} tubeRadius={0.14} segments={8} speed={0.9} mouse={mouse} />
-      <Sphere position={[-1.5,2,-2]} mouse={mouse} />
-      <Sphere position={[1.8,-1.8,-3.5]} mouse={mouse} />
+      <ambientLight intensity={0.6} />
+      <pointLight position={[10,10,10]} intensity={0.5} color="#0367FC" />
+      <pointLight position={[-10,-10,-10]} intensity={0.3} color="#D2F801" />
+      <AICore position={[0,0,0]} />
+      <DataOrbit position={[0,0,0]} radius={0.9} color="#0367FC" speed={0.8} />
+      <DataOrbit position={[0,0,0]} radius={1.3} color="#D2F801" speed={0.4} />
+      <NeuralNode position={[-3,1.2,-3]} size={0.2} color="#0367FC" speed={1.5} />
+      <NeuralNode position={[3.2,-0.5,-4]} size={0.18} color="#D2F801" speed={0.7} />
+      <NeuralNode position={[-2,-1.5,-5]} size={0.15} color="#0367FC" speed={1.2} />
+      <NeuralNode position={[2.5,1.8,-6]} size={0.16} color="#D2F801" speed={0.9} />
+      <Shield position={[-1.5,2,-2]} color="#D2F801" speed={1.2} />
+      <Shield position={[1.8,-1.8,-3.5]} color="#0367FC" speed={0.5} />
+      <CyberRing position={[0.5,-1,2]} color="#D2F801" />
+      <CyberRing position={[-0.8,1.5,1.5]} color="#0367FC" speed={0.6} />
       <Particles count={300} />
     </>
   )
@@ -101,11 +160,13 @@ function FullScene({ mouse }) {
 function SimpleScene() {
   return (
     <>
-      <ambientLight intensity={0.6} />
-      <pointLight position={[5,5,5]} intensity={0.3} color="#0326FC" />
-      <Gear position={[0,0,0]} radius={0.8} tubeRadius={0.2} segments={8} speed={0.6} />
-      <Gear position={[-2.5,0.8,-3]} radius={0.35} tubeRadius={0.1} segments={6} color="#fff" speed={1.2} />
-      <Gear position={[2.5,-0.6,-3]} radius={0.4} tubeRadius={0.12} segments={10} speed={0.8} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[5,5,5]} intensity={0.3} color="#0367FC" />
+      <AICore position={[0,0,0]} />
+      <DataOrbit position={[0,0,0]} radius={0.7} color="#0367FC" speed={0.6} />
+      <NeuralNode position={[-2.5,0.8,-3]} size={0.15} color="#D2F801" speed={1.2} />
+      <NeuralNode position={[2.5,-0.6,-3]} size={0.17} color="#0367FC" speed={0.8} />
+      <Shield position={[0,1.5,-2]} color="#D2F801" speed={0.5} />
       <Particles count={150} />
     </>
   )
@@ -114,9 +175,10 @@ function SimpleScene() {
 function MinimalScene() {
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <Gear position={[0,0,0]} radius={0.6} tubeRadius={0.15} segments={8} speed={0.5} />
-      <Ring position={[0,0,0]} />
+      <ambientLight intensity={0.4} />
+      <AICore position={[0,0,0]} />
+      <DataOrbit position={[0,0,0]} radius={0.6} color="#0367FC" speed={0.5} />
+      <CyberRing position={[0,0,0]} />
       <Particles count={80} />
     </>
   )

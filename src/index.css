@@ -3,37 +3,35 @@
 @tailwind utilities;
 
 :root {
-  --text-body: #1a1a1a;
-  --text-secondary: rgba(0, 0, 0, 0.65);
-  --text-muted: rgba(0, 0, 0, 0.45);
-  --text-dim: rgba(0, 0, 0, 0.25);
-  --text-on-brand: #ffffff;
-  --border-light: rgba(0, 0, 0, 0.06);
-  --border-medium: rgba(0, 0, 0, 0.10);
-  --glass-bg: rgba(0, 0, 0, 0.03);
-  --glass-hover: rgba(0, 0, 0, 0.06);
-  --bg-page: #ffffff;
-  --bg-elevated: #f8f8f8;
+  --text-body: #1F1F1F;
+  --text-secondary: rgba(31, 31, 31, 0.65);
+  --text-muted: rgba(31, 31, 31, 0.45);
+  --text-dim: rgba(31, 31, 31, 0.25);
+  --text-on-brand: #FFFFFF;
+  --border-light: rgba(31, 31, 31, 0.06);
+  --border-medium: rgba(31, 31, 31, 0.10);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-hover: rgba(255, 255, 255, 0.9);
+  --bg-page: #F0F0F5;
+  --bg-elevated: #FFFFFF;
 }
 
 .dark {
-  --text-body: #ffffff;
+  --text-body: #FFFFFF;
   --text-secondary: rgba(255, 255, 255, 0.65);
   --text-muted: rgba(255, 255, 255, 0.45);
   --text-dim: rgba(255, 255, 255, 0.25);
-  --text-on-brand: #ffffff;
+  --text-on-brand: #161616;
   --border-light: rgba(255, 255, 255, 0.06);
   --border-medium: rgba(255, 255, 255, 0.10);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-hover: rgba(255, 255, 255, 0.06);
-  --bg-page: #000000;
-  --bg-elevated: #0a0a0a;
+  --glass-bg: rgba(3, 103, 252, 0.04);
+  --glass-hover: rgba(3, 103, 252, 0.08);
+  --bg-page: #161616;
+  --bg-elevated: #1F1F1F;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
@@ -41,15 +39,14 @@ body {
   color: var(--text-body);
   transition: background 0.3s, color 0.3s;
 }
-
-html.light body { background: #ffffff; }
-html.dark body { background: #000000; }
+html.light body { background: #F0F0F5; }
+html.dark body { background: #161616; }
 
 ::-webkit-scrollbar { width: 6px; }
-.dark ::-webkit-scrollbar-track { background: #000; }
-.light ::-webkit-scrollbar-track { background: #f0f0f0; }
-::-webkit-scrollbar-thumb { background: #0326FC; border-radius: 3px; }
-::selection { background: #0326FC; color: #fff; }
+.dark ::-webkit-scrollbar-track { background: #161616; }
+.light ::-webkit-scrollbar-track { background: #E0E0E8; }
+::-webkit-scrollbar-thumb { background: #0367FC; border-radius: 3px; }
+::selection { background: #D2F801; color: #161616; }
 
 .text-body { color: var(--text-body); }
 .text-secondary { color: var(--text-secondary); }
@@ -66,42 +63,36 @@ html.dark body { background: #000000; }
   border: 1px solid var(--border-light);
   transition: background 0.3s, border-color 0.3s;
 }
+.glass-hover:hover { background: var(--glass-hover); }
 
-.glass-hover:hover {
-  background: var(--glass-hover);
-}
-
-.glass-blue {
+.glass-accent {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  background: rgba(3, 38, 252, 0.08);
-  border: 1px solid rgba(3, 38, 252, 0.15);
+  background: rgba(210, 248, 1, 0.06);
+  border: 1px solid rgba(210, 248, 1, 0.12);
 }
-
-.glow-blue {
-  box-shadow: 0 0 30px rgba(3, 38, 252, 0.15), 0 0 60px rgba(3, 38, 252, 0.05);
+.glow-accent {
+  box-shadow: 0 0 30px rgba(210, 248, 1, 0.1), 0 0 60px rgba(210, 248, 1, 0.03);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #0326FC 0%, #5555ff 100%);
+  background: linear-gradient(135deg, #0367FC 0%, #D2F801 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .grid-overlay { pointer-events: none; }
-.dark .grid-overlay {
+.dark .grid-overlay, .light .grid-overlay {
   background-image:
-    linear-gradient(rgba(3, 38, 252, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(3, 38, 252, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(3, 103, 252, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(210, 248, 1, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
-/* Section padding */
 .section-padding { padding: 100px 0; }
 @media (max-width: 768px) { .section-padding { padding: 60px 0; } }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

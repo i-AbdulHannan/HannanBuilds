@@ -6,8 +6,12 @@ export default function Footer() {
     <footer className="relative border-t border-light py-10">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full border border-brand/50 flex items-center justify-center font-display font-bold text-xs text-brand">AH</div>
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 rounded-lg border border-brand/50 flex items-center justify-center font-display font-bold text-xs text-brand group-hover:shadow-[0_0_15px_rgba(3,103,252,0.2)] transition-all duration-300">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
             <span className="text-sm text-muted">Abdul <span className="text-brand">Hannan</span></span>
           </Link>
 
