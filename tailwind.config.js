@@ -19,8 +19,8 @@ export default {
         'gray-medium': '#1F1F1F',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
+        sans: ['DM Sans', 'sans-serif'],
+        display: ['Syne', 'sans-serif'],
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',

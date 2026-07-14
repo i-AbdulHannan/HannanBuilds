@@ -12,6 +12,34 @@ import Projects from './pages/Projects'
 import Skills from './pages/Skills'
 import Contact from './pages/Contact'
 
+function LiveUsers() {
+  const [users, setUsers] = useState(() => Math.floor(Math.random() * 15) + 48)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setUsers(prev => {
+        const change = Math.random() > 0.5 ? 1 : -1
+        return Math.max(42, Math.min(72, prev + change * Math.floor(Math.random() * 3 + 1)))
+      })
+    }, 3000 + Math.random() * 4000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="fixed bottom-6 left-4 sm:left-6 z-40 glass rounded-lg px-3 py-2 sm:px-4 sm:py-2.5 flex items-center gap-2.5 shadow-lg border border-green-500/20">
+      <span className="relative flex w-2 h-2">
+        <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75" />
+        <span className="relative inline-flex rounded-full w-2 h-2 bg-green-500" />
+      </span>
+      <span className="text-[11px] sm:text-xs text-muted whitespace-nowrap">
+        <span className="font-bold text-body">{users}</span>
+        <span className="hidden xs:inline"> people viewing now</span>
+        <span className="inline xs:hidden"> live</span>
+      </span>
+    </div>
+  )
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => { window.scrollTo(0, 0) }, [pathname])
@@ -45,6 +73,7 @@ function AppContent() {
             </main>
             <Footer />
             <ChatBot />
+            <LiveUsers />
           </>
         )}
       </div>

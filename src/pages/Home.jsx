@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import EngineeringScene from '../components/EngineeringModels'
 
 const stats = [
@@ -55,6 +55,49 @@ function HeroImage() {
   )
 }
 
+function VoicePlayback({ sectionRef }) {
+  const audioRef = useRef(null)
+  const [hasEnded, setHasEnded] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    setHasEnded(false)
+  }, [location.pathname])
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    const handleEnded = () => setHasEnded(true)
+    audio.addEventListener('ended', handleEnded)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!hasEnded && audio.paused) {
+            audio.play().catch(() => {})
+          }
+        } else {
+          if (!audio.paused && !audio.ended) {
+            audio.pause()
+          }
+        }
+      },
+      { threshold: 0.3 }
+    )
+
+    if (sectionRef.current) observer.observe(sectionRef.current)
+
+    return () => {
+      observer.disconnect()
+      audio.removeEventListener('ended', handleEnded)
+      audio.pause()
+    }
+  }, [sectionRef, hasEnded])
+
+  return <audio ref={audioRef} src="/welcome.mp3" preload="auto" />
+}
+
 function DecorativeBlob({ className, color }) {
   return (
     <div className={`absolute rounded-full mix-blend-multiply dark:mix-blend-screen opacity-20 dark:opacity-10 blur-3xl ${className}`}
@@ -66,6 +109,7 @@ function DecorativeBlob({ className, color }) {
 function HeroSection() {
   const mouse = useRef({ x: 0, y: 0 })
   const [mounted, setMounted] = useState(false)
+  const sectionRef = useRef(null)
   useEffect(() => {
     setMounted(true)
     const fn = (e) => { mouse.current = { x: (e.clientX / window.innerWidth) * 2 - 1, y: -(e.clientY / window.innerHeight) * 2 + 1 } }
@@ -74,7 +118,8 @@ function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+      <VoicePlayback sectionRef={sectionRef} />
       <DecorativeBlob color="#0367FC" className="w-96 h-96 -top-20 -left-20" />
       <DecorativeBlob color="#D2F801" className="w-80 h-80 bottom-40 -right-20" />
       {mounted && <EngineeringScene variant="full" mouse={mouse} />}
